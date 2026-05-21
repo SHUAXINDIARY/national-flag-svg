@@ -135,6 +135,9 @@
 
       const regionNames = new Intl.DisplayNames(["zh-CN"], { type: "region" });
       const regionNameFallbacks = {
+        HK: "中国香港",
+        MO: "中国澳门",
+        TW: "中国台湾",
         XK: "科索沃",
       };
 
@@ -142,13 +145,18 @@
         return regionNameFallbacks[code] || regionNames.of(code) || code;
       }
 
-      const sampleCodes = ["CN", "JP", "US", "GB", "FR", "DE", "KR", "BR", "IN", "CA", "AU", "ZA"];
+      const sampleCodes = ["CN", "JP", "US", "AU", "TH", "FR", "IT", "ES", "VA"];
+      const sampleCodeSet = new Set(sampleCodes);
       const samples = document.querySelector("#samples");
       const grid = document.querySelector("#grid");
       const status = document.querySelector("#status");
 
       sampleCodes.forEach((code) => renderFlagCard(samples, code));
       regionCodes.forEach((code) => {
+        if (sampleCodeSet.has(code)) {
+          return;
+        }
+
         renderFlagCard(grid, code);
       });
 
