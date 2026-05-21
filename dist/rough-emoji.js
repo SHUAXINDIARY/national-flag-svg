@@ -2099,292 +2099,296 @@
             size = previous.size;
         }
     }
+    let renderer;
     const RoughEmoji = {
         draw (canvasElement, value) {
-            withCanvas(canvasElement, ()=>drawFlag(resolveFlag(value)));
+            withCanvas(canvasElement, ()=>renderer.draw(resolveFlag(value)));
         },
         isFlagEmoji: isFlagEmoji,
         resolveFlag: resolveFlag
     };
-    const TEMPLATE_FLAG_DRAWERS = {
-        [TEMPLATE_FLAGS.australia]: drawAustraliaFlag,
-        [TEMPLATE_FLAGS.china]: drawChinaFlag,
-        [TEMPLATE_FLAGS.spain]: drawSpainFlag,
-        [TEMPLATE_FLAGS.france]: drawFranceFlag,
-        [TEMPLATE_FLAGS.italy]: drawItalyFlag,
-        [TEMPLATE_FLAGS.japan]: drawJapanFlag,
-        [TEMPLATE_FLAGS.thailand]: drawThailandFlag,
-        [TEMPLATE_FLAGS.unitedStates]: drawUnitedStatesFlag,
-        [TEMPLATE_FLAGS.vatican]: drawVaticanFlag,
-        [TEMPLATE_FLAGS.ad]: drawAdFlag,
-        [TEMPLATE_FLAGS.ae]: drawAeFlag,
-        [TEMPLATE_FLAGS.af]: drawAfFlag,
-        [TEMPLATE_FLAGS.ag]: drawAgFlag,
-        [TEMPLATE_FLAGS.ai]: drawAiFlag,
-        [TEMPLATE_FLAGS.al]: drawAlFlag,
-        [TEMPLATE_FLAGS.am]: drawAmFlag,
-        [TEMPLATE_FLAGS.ao]: drawAoFlag,
-        [TEMPLATE_FLAGS.aq]: drawAqFlag,
-        [TEMPLATE_FLAGS.ar]: drawArFlag,
-        [TEMPLATE_FLAGS.as]: drawAsFlag,
-        [TEMPLATE_FLAGS.at]: drawAtFlag,
-        [TEMPLATE_FLAGS.aw]: drawAwFlag,
-        [TEMPLATE_FLAGS.ax]: drawAxFlag,
-        [TEMPLATE_FLAGS.az]: drawAzFlag,
-        [TEMPLATE_FLAGS.ba]: drawBaFlag,
-        [TEMPLATE_FLAGS.bb]: drawBbFlag,
-        [TEMPLATE_FLAGS.bd]: drawBdFlag,
-        [TEMPLATE_FLAGS.be]: drawBeFlag,
-        [TEMPLATE_FLAGS.bf]: drawBfFlag,
-        [TEMPLATE_FLAGS.bg]: drawBgFlag,
-        [TEMPLATE_FLAGS.bh]: drawBhFlag,
-        [TEMPLATE_FLAGS.bi]: drawBiFlag,
-        [TEMPLATE_FLAGS.bj]: drawBjFlag,
-        [TEMPLATE_FLAGS.bl]: drawBlFlag,
-        [TEMPLATE_FLAGS.bm]: drawBmFlag,
-        [TEMPLATE_FLAGS.bn]: drawBnFlag,
-        [TEMPLATE_FLAGS.bo]: drawBoFlag,
-        [TEMPLATE_FLAGS.bq]: drawBqFlag,
-        [TEMPLATE_FLAGS.br]: drawBrFlag,
-        [TEMPLATE_FLAGS.bs]: drawBsFlag,
-        [TEMPLATE_FLAGS.bt]: drawBtFlag,
-        [TEMPLATE_FLAGS.bv]: drawBvFlag,
-        [TEMPLATE_FLAGS.bw]: drawBwFlag,
-        [TEMPLATE_FLAGS.by]: drawByFlag,
-        [TEMPLATE_FLAGS.bz]: drawBzFlag,
-        [TEMPLATE_FLAGS.ca]: drawCaFlag,
-        [TEMPLATE_FLAGS.cc]: drawCcFlag,
-        [TEMPLATE_FLAGS.cd]: drawCdFlag,
-        [TEMPLATE_FLAGS.cf]: drawCfFlag,
-        [TEMPLATE_FLAGS.cg]: drawCgFlag,
-        [TEMPLATE_FLAGS.ch]: drawChFlag,
-        [TEMPLATE_FLAGS.ci]: drawCiFlag,
-        [TEMPLATE_FLAGS.ck]: drawCkFlag,
-        [TEMPLATE_FLAGS.cl]: drawClFlag,
-        [TEMPLATE_FLAGS.cm]: drawCmFlag,
-        [TEMPLATE_FLAGS.co]: drawCoFlag,
-        [TEMPLATE_FLAGS.cr]: drawCrFlag,
-        [TEMPLATE_FLAGS.cu]: drawCuFlag,
-        [TEMPLATE_FLAGS.cv]: drawCvFlag,
-        [TEMPLATE_FLAGS.cw]: drawCwFlag,
-        [TEMPLATE_FLAGS.cx]: drawCxFlag,
-        [TEMPLATE_FLAGS.cy]: drawCyFlag,
-        [TEMPLATE_FLAGS.cz]: drawCzFlag,
-        [TEMPLATE_FLAGS.de]: drawDeFlag,
-        [TEMPLATE_FLAGS.dj]: drawDjFlag,
-        [TEMPLATE_FLAGS.dk]: drawDkFlag,
-        [TEMPLATE_FLAGS.dm]: drawDmFlag,
-        [TEMPLATE_FLAGS["do"]]: drawDoFlag,
-        [TEMPLATE_FLAGS.dz]: drawDzFlag,
-        [TEMPLATE_FLAGS.ec]: drawEcFlag,
-        [TEMPLATE_FLAGS.ee]: drawEeFlag,
-        [TEMPLATE_FLAGS.eg]: drawEgFlag,
-        [TEMPLATE_FLAGS.eh]: drawEhFlag,
-        [TEMPLATE_FLAGS.er]: drawErFlag,
-        [TEMPLATE_FLAGS.et]: drawEtFlag,
-        [TEMPLATE_FLAGS.fi]: drawFiFlag,
-        [TEMPLATE_FLAGS.fj]: drawFjFlag,
-        [TEMPLATE_FLAGS.fk]: drawFkFlag,
-        [TEMPLATE_FLAGS.fm]: drawFmFlag,
-        [TEMPLATE_FLAGS.fo]: drawFoFlag,
-        [TEMPLATE_FLAGS.ga]: drawGaFlag,
-        [TEMPLATE_FLAGS.gb]: drawGbFlag,
-        [TEMPLATE_FLAGS.gd]: drawGdFlag,
-        [TEMPLATE_FLAGS.ge]: drawGeFlag,
-        [TEMPLATE_FLAGS.gf]: drawGfFlag,
-        [TEMPLATE_FLAGS.gg]: drawGgFlag,
-        [TEMPLATE_FLAGS.gh]: drawGhFlag,
-        [TEMPLATE_FLAGS.gi]: drawGiFlag,
-        [TEMPLATE_FLAGS.gl]: drawGlFlag,
-        [TEMPLATE_FLAGS.gm]: drawGmFlag,
-        [TEMPLATE_FLAGS.gn]: drawGnFlag,
-        [TEMPLATE_FLAGS.gp]: drawGpFlag,
-        [TEMPLATE_FLAGS.gq]: drawGqFlag,
-        [TEMPLATE_FLAGS.gr]: drawGrFlag,
-        [TEMPLATE_FLAGS.gs]: drawGsFlag,
-        [TEMPLATE_FLAGS.gt]: drawGtFlag,
-        [TEMPLATE_FLAGS.gu]: drawGuFlag,
-        [TEMPLATE_FLAGS.gw]: drawGwFlag,
-        [TEMPLATE_FLAGS.gy]: drawGyFlag,
-        [TEMPLATE_FLAGS.hk]: drawHkFlag,
-        [TEMPLATE_FLAGS.hm]: drawHmFlag,
-        [TEMPLATE_FLAGS.hn]: drawHnFlag,
-        [TEMPLATE_FLAGS.hr]: drawHrFlag,
-        [TEMPLATE_FLAGS.ht]: drawHtFlag,
-        [TEMPLATE_FLAGS.hu]: drawHuFlag,
-        [TEMPLATE_FLAGS.id]: drawIdFlag,
-        [TEMPLATE_FLAGS.ie]: drawIeFlag,
-        [TEMPLATE_FLAGS.il]: drawIlFlag,
-        [TEMPLATE_FLAGS.im]: drawImFlag,
-        [TEMPLATE_FLAGS["in"]]: drawInFlag,
-        [TEMPLATE_FLAGS.io]: drawIoFlag,
-        [TEMPLATE_FLAGS.iq]: drawIqFlag,
-        [TEMPLATE_FLAGS.ir]: drawIrFlag,
-        [TEMPLATE_FLAGS.is]: drawIsFlag,
-        [TEMPLATE_FLAGS.je]: drawJeFlag,
-        [TEMPLATE_FLAGS.jm]: drawJmFlag,
-        [TEMPLATE_FLAGS.jo]: drawJoFlag,
-        [TEMPLATE_FLAGS.ke]: drawKeFlag,
-        [TEMPLATE_FLAGS.kg]: drawKgFlag,
-        [TEMPLATE_FLAGS.kh]: drawKhFlag,
-        [TEMPLATE_FLAGS.ki]: drawKiFlag,
-        [TEMPLATE_FLAGS.km]: drawKmFlag,
-        [TEMPLATE_FLAGS.kn]: drawKnFlag,
-        [TEMPLATE_FLAGS.kp]: drawKpFlag,
-        [TEMPLATE_FLAGS.kr]: drawKrFlag,
-        [TEMPLATE_FLAGS.kw]: drawKwFlag,
-        [TEMPLATE_FLAGS.ky]: drawKyFlag,
-        [TEMPLATE_FLAGS.kz]: drawKzFlag,
-        [TEMPLATE_FLAGS.la]: drawLaFlag,
-        [TEMPLATE_FLAGS.lb]: drawLbFlag,
-        [TEMPLATE_FLAGS.lc]: drawLcFlag,
-        [TEMPLATE_FLAGS.li]: drawLiFlag,
-        [TEMPLATE_FLAGS.lk]: drawLkFlag,
-        [TEMPLATE_FLAGS.lr]: drawLrFlag,
-        [TEMPLATE_FLAGS.ls]: drawLsFlag,
-        [TEMPLATE_FLAGS.lt]: drawLtFlag,
-        [TEMPLATE_FLAGS.lu]: drawLuFlag,
-        [TEMPLATE_FLAGS.lv]: drawLvFlag,
-        [TEMPLATE_FLAGS.ly]: drawLyFlag,
-        [TEMPLATE_FLAGS.ma]: drawMaFlag,
-        [TEMPLATE_FLAGS.mc]: drawMcFlag,
-        [TEMPLATE_FLAGS.md]: drawMdFlag,
-        [TEMPLATE_FLAGS.me]: drawMeFlag,
-        [TEMPLATE_FLAGS.mf]: drawMfFlag,
-        [TEMPLATE_FLAGS.mg]: drawMgFlag,
-        [TEMPLATE_FLAGS.mh]: drawMhFlag,
-        [TEMPLATE_FLAGS.mk]: drawMkFlag,
-        [TEMPLATE_FLAGS.ml]: drawMlFlag,
-        [TEMPLATE_FLAGS.mm]: drawMmFlag,
-        [TEMPLATE_FLAGS.mn]: drawMnFlag,
-        [TEMPLATE_FLAGS.mo]: drawMoFlag,
-        [TEMPLATE_FLAGS.mp]: drawMpFlag,
-        [TEMPLATE_FLAGS.mq]: drawMqFlag,
-        [TEMPLATE_FLAGS.mr]: drawMrFlag,
-        [TEMPLATE_FLAGS.ms]: drawMsFlag,
-        [TEMPLATE_FLAGS.mt]: drawMtFlag,
-        [TEMPLATE_FLAGS.mu]: drawMuFlag,
-        [TEMPLATE_FLAGS.mv]: drawMvFlag,
-        [TEMPLATE_FLAGS.mw]: drawMwFlag,
-        [TEMPLATE_FLAGS.mx]: drawMxFlag,
-        [TEMPLATE_FLAGS.my]: drawMyFlag,
-        [TEMPLATE_FLAGS.mz]: drawMzFlag,
-        [TEMPLATE_FLAGS.na]: drawNaFlag,
-        [TEMPLATE_FLAGS.nc]: drawNcFlag,
-        [TEMPLATE_FLAGS.ne]: drawNeFlag,
-        [TEMPLATE_FLAGS.nf]: drawNfFlag,
-        [TEMPLATE_FLAGS.ng]: drawNgFlag,
-        [TEMPLATE_FLAGS.ni]: drawNiFlag,
-        [TEMPLATE_FLAGS.nl]: drawNlFlag,
-        [TEMPLATE_FLAGS.no]: drawNoFlag,
-        [TEMPLATE_FLAGS.np]: drawNpFlag,
-        [TEMPLATE_FLAGS.nr]: drawNrFlag,
-        [TEMPLATE_FLAGS.nu]: drawNuFlag,
-        [TEMPLATE_FLAGS.nz]: drawNzFlag,
-        [TEMPLATE_FLAGS.om]: drawOmFlag,
-        [TEMPLATE_FLAGS.pa]: drawPaFlag,
-        [TEMPLATE_FLAGS.pe]: drawPeFlag,
-        [TEMPLATE_FLAGS.pf]: drawPfFlag,
-        [TEMPLATE_FLAGS.pg]: drawPgFlag,
-        [TEMPLATE_FLAGS.ph]: drawPhFlag,
-        [TEMPLATE_FLAGS.pk]: drawPkFlag,
-        [TEMPLATE_FLAGS.pl]: drawPlFlag,
-        [TEMPLATE_FLAGS.pm]: drawPmFlag,
-        [TEMPLATE_FLAGS.pn]: drawPnFlag,
-        [TEMPLATE_FLAGS.pr]: drawPrFlag,
-        [TEMPLATE_FLAGS.ps]: drawPsFlag,
-        [TEMPLATE_FLAGS.pt]: drawPtFlag,
-        [TEMPLATE_FLAGS.pw]: drawPwFlag,
-        [TEMPLATE_FLAGS.py]: drawPyFlag,
-        [TEMPLATE_FLAGS.qa]: drawQaFlag,
-        [TEMPLATE_FLAGS.re]: drawReFlag,
-        [TEMPLATE_FLAGS.ro]: drawRoFlag,
-        [TEMPLATE_FLAGS.rs]: drawRsFlag,
-        [TEMPLATE_FLAGS.ru]: drawRuFlag,
-        [TEMPLATE_FLAGS.rw]: drawRwFlag,
-        [TEMPLATE_FLAGS.sa]: drawSaFlag,
-        [TEMPLATE_FLAGS.sb]: drawSbFlag,
-        [TEMPLATE_FLAGS.sc]: drawScFlag,
-        [TEMPLATE_FLAGS.sd]: drawSdFlag,
-        [TEMPLATE_FLAGS.se]: drawSeFlag,
-        [TEMPLATE_FLAGS.sg]: drawSgFlag,
-        [TEMPLATE_FLAGS.sh]: drawShFlag,
-        [TEMPLATE_FLAGS.si]: drawSiFlag,
-        [TEMPLATE_FLAGS.sj]: drawSjFlag,
-        [TEMPLATE_FLAGS.sk]: drawSkFlag,
-        [TEMPLATE_FLAGS.sl]: drawSlFlag,
-        [TEMPLATE_FLAGS.sm]: drawSmFlag,
-        [TEMPLATE_FLAGS.sn]: drawSnFlag,
-        [TEMPLATE_FLAGS.so]: drawSoFlag,
-        [TEMPLATE_FLAGS.sr]: drawSrFlag,
-        [TEMPLATE_FLAGS.ss]: drawSsFlag,
-        [TEMPLATE_FLAGS.st]: drawStFlag,
-        [TEMPLATE_FLAGS.sv]: drawSvFlag,
-        [TEMPLATE_FLAGS.sx]: drawSxFlag,
-        [TEMPLATE_FLAGS.sy]: drawSyFlag,
-        [TEMPLATE_FLAGS.sz]: drawSzFlag,
-        [TEMPLATE_FLAGS.tc]: drawTcFlag,
-        [TEMPLATE_FLAGS.td]: drawTdFlag,
-        [TEMPLATE_FLAGS.tf]: drawTfFlag,
-        [TEMPLATE_FLAGS.tg]: drawTgFlag,
-        [TEMPLATE_FLAGS.tj]: drawTjFlag,
-        [TEMPLATE_FLAGS.tk]: drawTkFlag,
-        [TEMPLATE_FLAGS.tl]: drawTlFlag,
-        [TEMPLATE_FLAGS.tm]: drawTmFlag,
-        [TEMPLATE_FLAGS.tn]: drawTnFlag,
-        [TEMPLATE_FLAGS.to]: drawToFlag,
-        [TEMPLATE_FLAGS.tr]: drawTrFlag,
-        [TEMPLATE_FLAGS.tt]: drawTtFlag,
-        [TEMPLATE_FLAGS.tv]: drawTvFlag,
-        [TEMPLATE_FLAGS.tw]: drawTwFlag,
-        [TEMPLATE_FLAGS.tz]: drawTzFlag,
-        [TEMPLATE_FLAGS.ua]: drawUaFlag,
-        [TEMPLATE_FLAGS.ug]: drawUgFlag,
-        [TEMPLATE_FLAGS.um]: drawUmFlag,
-        [TEMPLATE_FLAGS.uy]: drawUyFlag,
-        [TEMPLATE_FLAGS.uz]: drawUzFlag,
-        [TEMPLATE_FLAGS.vc]: drawVcFlag,
-        [TEMPLATE_FLAGS.ve]: drawVeFlag,
-        [TEMPLATE_FLAGS.vg]: drawVgFlag,
-        [TEMPLATE_FLAGS.vi]: drawViFlag,
-        [TEMPLATE_FLAGS.vn]: drawVnFlag,
-        [TEMPLATE_FLAGS.vu]: drawVuFlag,
-        [TEMPLATE_FLAGS.wf]: drawWfFlag,
-        [TEMPLATE_FLAGS.ws]: drawWsFlag,
-        [TEMPLATE_FLAGS.xk]: drawXkFlag,
-        [TEMPLATE_FLAGS.ye]: drawYeFlag,
-        [TEMPLATE_FLAGS.yt]: drawYtFlag,
-        [TEMPLATE_FLAGS.za]: drawZaFlag,
-        [TEMPLATE_FLAGS.zm]: drawZmFlag,
-        [TEMPLATE_FLAGS.zw]: drawZwFlag
-    };
+    class RoughEmojiRenderer {
+        templateDrawers = {
+            [TEMPLATE_FLAGS.australia]: drawAustraliaFlag,
+            [TEMPLATE_FLAGS.china]: drawChinaFlag,
+            [TEMPLATE_FLAGS.spain]: drawSpainFlag,
+            [TEMPLATE_FLAGS.france]: drawFranceFlag,
+            [TEMPLATE_FLAGS.italy]: drawItalyFlag,
+            [TEMPLATE_FLAGS.japan]: drawJapanFlag,
+            [TEMPLATE_FLAGS.thailand]: drawThailandFlag,
+            [TEMPLATE_FLAGS.unitedStates]: drawUnitedStatesFlag,
+            [TEMPLATE_FLAGS.vatican]: drawVaticanFlag,
+            [TEMPLATE_FLAGS.ad]: drawAdFlag,
+            [TEMPLATE_FLAGS.ae]: drawAeFlag,
+            [TEMPLATE_FLAGS.af]: drawAfFlag,
+            [TEMPLATE_FLAGS.ag]: drawAgFlag,
+            [TEMPLATE_FLAGS.ai]: drawAiFlag,
+            [TEMPLATE_FLAGS.al]: drawAlFlag,
+            [TEMPLATE_FLAGS.am]: drawAmFlag,
+            [TEMPLATE_FLAGS.ao]: drawAoFlag,
+            [TEMPLATE_FLAGS.aq]: drawAqFlag,
+            [TEMPLATE_FLAGS.ar]: drawArFlag,
+            [TEMPLATE_FLAGS.as]: drawAsFlag,
+            [TEMPLATE_FLAGS.at]: drawAtFlag,
+            [TEMPLATE_FLAGS.aw]: drawAwFlag,
+            [TEMPLATE_FLAGS.ax]: drawAxFlag,
+            [TEMPLATE_FLAGS.az]: drawAzFlag,
+            [TEMPLATE_FLAGS.ba]: drawBaFlag,
+            [TEMPLATE_FLAGS.bb]: drawBbFlag,
+            [TEMPLATE_FLAGS.bd]: drawBdFlag,
+            [TEMPLATE_FLAGS.be]: drawBeFlag,
+            [TEMPLATE_FLAGS.bf]: drawBfFlag,
+            [TEMPLATE_FLAGS.bg]: drawBgFlag,
+            [TEMPLATE_FLAGS.bh]: drawBhFlag,
+            [TEMPLATE_FLAGS.bi]: drawBiFlag,
+            [TEMPLATE_FLAGS.bj]: drawBjFlag,
+            [TEMPLATE_FLAGS.bl]: drawBlFlag,
+            [TEMPLATE_FLAGS.bm]: drawBmFlag,
+            [TEMPLATE_FLAGS.bn]: drawBnFlag,
+            [TEMPLATE_FLAGS.bo]: drawBoFlag,
+            [TEMPLATE_FLAGS.bq]: drawBqFlag,
+            [TEMPLATE_FLAGS.br]: drawBrFlag,
+            [TEMPLATE_FLAGS.bs]: drawBsFlag,
+            [TEMPLATE_FLAGS.bt]: drawBtFlag,
+            [TEMPLATE_FLAGS.bv]: drawBvFlag,
+            [TEMPLATE_FLAGS.bw]: drawBwFlag,
+            [TEMPLATE_FLAGS.by]: drawByFlag,
+            [TEMPLATE_FLAGS.bz]: drawBzFlag,
+            [TEMPLATE_FLAGS.ca]: drawCaFlag,
+            [TEMPLATE_FLAGS.cc]: drawCcFlag,
+            [TEMPLATE_FLAGS.cd]: drawCdFlag,
+            [TEMPLATE_FLAGS.cf]: drawCfFlag,
+            [TEMPLATE_FLAGS.cg]: drawCgFlag,
+            [TEMPLATE_FLAGS.ch]: drawChFlag,
+            [TEMPLATE_FLAGS.ci]: drawCiFlag,
+            [TEMPLATE_FLAGS.ck]: drawCkFlag,
+            [TEMPLATE_FLAGS.cl]: drawClFlag,
+            [TEMPLATE_FLAGS.cm]: drawCmFlag,
+            [TEMPLATE_FLAGS.co]: drawCoFlag,
+            [TEMPLATE_FLAGS.cr]: drawCrFlag,
+            [TEMPLATE_FLAGS.cu]: drawCuFlag,
+            [TEMPLATE_FLAGS.cv]: drawCvFlag,
+            [TEMPLATE_FLAGS.cw]: drawCwFlag,
+            [TEMPLATE_FLAGS.cx]: drawCxFlag,
+            [TEMPLATE_FLAGS.cy]: drawCyFlag,
+            [TEMPLATE_FLAGS.cz]: drawCzFlag,
+            [TEMPLATE_FLAGS.de]: drawDeFlag,
+            [TEMPLATE_FLAGS.dj]: drawDjFlag,
+            [TEMPLATE_FLAGS.dk]: drawDkFlag,
+            [TEMPLATE_FLAGS.dm]: drawDmFlag,
+            [TEMPLATE_FLAGS["do"]]: drawDoFlag,
+            [TEMPLATE_FLAGS.dz]: drawDzFlag,
+            [TEMPLATE_FLAGS.ec]: drawEcFlag,
+            [TEMPLATE_FLAGS.ee]: drawEeFlag,
+            [TEMPLATE_FLAGS.eg]: drawEgFlag,
+            [TEMPLATE_FLAGS.eh]: drawEhFlag,
+            [TEMPLATE_FLAGS.er]: drawErFlag,
+            [TEMPLATE_FLAGS.et]: drawEtFlag,
+            [TEMPLATE_FLAGS.fi]: drawFiFlag,
+            [TEMPLATE_FLAGS.fj]: drawFjFlag,
+            [TEMPLATE_FLAGS.fk]: drawFkFlag,
+            [TEMPLATE_FLAGS.fm]: drawFmFlag,
+            [TEMPLATE_FLAGS.fo]: drawFoFlag,
+            [TEMPLATE_FLAGS.ga]: drawGaFlag,
+            [TEMPLATE_FLAGS.gb]: drawGbFlag,
+            [TEMPLATE_FLAGS.gd]: drawGdFlag,
+            [TEMPLATE_FLAGS.ge]: drawGeFlag,
+            [TEMPLATE_FLAGS.gf]: drawGfFlag,
+            [TEMPLATE_FLAGS.gg]: drawGgFlag,
+            [TEMPLATE_FLAGS.gh]: drawGhFlag,
+            [TEMPLATE_FLAGS.gi]: drawGiFlag,
+            [TEMPLATE_FLAGS.gl]: drawGlFlag,
+            [TEMPLATE_FLAGS.gm]: drawGmFlag,
+            [TEMPLATE_FLAGS.gn]: drawGnFlag,
+            [TEMPLATE_FLAGS.gp]: drawGpFlag,
+            [TEMPLATE_FLAGS.gq]: drawGqFlag,
+            [TEMPLATE_FLAGS.gr]: drawGrFlag,
+            [TEMPLATE_FLAGS.gs]: drawGsFlag,
+            [TEMPLATE_FLAGS.gt]: drawGtFlag,
+            [TEMPLATE_FLAGS.gu]: drawGuFlag,
+            [TEMPLATE_FLAGS.gw]: drawGwFlag,
+            [TEMPLATE_FLAGS.gy]: drawGyFlag,
+            [TEMPLATE_FLAGS.hk]: drawHkFlag,
+            [TEMPLATE_FLAGS.hm]: drawHmFlag,
+            [TEMPLATE_FLAGS.hn]: drawHnFlag,
+            [TEMPLATE_FLAGS.hr]: drawHrFlag,
+            [TEMPLATE_FLAGS.ht]: drawHtFlag,
+            [TEMPLATE_FLAGS.hu]: drawHuFlag,
+            [TEMPLATE_FLAGS.id]: drawIdFlag,
+            [TEMPLATE_FLAGS.ie]: drawIeFlag,
+            [TEMPLATE_FLAGS.il]: drawIlFlag,
+            [TEMPLATE_FLAGS.im]: drawImFlag,
+            [TEMPLATE_FLAGS["in"]]: drawInFlag,
+            [TEMPLATE_FLAGS.io]: drawIoFlag,
+            [TEMPLATE_FLAGS.iq]: drawIqFlag,
+            [TEMPLATE_FLAGS.ir]: drawIrFlag,
+            [TEMPLATE_FLAGS.is]: drawIsFlag,
+            [TEMPLATE_FLAGS.je]: drawJeFlag,
+            [TEMPLATE_FLAGS.jm]: drawJmFlag,
+            [TEMPLATE_FLAGS.jo]: drawJoFlag,
+            [TEMPLATE_FLAGS.ke]: drawKeFlag,
+            [TEMPLATE_FLAGS.kg]: drawKgFlag,
+            [TEMPLATE_FLAGS.kh]: drawKhFlag,
+            [TEMPLATE_FLAGS.ki]: drawKiFlag,
+            [TEMPLATE_FLAGS.km]: drawKmFlag,
+            [TEMPLATE_FLAGS.kn]: drawKnFlag,
+            [TEMPLATE_FLAGS.kp]: drawKpFlag,
+            [TEMPLATE_FLAGS.kr]: drawKrFlag,
+            [TEMPLATE_FLAGS.kw]: drawKwFlag,
+            [TEMPLATE_FLAGS.ky]: drawKyFlag,
+            [TEMPLATE_FLAGS.kz]: drawKzFlag,
+            [TEMPLATE_FLAGS.la]: drawLaFlag,
+            [TEMPLATE_FLAGS.lb]: drawLbFlag,
+            [TEMPLATE_FLAGS.lc]: drawLcFlag,
+            [TEMPLATE_FLAGS.li]: drawLiFlag,
+            [TEMPLATE_FLAGS.lk]: drawLkFlag,
+            [TEMPLATE_FLAGS.lr]: drawLrFlag,
+            [TEMPLATE_FLAGS.ls]: drawLsFlag,
+            [TEMPLATE_FLAGS.lt]: drawLtFlag,
+            [TEMPLATE_FLAGS.lu]: drawLuFlag,
+            [TEMPLATE_FLAGS.lv]: drawLvFlag,
+            [TEMPLATE_FLAGS.ly]: drawLyFlag,
+            [TEMPLATE_FLAGS.ma]: drawMaFlag,
+            [TEMPLATE_FLAGS.mc]: drawMcFlag,
+            [TEMPLATE_FLAGS.md]: drawMdFlag,
+            [TEMPLATE_FLAGS.me]: drawMeFlag,
+            [TEMPLATE_FLAGS.mf]: drawMfFlag,
+            [TEMPLATE_FLAGS.mg]: drawMgFlag,
+            [TEMPLATE_FLAGS.mh]: drawMhFlag,
+            [TEMPLATE_FLAGS.mk]: drawMkFlag,
+            [TEMPLATE_FLAGS.ml]: drawMlFlag,
+            [TEMPLATE_FLAGS.mm]: drawMmFlag,
+            [TEMPLATE_FLAGS.mn]: drawMnFlag,
+            [TEMPLATE_FLAGS.mo]: drawMoFlag,
+            [TEMPLATE_FLAGS.mp]: drawMpFlag,
+            [TEMPLATE_FLAGS.mq]: drawMqFlag,
+            [TEMPLATE_FLAGS.mr]: drawMrFlag,
+            [TEMPLATE_FLAGS.ms]: drawMsFlag,
+            [TEMPLATE_FLAGS.mt]: drawMtFlag,
+            [TEMPLATE_FLAGS.mu]: drawMuFlag,
+            [TEMPLATE_FLAGS.mv]: drawMvFlag,
+            [TEMPLATE_FLAGS.mw]: drawMwFlag,
+            [TEMPLATE_FLAGS.mx]: drawMxFlag,
+            [TEMPLATE_FLAGS.my]: drawMyFlag,
+            [TEMPLATE_FLAGS.mz]: drawMzFlag,
+            [TEMPLATE_FLAGS.na]: drawNaFlag,
+            [TEMPLATE_FLAGS.nc]: drawNcFlag,
+            [TEMPLATE_FLAGS.ne]: drawNeFlag,
+            [TEMPLATE_FLAGS.nf]: drawNfFlag,
+            [TEMPLATE_FLAGS.ng]: drawNgFlag,
+            [TEMPLATE_FLAGS.ni]: drawNiFlag,
+            [TEMPLATE_FLAGS.nl]: drawNlFlag,
+            [TEMPLATE_FLAGS.no]: drawNoFlag,
+            [TEMPLATE_FLAGS.np]: drawNpFlag,
+            [TEMPLATE_FLAGS.nr]: drawNrFlag,
+            [TEMPLATE_FLAGS.nu]: drawNuFlag,
+            [TEMPLATE_FLAGS.nz]: drawNzFlag,
+            [TEMPLATE_FLAGS.om]: drawOmFlag,
+            [TEMPLATE_FLAGS.pa]: drawPaFlag,
+            [TEMPLATE_FLAGS.pe]: drawPeFlag,
+            [TEMPLATE_FLAGS.pf]: drawPfFlag,
+            [TEMPLATE_FLAGS.pg]: drawPgFlag,
+            [TEMPLATE_FLAGS.ph]: drawPhFlag,
+            [TEMPLATE_FLAGS.pk]: drawPkFlag,
+            [TEMPLATE_FLAGS.pl]: drawPlFlag,
+            [TEMPLATE_FLAGS.pm]: drawPmFlag,
+            [TEMPLATE_FLAGS.pn]: drawPnFlag,
+            [TEMPLATE_FLAGS.pr]: drawPrFlag,
+            [TEMPLATE_FLAGS.ps]: drawPsFlag,
+            [TEMPLATE_FLAGS.pt]: drawPtFlag,
+            [TEMPLATE_FLAGS.pw]: drawPwFlag,
+            [TEMPLATE_FLAGS.py]: drawPyFlag,
+            [TEMPLATE_FLAGS.qa]: drawQaFlag,
+            [TEMPLATE_FLAGS.re]: drawReFlag,
+            [TEMPLATE_FLAGS.ro]: drawRoFlag,
+            [TEMPLATE_FLAGS.rs]: drawRsFlag,
+            [TEMPLATE_FLAGS.ru]: drawRuFlag,
+            [TEMPLATE_FLAGS.rw]: drawRwFlag,
+            [TEMPLATE_FLAGS.sa]: drawSaFlag,
+            [TEMPLATE_FLAGS.sb]: drawSbFlag,
+            [TEMPLATE_FLAGS.sc]: drawScFlag,
+            [TEMPLATE_FLAGS.sd]: drawSdFlag,
+            [TEMPLATE_FLAGS.se]: drawSeFlag,
+            [TEMPLATE_FLAGS.sg]: drawSgFlag,
+            [TEMPLATE_FLAGS.sh]: drawShFlag,
+            [TEMPLATE_FLAGS.si]: drawSiFlag,
+            [TEMPLATE_FLAGS.sj]: drawSjFlag,
+            [TEMPLATE_FLAGS.sk]: drawSkFlag,
+            [TEMPLATE_FLAGS.sl]: drawSlFlag,
+            [TEMPLATE_FLAGS.sm]: drawSmFlag,
+            [TEMPLATE_FLAGS.sn]: drawSnFlag,
+            [TEMPLATE_FLAGS.so]: drawSoFlag,
+            [TEMPLATE_FLAGS.sr]: drawSrFlag,
+            [TEMPLATE_FLAGS.ss]: drawSsFlag,
+            [TEMPLATE_FLAGS.st]: drawStFlag,
+            [TEMPLATE_FLAGS.sv]: drawSvFlag,
+            [TEMPLATE_FLAGS.sx]: drawSxFlag,
+            [TEMPLATE_FLAGS.sy]: drawSyFlag,
+            [TEMPLATE_FLAGS.sz]: drawSzFlag,
+            [TEMPLATE_FLAGS.tc]: drawTcFlag,
+            [TEMPLATE_FLAGS.td]: drawTdFlag,
+            [TEMPLATE_FLAGS.tf]: drawTfFlag,
+            [TEMPLATE_FLAGS.tg]: drawTgFlag,
+            [TEMPLATE_FLAGS.tj]: drawTjFlag,
+            [TEMPLATE_FLAGS.tk]: drawTkFlag,
+            [TEMPLATE_FLAGS.tl]: drawTlFlag,
+            [TEMPLATE_FLAGS.tm]: drawTmFlag,
+            [TEMPLATE_FLAGS.tn]: drawTnFlag,
+            [TEMPLATE_FLAGS.to]: drawToFlag,
+            [TEMPLATE_FLAGS.tr]: drawTrFlag,
+            [TEMPLATE_FLAGS.tt]: drawTtFlag,
+            [TEMPLATE_FLAGS.tv]: drawTvFlag,
+            [TEMPLATE_FLAGS.tw]: drawTwFlag,
+            [TEMPLATE_FLAGS.tz]: drawTzFlag,
+            [TEMPLATE_FLAGS.ua]: drawUaFlag,
+            [TEMPLATE_FLAGS.ug]: drawUgFlag,
+            [TEMPLATE_FLAGS.um]: drawUmFlag,
+            [TEMPLATE_FLAGS.uy]: drawUyFlag,
+            [TEMPLATE_FLAGS.uz]: drawUzFlag,
+            [TEMPLATE_FLAGS.vc]: drawVcFlag,
+            [TEMPLATE_FLAGS.ve]: drawVeFlag,
+            [TEMPLATE_FLAGS.vg]: drawVgFlag,
+            [TEMPLATE_FLAGS.vi]: drawViFlag,
+            [TEMPLATE_FLAGS.vn]: drawVnFlag,
+            [TEMPLATE_FLAGS.vu]: drawVuFlag,
+            [TEMPLATE_FLAGS.wf]: drawWfFlag,
+            [TEMPLATE_FLAGS.ws]: drawWsFlag,
+            [TEMPLATE_FLAGS.xk]: drawXkFlag,
+            [TEMPLATE_FLAGS.ye]: drawYeFlag,
+            [TEMPLATE_FLAGS.yt]: drawYtFlag,
+            [TEMPLATE_FLAGS.za]: drawZaFlag,
+            [TEMPLATE_FLAGS.zm]: drawZmFlag,
+            [TEMPLATE_FLAGS.zw]: drawZwFlag
+        };
+        draw(flag) {
+            this.clearCanvas();
+            this.drawPaper();
+            const templateDrawer = this.templateDrawers[flag];
+            if (templateDrawer) return void templateDrawer();
+            drawGenericFlag(flag);
+        }
+        clearCanvas() {
+            ctx.clearRect(0, 0, size, size);
+        }
+        drawPaper() {
+            ctx.fillStyle = PALETTE.paper;
+            ctx.fillRect(0, 0, size, size);
+            roughCanvas.rectangle(46, 46, size - 92, size - 92, {
+                roughness: 1.4,
+                bowing: 0.8,
+                stroke: PALETTE.frame,
+                strokeWidth: 1.2,
+                fill: PALETTE.paper,
+                fillStyle: "hachure",
+                hachureGap: 24,
+                fillWeight: 0.28
+            });
+        }
+    }
+    renderer = new RoughEmojiRenderer();
     const browserWindow = window;
     browserWindow.RoughEmoji = RoughEmoji;
     new RoughEmojiApp(RoughEmoji).mount();
-    function drawFlag(flag) {
-        clearCanvas();
-        drawPaper();
-        const templateDrawer = TEMPLATE_FLAG_DRAWERS[flag];
-        if (templateDrawer) return void templateDrawer();
-        drawGenericFlag(flag);
-    }
-    function clearCanvas() {
-        ctx.clearRect(0, 0, size, size);
-    }
-    function drawPaper() {
-        ctx.fillStyle = PALETTE.paper;
-        ctx.fillRect(0, 0, size, size);
-        roughCanvas.rectangle(46, 46, size - 92, size - 92, {
-            roughness: 1.4,
-            bowing: 0.8,
-            stroke: PALETTE.frame,
-            strokeWidth: 1.2,
-            fill: PALETTE.paper,
-            fillStyle: "hachure",
-            hachureGap: 24,
-            fillWeight: 0.28
-        });
-    }
     function drawChinaFlag() {
         const flag = makeSketchRect(118, 174, 486, 342);
         roughCanvas.polygon(flag, {
@@ -2631,13 +2635,116 @@
         drawFlagBorder(flagBox);
     }
     function drawAfFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.af);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const cx = mapFlagX(0.5, 0.5, flagBox);
+        const cy = mapFlagY(0.5, 0.5, flagBox);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#262d2b", "#111615");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#249064", "#176847");
+        roughCanvas.circle(cx, cy, 68, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "rgba(251, 253, 250, 0.86)",
+            fillStyle: "hachure",
+            hachureGap: 7,
+            fillWeight: 0.7,
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.rectangle(cx - 22 + jitter(1), cy - 16 + jitter(1), 44, 38, {
+            stroke: "#6f5c38",
+            strokeWidth: 1,
+            fill: "transparent",
+            roughness: 2.1,
+            bowing: 1.2
+        });
+        roughCanvas.line(cx - 28, cy + 30, cx + 28, cy + 30 + jitter(2), {
+            stroke: "#6f5c38",
+            strokeWidth: 1.2,
+            roughness: 2.3,
+            bowing: 1.5
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b3538");
+        drawFlagBorder(flagBox);
     }
     function drawAgFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.ag);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const topLeft = [
+            mapFlagX(0, 0, flagBox),
+            mapFlagY(0, 0, flagBox)
+        ];
+        const topRight = [
+            mapFlagX(1, 0, flagBox),
+            mapFlagY(1, 0, flagBox)
+        ];
+        const bottomCenter = [
+            mapFlagX(0.5, 1, flagBox),
+            mapFlagY(0.5, 1, flagBox)
+        ];
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        roughCanvas.polygon([
+            topLeft,
+            topRight,
+            bottomCenter
+        ], {
+            stroke: "#111615",
+            strokeWidth: 1.2,
+            fill: "#262d2b",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFlagBand(flagBox, 0.28, 0.48, 0.72, 0.64, "#2f5fa0", "#203a74");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.28, 0.64, flagBox),
+                mapFlagY(0.28, 0.64, flagBox)
+            ],
+            [
+                mapFlagX(0.72, 0.64, flagBox),
+                mapFlagY(0.72, 0.64, flagBox)
+            ],
+            bottomCenter
+        ], {
+            stroke: "#c7d1cc",
+            strokeWidth: 1,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawSketchStar(mapFlagX(0.5, 0.36, flagBox), mapFlagY(0.5, 0.36, flagBox), 36, -18);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
     }
     function drawAiFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.ai);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const badgeX = mapFlagX(0.74, 0.54, flagBox);
+        const badgeY = mapFlagY(0.54, 0.54, flagBox);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#243f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0, 1, 1, "#243f78", "#1b2c56");
+        drawUnionJackCanton(flagBox);
+        drawShieldBadge(flagBox, 0.74, 0.54, "#fbfdfa", "#2f6fa4");
+        roughCanvas.line(badgeX - 22, badgeY + 4, badgeX + 24, badgeY + 4 + jitter(2), {
+            stroke: "#2f6fa4",
+            strokeWidth: 2,
+            roughness: 2.2,
+            bowing: 1.5
+        });
+        drawSketchStarWithColors(badgeX, badgeY - 20, 9, -18, {
+            stroke: "#b68b12",
+            fill: "#ffd84c",
+            hatch: "#ffec62"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+        drawFlagBorder(flagBox);
     }
     function drawAlFlag() {
         const flagBox = makeStandardFlagBox();
@@ -2710,10 +2817,81 @@
         drawFlagBorder(flagBox);
     }
     function drawAoFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.ao);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const cx = mapFlagX(0.52, 0.5, flagBox);
+        const cy = mapFlagY(0.52, 0.5, flagBox);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#262d2b", "#111615");
+        roughCanvas.circle(cx, cy + 4, 92, {
+            stroke: "#d7a51d",
+            strokeWidth: 6,
+            fill: "transparent",
+            roughness: 2.4,
+            bowing: 1.4
+        });
+        roughCanvas.line(cx - 58, cy + 36, cx + 70, cy - 38, {
+            stroke: "#d7a51d",
+            strokeWidth: 7,
+            roughness: 2.5,
+            bowing: 1.6
+        });
+        drawSketchStar(cx - 20, cy - 24, 22, -18);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
     }
     function drawAqFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.aq);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#75a9d8", "#477aa5");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.28, 0.58, flagBox),
+                mapFlagY(0.28, 0.58, flagBox)
+            ],
+            [
+                mapFlagX(0.38, 0.42, flagBox),
+                mapFlagY(0.38, 0.42, flagBox)
+            ],
+            [
+                mapFlagX(0.53, 0.36, flagBox),
+                mapFlagY(0.53, 0.36, flagBox)
+            ],
+            [
+                mapFlagX(0.67, 0.46, flagBox),
+                mapFlagY(0.67, 0.46, flagBox)
+            ],
+            [
+                mapFlagX(0.75, 0.6, flagBox),
+                mapFlagY(0.75, 0.6, flagBox)
+            ],
+            [
+                mapFlagX(0.58, 0.7, flagBox),
+                mapFlagY(0.58, 0.7, flagBox)
+            ],
+            [
+                mapFlagX(0.45, 0.66, flagBox),
+                mapFlagY(0.45, 0.66, flagBox)
+            ],
+            [
+                mapFlagX(0.36, 0.72, flagBox),
+                mapFlagY(0.36, 0.72, flagBox)
+            ]
+        ], {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.4,
+            fill: "#fbfdfa",
+            fillStyle: "hachure",
+            hachureGap: 10,
+            fillWeight: 0.58,
+            roughness: 2.3,
+            bowing: 1.3
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#477aa5");
+        drawFlagBorder(flagBox);
     }
     function drawArFlag() {
         const flagBox = makeStandardFlagBox();
@@ -2737,7 +2915,47 @@
         drawFlagBorder(flagBox);
     }
     function drawAsFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.as);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const fly = [
+            mapFlagX(1, 0.5, flagBox),
+            mapFlagY(1, 0.5, flagBox)
+        ];
+        const badgeX = mapFlagX(0.72, 0.5, flagBox);
+        const badgeY = mapFlagY(0.72, 0.5, flagBox);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#243f78", "#1b2c56");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            fly,
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#8f2633",
+            strokeWidth: 9,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.line(badgeX - 30, badgeY, badgeX + 36, badgeY - 18 + jitter(3), {
+            stroke: "#8b6418",
+            strokeWidth: 4,
+            roughness: 2.4,
+            bowing: 1.6
+        });
+        drawSketchStarWithColors(badgeX - 8, badgeY - 20, 14, -18, {
+            stroke: "#8b6418",
+            fill: "#f4d24a",
+            hatch: "#ffec62"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+        drawFlagBorder(flagBox);
     }
     function drawAtFlag() {
         const flagBox = makeStandardFlagBox();
@@ -2751,10 +2969,31 @@
         drawFlagBorder(flagBox);
     }
     function drawAwFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.aw);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#3d9fd3", "#2c6f9b");
+        drawFlagBand(flagBox, 0, 0.62, 1, 0.68, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0.72, 1, 0.78, "#f0c83a", "#a98218");
+        drawSketchStarWithColors(mapFlagX(0.2, 0.24, flagBox), mapFlagY(0.2, 0.24, flagBox), 29, -18, {
+            stroke: "#fbfdfa",
+            fill: "#c83c4a",
+            hatch: "rgba(251, 253, 250, 0.52)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#2c6f9b");
+        drawFlagBorder(flagBox);
     }
     function drawAxFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.ax);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0.27, 0, 0.45, 1, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0.38, 1, 0.62, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0.32, 0, 0.4, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.44, 1, 0.56, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+        drawFlagBorder(flagBox);
     }
     function drawAzFlag() {
         const flagBox = makeStandardFlagBox();
@@ -2946,7 +3185,84 @@
         drawFlagBorder(flagBox);
     }
     function drawBiFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.bi);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const centerX = mapFlagX(0.5, 0.5, flagBox);
+        const centerY = mapFlagY(0.5, 0.5, flagBox);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#249064", "#176847");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(1, 0, flagBox),
+                mapFlagY(1, 0, flagBox)
+            ],
+            [
+                centerX,
+                centerY
+            ]
+        ], {
+            stroke: "#8f2633",
+            strokeWidth: 1,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ],
+            [
+                mapFlagX(1, 1, flagBox),
+                mapFlagY(1, 1, flagBox)
+            ],
+            [
+                centerX,
+                centerY
+            ]
+        ], {
+            stroke: "#8f2633",
+            strokeWidth: 1,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawCantonLine(flagBox, 0, 0, 1, 1, "#fbfdfa", 30);
+        drawCantonLine(flagBox, 1, 0, 0, 1, "#fbfdfa", 30);
+        roughCanvas.circle(centerX, centerY, 98, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        [
+            [
+                0.5,
+                0.43
+            ],
+            [
+                0.45,
+                0.56
+            ],
+            [
+                0.55,
+                0.56
+            ]
+        ].forEach(([u, v], index)=>drawSketchStarWithColors(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), 13, -18 + 8 * index, {
+                stroke: "#8f2633",
+                fill: "#c83c4a",
+                hatch: "rgba(200, 60, 74, 0.5)"
+            }));
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#5d5a48");
+        drawFlagBorder(flagBox);
     }
     function drawBjFlag() {
         const flagBox = makeStandardFlagBox();
@@ -2960,16 +3276,68 @@
         drawFlagBorder(flagBox);
     }
     function drawBlFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.bl);
+        drawFranceFlag();
     }
     function drawBmFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.bm);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawUnionJackCanton(flagBox);
+        drawShieldBadge(flagBox, 0.74, 0.54, "#fbfdfa", "#249064");
+        roughCanvas.circle(mapFlagX(0.74, 0.5, flagBox), mapFlagY(0.74, 0.5, flagBox), 24, {
+            stroke: "#8f2633",
+            strokeWidth: 1,
+            fill: "#c83c4a",
+            fillStyle: "hachure",
+            hachureGap: 5,
+            fillWeight: 0.75,
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
     }
     function drawBnFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.bn);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const cx = mapFlagX(0.5, 0.5, flagBox);
+        const cy = mapFlagY(0.5, 0.5, flagBox);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawCantonLine(flagBox, 0, 0.72, 1, 0.18, "#fbfdfa", 54);
+        drawCantonLine(flagBox, 0, 0.72, 1, 0.18, "#262d2b", 28);
+        roughCanvas.rectangle(cx - 24 + jitter(1), cy - 18 + jitter(1), 48, 34, {
+            stroke: "#8f2633",
+            strokeWidth: 1.2,
+            fill: "#c83c4a",
+            fillStyle: "hachure",
+            hachureGap: 7,
+            fillWeight: 0.7,
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.line(cx - 42, cy + 24, cx + 42, cy + 24 + jitter(2), {
+            stroke: "#262d2b",
+            strokeWidth: 2.2,
+            roughness: 2.3,
+            bowing: 1.5
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
     }
     function drawBoFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.bo);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#249064", "#176847");
+        drawShieldBadge(flagBox, 0.5, 0.5, "#fbfdfa", "#8f2633");
+        drawSketchStar(mapFlagX(0.5, 0.47, flagBox), mapFlagY(0.5, 0.47, flagBox), 9, -18);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
     }
     function drawBqFlag() {
         drawSampledFlagTemplate(TEMPLATE_FLAGS.bq);
@@ -3022,13 +3390,42 @@
         drawFlagBorder(flagBox);
     }
     function drawBsFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.bs);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#3d9fd3", "#2c6f9b");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#3d9fd3", "#2c6f9b");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#3d9fd3", "#2c6f9b");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.42, 0.5, flagBox),
+                mapFlagY(0.42, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#111615",
+            strokeWidth: 1.2,
+            fill: "#262d2b",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#416a88");
+        drawFlagBorder(flagBox);
     }
     function drawBtFlag() {
         drawSampledFlagTemplate(TEMPLATE_FLAGS.bt);
     }
     function drawBvFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.bv);
+        drawNoFlag();
     }
     function drawBwFlag() {
         const flagBox = makeStandardFlagBox();
@@ -3162,10 +3559,29 @@
         drawSampledFlagTemplate(TEMPLATE_FLAGS.cc);
     }
     function drawCdFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.cd);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#3d9fd3", "#2c6f9b");
+        drawCantonLine(flagBox, 0.1, 1, 1, 0.1, "#f0c83a", 42);
+        drawCantonLine(flagBox, 0.1, 1, 1, 0.1, "#c83c4a", 24);
+        drawSketchStar(mapFlagX(0.22, 0.22, flagBox), mapFlagY(0.22, 0.22, flagBox), 31, -18);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#2c6f9b");
+        drawFlagBorder(flagBox);
     }
     function drawCfFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.cf);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.25, "#2f5fa0", "#203a74");
+        drawFlagBand(flagBox, 0, 0.25, 1, 0.5, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.5, 1, 0.75, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 0.75, 1, 1, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0.44, 0, 0.56, 1, "#c83c4a", "#8f2633");
+        drawSketchStar(mapFlagX(0.2, 0.13, flagBox), mapFlagY(0.2, 0.13, flagBox), 22, -18);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
     }
     function drawCgFlag() {
         const flagBox = makeStandardFlagBox();
