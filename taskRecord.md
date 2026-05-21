@@ -213,3 +213,102 @@
 - `index.html`：样本区 `UN`、地区名回退与状态计数。
 - `dist/rough-emoji.js`：运行构建后同步更新浏览器产物。
 - `taskRecord.md`：追加本次任务记录。
+
+## 2026-05-21 QA 页面 SEO 与站点信息
+
+### 日期
+
+2026-05-21
+
+### 任务目的
+
+更新 QA 页面站点信息与 SEO 元数据，补充可见的项目介绍与页脚说明，便于搜索收录与访客理解项目定位。
+
+### 完成过程
+
+1. 在 `index.html` 的 `<head>` 中补充 `description`、`keywords`、Open Graph、Twitter Card、JSON-LD 结构化数据及 `theme-color` 等 SEO 内容。
+2. 更新页头品牌名与副标题，新增项目介绍区与页脚外链说明。
+3. 将状态文案改为中文，并为 `#status` 增加 `aria-live="polite"`。
+
+### 修改具体文件
+
+- `index.html`：SEO 元数据、介绍区、页脚与页头文案更新。
+- `taskRecord.md`：追加本次任务记录。
+
+## 2026-05-21 构建产物压缩
+
+### 日期
+
+2026-05-21
+
+### 任务目的
+
+在 Rslib 构建配置中启用生产压缩，减小 IIFE 浏览器产物体积，去除多余换行与空格。
+
+### 完成过程
+
+1. 在 `rslib.config.ts` 的 `output` 中开启 `minify: true`。
+2. 设置 `legalComments: "none"` 移除 license 注释，`sourceMap: false` 不生成 source map。
+3. 运行 `pnpm run build` 验证，IIFE 产物由约 354 KB 降至约 134 KB（gzip 约 26.7 KB）。
+
+### 修改具体文件
+
+- `rslib.config.ts`：开启 minify、关闭 legalComments 与 sourceMap。
+- `dist/rough-emoji.js`：运行构建后同步更新压缩产物。
+- `taskRecord.md`：追加本次任务记录。
+
+## 2026-05-21 多格式构建与 npm 包支持
+
+### 日期
+
+2026-05-21
+
+### 任务目的
+
+配置 Rslib 同时输出 ESM、CommonJS 与 IIFE 产物，支持 npm 安装后 `import` / `require` 使用，并为 TypeScript 项目提供类型声明。
+
+### 完成过程
+
+1. 拆分入口：`src/index.ts` 作为 npm 库入口导出 API，`src/browser.ts` 作为 IIFE 入口挂载 `window.RoughEmoji` 并绑定演示页。
+2. 从 `src/rough-emoji.ts` 移除浏览器副作用，导出 `RoughEmoji`；将 `src/type.d.ts` 迁移为 `src/types.ts` 以确保 `.d.ts` 正确输出到 `dist`。
+3. 调整 `src/constant.ts` 中 `DEVICE_PIXEL_RATIO` 的读取方式，避免 Node 侧模块加载时访问 `window` 报错。
+4. 在 `rslib.config.ts` 中配置 ESM（含 dts）、CJS（target: node）、IIFE（minify）三套构建；设置 `autoExternal: false` 将 Rough.js 一并打包。
+5. 更新 `package.json` 的 `main`、`module`、`types` 与 `exports` 字段；`tsconfig.json` 增加 `rootDir: "src"` 以满足声明文件生成要求。
+6. 运行 `pnpm run typecheck` 与 `pnpm run build` 验证，并确认 Node 侧 `require('./dist/index.cjs')` 可正常加载 API。
+
+### 修改具体文件
+
+- `src/index.ts`：新增 npm 库入口。
+- `src/browser.ts`：新增浏览器 IIFE 入口。
+- `src/rough-emoji.ts`：导出 API，移除 `window` 挂载与演示页自动绑定。
+- `src/types.ts`：由原 `src/type.d.ts` 迁移，补充 `Window.RoughEmoji` 全局类型。
+- `src/constant.ts`：Node 安全的 `DEVICE_PIXEL_RATIO` 读取。
+- `src/rough-emoji-app.ts`、`src/render-context.ts`：类型 import 路径同步为 `./types`。
+- `rslib.config.ts`：ESM / CJS / IIFE 多格式构建配置。
+- `package.json`：exports、main、module、types、files、sideEffects 等 npm 字段。
+- `tsconfig.json`：新增 `rootDir`。
+- `.cursor/rules/project-rules.mdc`：类型文件路径由 `type.d.ts` 更新为 `types.ts`。
+- `dist/`：运行构建后同步更新多格式产物与类型声明。
+- `taskRecord.md`：追加本次任务记录。
+
+## 2026-05-21 README 文档更新
+
+### 日期
+
+2026-05-21
+
+### 任务目的
+
+同步 README 与当前项目能力，覆盖多格式构建产物、npm 接入方式、TypeScript 类型与最新目录结构。
+
+### 完成过程
+
+1. 更新项目定位说明，补充 ESM / CJS / IIFE 三种接入方式与 Rough.js 内置打包说明。
+2. 新增构建产物对照表，以及 npm ESM、`require`、浏览器 `<script>` 三类使用示例。
+3. 将 QA 页面引用由 `flag-qa.html` 更正为 `index.html`，并同步 `src/` 多文件目录结构。
+4. 补充 TypeScript 类型导出说明与 Node 侧 Canvas 运行时注意事项。
+
+### 修改具体文件
+
+- `README.md`：全面更新项目说明、使用方式、API、目录结构与开发说明。
+- `taskRecord.md`：追加本次任务记录。
