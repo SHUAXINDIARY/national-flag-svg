@@ -11,6 +11,9 @@ export default defineConfig({
   output: {
     target: "web",
     cleanDistPath: true,
+    minify: true,
+    legalComments: "none",
+    sourceMap: false,
   },
   source: {
     entry: {
