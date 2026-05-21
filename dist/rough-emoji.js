@@ -236,7 +236,7 @@
         tr: "🇹🇷",
         tt: "🇹🇹",
         tv: "🇹🇻",
-        tw: "🇹🇼",
+        tw: "",
         tz: "🇹🇿",
         ua: "🇺🇦",
         ug: "🇺🇬",
@@ -2338,7 +2338,7 @@
             [TEMPLATE_FLAGS.tr]: drawTrFlag,
             [TEMPLATE_FLAGS.tt]: drawTtFlag,
             [TEMPLATE_FLAGS.tv]: drawTvFlag,
-            [TEMPLATE_FLAGS.tw]: drawTwFlag,
+            [TEMPLATE_FLAGS.tw]: drawChinaFlag,
             [TEMPLATE_FLAGS.tz]: drawTzFlag,
             [TEMPLATE_FLAGS.ua]: drawUaFlag,
             [TEMPLATE_FLAGS.ug]: drawUgFlag,
@@ -7610,20 +7610,6 @@
             ]
         ].forEach(([u, v], index)=>drawSketchStar(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), 9, -18 + index));
         drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#477aa5");
-        drawFlagBorder(flagBox);
-    }
-    function drawTwFlag() {
-        const flagBox = makeStandardFlagBox();
-        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
-        drawFlagShadow(flag);
-        drawBlankFlag(flag, "#c83c4a", "#8f2633");
-        drawFlagBand(flagBox, 0, 0, 0.5, 0.5, "#253f78", "#1b2c56");
-        drawSketchStarWithColors(mapFlagX(0.25, 0.25, flagBox), mapFlagY(0.25, 0.25, flagBox), 34, -18, {
-            stroke: "#c7d1cc",
-            fill: "#fbfdfa",
-            hatch: "rgba(251, 253, 250, 0.7)"
-        });
-        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
         drawFlagBorder(flagBox);
     }
     function drawTzFlag() {
