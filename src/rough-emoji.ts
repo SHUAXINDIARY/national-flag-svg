@@ -1196,9 +1196,9 @@ function drawBoFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** BQ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** BQ 国旗专门模板：加勒比荷兰 emoji 沿用荷兰三色旗。 */
 function drawBqFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.bq);
+  drawNlFlag();
 }
 
 /** BR 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -1252,9 +1252,34 @@ function drawBsFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** BT 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** BT 国旗专门模板：黄橙对角双色，并用白色曲线简化雷龙。 */
 function drawBtFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.bt);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#ee8b2c", "#a9601d");
+  roughCanvas.polygon(
+    [
+      [mapFlagX(0, 0, flagBox), mapFlagY(0, 0, flagBox)],
+      [mapFlagX(1, 0, flagBox), mapFlagY(1, 0, flagBox)],
+      [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)],
+    ],
+    { stroke: "#a98218", strokeWidth: 1.2, fill: "#f0c83a", fillStyle: "solid", roughness: 2.2, bowing: 1.2 },
+  );
+  roughCanvas.line(mapFlagX(0.38, 0.66, flagBox), mapFlagY(0.38, 0.66, flagBox), mapFlagX(0.7, 0.34, flagBox), mapFlagY(0.7, 0.34, flagBox), {
+    stroke: "#fbfdfa",
+    strokeWidth: 8,
+    roughness: 2.6,
+    bowing: 2,
+  });
+  drawSketchStarWithColors(mapFlagX(0.56, 0.5, flagBox), mapFlagY(0.56, 0.5, flagBox), 16, -18, {
+    stroke: "#c7d1cc",
+    fill: "#fbfdfa",
+    hatch: "rgba(251, 253, 250, 0.6)",
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#9c5524");
+  drawFlagBorder(flagBox);
 }
 
 /** BV 国旗专门模板：布韦岛 emoji 沿用挪威北欧十字旗。 */
@@ -1359,9 +1384,37 @@ function drawCaFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** CC 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** CC 国旗专门模板：绿底、左侧月牙和飞侧南十字星。 */
 function drawCcFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.cc);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#176847", "#0f4f37");
+  roughCanvas.circle(mapFlagX(0.22, 0.34, flagBox), mapFlagY(0.22, 0.34, flagBox), 70, {
+    stroke: "#b68b12",
+    strokeWidth: 1.2,
+    fill: "#ffd84c",
+    fillStyle: "solid",
+    roughness: 2.2,
+    bowing: 1.2,
+  });
+  roughCanvas.circle(mapFlagX(0.26, 0.34, flagBox), mapFlagY(0.26, 0.34, flagBox), 62, {
+    stroke: "#0f4f37",
+    strokeWidth: 1,
+    fill: "#176847",
+    fillStyle: "solid",
+    roughness: 2.2,
+    bowing: 1.2,
+  });
+  [
+    [0.64, 0.3, 12],
+    [0.75, 0.44, 11],
+    [0.62, 0.58, 12],
+    [0.8, 0.68, 8],
+  ].forEach(([u, v, radius], index) => drawSketchStar(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), radius, -18 + index * 5));
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#0f4f37");
+  drawFlagBorder(flagBox);
 }
 
 /** CD 国旗专门模板：蓝底、黄边红色斜带和左上黄星。 */
@@ -1459,9 +1512,26 @@ function drawCiFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** CK 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** CK 国旗专门模板：蓝船旗、左上联合旗和右侧星环。 */
 function drawCkFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.ck);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+  const cx = mapFlagX(0.72, 0.5, flagBox);
+  const cy = mapFlagY(0.72, 0.5, flagBox);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#243f78", "#1b2c56");
+  drawUnionJackCanton(flagBox);
+  for (let i = 0; i < 15; i += 1) {
+    const angle = (Math.PI * 2 * i) / 15;
+    drawSketchStarWithColors(cx + Math.cos(angle) * 54, cy + Math.sin(angle) * 54, 7, -18 + i, {
+      stroke: "#c7d1cc",
+      fill: "#fbfdfa",
+      hatch: "rgba(251, 253, 250, 0.6)",
+    });
+  }
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+  drawFlagBorder(flagBox);
 }
 
 /** CL 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -1565,24 +1635,107 @@ function drawCuFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** CV 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** CV 国旗专门模板：蓝底、低位白红白横带和星环。 */
 function drawCvFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.cv);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+  const cx = mapFlagX(0.34, 0.6, flagBox);
+  const cy = mapFlagY(0.34, 0.6, flagBox);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#253f78", "#1b2c56");
+  drawFlagBand(flagBox, 0, 0.52, 1, 0.58, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0.6, 1, 0.68, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0.7, 1, 0.76, "#fbfdfa", "#c7d1cc");
+  for (let i = 0; i < 10; i += 1) {
+    const angle = (Math.PI * 2 * i) / 10;
+    drawSketchStar(cx + Math.cos(angle) * 42, cy + Math.sin(angle) * 42, 7, -18 + i * 4);
+  }
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+  drawFlagBorder(flagBox);
 }
 
-/** CW 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** CW 国旗专门模板：蓝底、底部黄带和左上双星。 */
 function drawCwFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.cw);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#253f78", "#1b2c56");
+  drawFlagBand(flagBox, 0, 0.68, 1, 0.78, "#f0c83a", "#a98218");
+  drawSketchStarWithColors(mapFlagX(0.24, 0.28, flagBox), mapFlagY(0.24, 0.28, flagBox), 18, -18, {
+    stroke: "#c7d1cc",
+    fill: "#fbfdfa",
+    hatch: "rgba(251, 253, 250, 0.7)",
+  });
+  drawSketchStarWithColors(mapFlagX(0.34, 0.38, flagBox), mapFlagY(0.34, 0.38, flagBox), 11, -10, {
+    stroke: "#c7d1cc",
+    fill: "#fbfdfa",
+    hatch: "rgba(251, 253, 250, 0.7)",
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+  drawFlagBorder(flagBox);
 }
 
-/** CX 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** CX 国旗专门模板：蓝绿双色、左上联合旗、南十字和金色圆徽。 */
 function drawCxFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.cx);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#243f78", "#1b2c56");
+  drawFlagBand(flagBox, 0.5, 0, 1, 1, "#176847", "#0f4f37");
+  drawUnionJackCanton(flagBox);
+  roughCanvas.circle(mapFlagX(0.72, 0.5, flagBox), mapFlagY(0.72, 0.5, flagBox), 70, {
+    stroke: "#a98218",
+    strokeWidth: 1.2,
+    fill: "#f0c83a",
+    fillStyle: "hachure",
+    hachureGap: 8,
+    fillWeight: 0.6,
+    roughness: 2.2,
+    bowing: 1.2,
+  });
+  drawSketchStarWithColors(mapFlagX(0.3, 0.75, flagBox), mapFlagY(0.3, 0.75, flagBox), 16, -18, {
+    stroke: "#c7d1cc",
+    fill: "#fbfdfa",
+    hatch: "rgba(251, 253, 250, 0.6)",
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+  drawFlagBorder(flagBox);
 }
 
-/** CY 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** CY 国旗专门模板：白底、铜色岛形和下方橄榄枝线条。 */
 function drawCyFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.cy);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  roughCanvas.polygon(
+    [
+      [mapFlagX(0.36, 0.43, flagBox), mapFlagY(0.36, 0.43, flagBox)],
+      [mapFlagX(0.48, 0.36, flagBox), mapFlagY(0.48, 0.36, flagBox)],
+      [mapFlagX(0.66, 0.42, flagBox), mapFlagY(0.66, 0.42, flagBox)],
+      [mapFlagX(0.58, 0.54, flagBox), mapFlagY(0.58, 0.54, flagBox)],
+      [mapFlagX(0.42, 0.54, flagBox), mapFlagY(0.42, 0.54, flagBox)],
+    ],
+    { stroke: "#a9601d", strokeWidth: 1.2, fill: "#ee8b2c", fillStyle: "hachure", hachureGap: 8, fillWeight: 0.7, roughness: 2.2, bowing: 1.2 },
+  );
+  roughCanvas.line(mapFlagX(0.38, 0.64, flagBox), mapFlagY(0.38, 0.64, flagBox), mapFlagX(0.5, 0.58, flagBox), mapFlagY(0.5, 0.58, flagBox), {
+    stroke: "#249064",
+    strokeWidth: 2,
+    roughness: 2.2,
+    bowing: 1.5,
+  });
+  roughCanvas.line(mapFlagX(0.62, 0.64, flagBox), mapFlagY(0.62, 0.64, flagBox), mapFlagX(0.5, 0.58, flagBox), mapFlagY(0.5, 0.58, flagBox), {
+    stroke: "#249064",
+    strokeWidth: 2,
+    roughness: 2.2,
+    bowing: 1.5,
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#cbd8ce");
+  drawFlagBorder(flagBox);
 }
 
 /** CZ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -1659,9 +1812,30 @@ function drawDkFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** DM 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** DM 国旗专门模板：绿底三色十字和中心红圆鹦鹉标记。 */
 function drawDmFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.dm);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#176847", "#0f4f37");
+  drawFlagBand(flagBox, 0.43, 0, 0.57, 1, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0, 0.4, 1, 0.6, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0.47, 0, 0.53, 1, "#262d2b", "#111615");
+  drawFlagBand(flagBox, 0, 0.46, 1, 0.54, "#262d2b", "#111615");
+  drawFlagBand(flagBox, 0.5, 0, 0.54, 1, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0.5, 1, 0.56, "#fbfdfa", "#c7d1cc");
+  roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 76, {
+    stroke: "#8f2633",
+    strokeWidth: 1.2,
+    fill: "#c83c4a",
+    fillStyle: "solid",
+    roughness: 2.3,
+    bowing: 1.2,
+  });
+  drawSketchStar(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 18, -18);
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#0f4f37");
+  drawFlagBorder(flagBox);
 }
 
 /** DO 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -1760,14 +1934,43 @@ function drawEgFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** EH 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** EH 国旗专门模板：西撒哈拉黑白绿横带、红三角和星月。 */
 function drawEhFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.eh);
+  drawPsLikeFlag("#262d2b", "#fbfdfa", "#249064", true);
 }
 
-/** ER 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** ER 国旗专门模板：红色大三角分割蓝绿底，并加金色枝叶标记。 */
 function drawErFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.er);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#4f9fd3", "#2c6f9b");
+  roughCanvas.polygon(
+    [
+      [mapFlagX(0, 0, flagBox), mapFlagY(0, 0, flagBox)],
+      [mapFlagX(1, 0, flagBox), mapFlagY(1, 0, flagBox)],
+      [mapFlagX(0, 0.5, flagBox), mapFlagY(0, 0.5, flagBox)],
+    ],
+    { stroke: "#176847", strokeWidth: 1, fill: "#249064", fillStyle: "solid", roughness: 2.2, bowing: 1.2 },
+  );
+  roughCanvas.polygon(
+    [
+      [mapFlagX(0, 0, flagBox), mapFlagY(0, 0, flagBox)],
+      [mapFlagX(1, 0.5, flagBox), mapFlagY(1, 0.5, flagBox)],
+      [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)],
+    ],
+    { stroke: "#8f2633", strokeWidth: 1.2, fill: "#c83c4a", fillStyle: "solid", roughness: 2.2, bowing: 1.2 },
+  );
+  roughCanvas.line(mapFlagX(0.2, 0.38, flagBox), mapFlagY(0.2, 0.38, flagBox), mapFlagX(0.2, 0.64, flagBox), mapFlagY(0.2, 0.64, flagBox), {
+    stroke: "#f0c83a",
+    strokeWidth: 4,
+    roughness: 2.3,
+    bowing: 1.6,
+  });
+  drawSketchStar(mapFlagX(0.2, 0.34, flagBox), mapFlagY(0.2, 0.34, flagBox), 13, -18);
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+  drawFlagBorder(flagBox);
 }
 
 /** ET 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -1806,14 +2009,14 @@ function drawFiFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** FJ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** FJ 国旗专门模板：浅蓝船旗、左上联合旗和盾徽。 */
 function drawFjFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.fj);
+  drawBritishBlueEnsign("#75a9d8", "#477aa5", "#fbfdfa", "#8f2633");
 }
 
-/** FK 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** FK 国旗专门模板：蓝船旗、左上联合旗和飞侧徽章。 */
 function drawFkFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.fk);
+  drawBritishBlueEnsign("#243f78", "#1b2c56", "#fbfdfa", "#2f6fa4");
 }
 
 /** FM 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -1839,9 +2042,19 @@ function drawFmFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** FO 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** FO 国旗专门模板：白底蓝边红色北欧十字。 */
 function drawFoFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.fo);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0.28, 0, 0.44, 1, "#2f4f9d", "#203a74");
+  drawFlagBand(flagBox, 0, 0.38, 1, 0.58, "#2f4f9d", "#203a74");
+  drawFlagBand(flagBox, 0.32, 0, 0.4, 1, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0.43, 1, 0.53, "#c83c4a", "#8f2633");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#cbd8ce");
+  drawFlagBorder(flagBox);
 }
 
 /** GA 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -1932,9 +2145,9 @@ function drawGeFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** GF 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** GF 国旗专门模板：法属圭亚那按地区 emoji 常见回退绘制法国三色旗。 */
 function drawGfFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.gf);
+  drawFranceFlag();
 }
 
 /** GG 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -1971,9 +2184,42 @@ function drawGhFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** GI 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** GI 国旗专门模板：白底红底边，中间绘制简化城堡钥匙徽章。 */
 function drawGiFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.gi);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+  const cx = mapFlagX(0.5, 0.48, flagBox);
+  const cy = mapFlagY(0.5, 0.48, flagBox);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0.68, 1, 1, "#c83c4a", "#8f2633");
+  roughCanvas.rectangle(cx - 48, cy - 38, 96, 54, {
+    stroke: "#8f2633",
+    strokeWidth: 1.4,
+    fill: "#c83c4a",
+    fillStyle: "hachure",
+    hachureGap: 7,
+    fillWeight: 0.75,
+    roughness: 2.2,
+    bowing: 1.2,
+  });
+  roughCanvas.line(cx, cy + 18, cx, cy + 86, {
+    stroke: "#f0c83a",
+    strokeWidth: 4,
+    roughness: 2.3,
+    bowing: 1.5,
+  });
+  roughCanvas.circle(cx, cy + 92, 18, {
+    stroke: "#a98218",
+    strokeWidth: 1,
+    fill: "#f0c83a",
+    fillStyle: "solid",
+    roughness: 2.2,
+    bowing: 1.2,
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+  drawFlagBorder(flagBox);
 }
 
 /** GL 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -2028,9 +2274,9 @@ function drawGnFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** GP 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** GP 国旗专门模板：瓜德罗普按地区 emoji 常见回退绘制法国三色旗。 */
 function drawGpFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.gp);
+  drawFranceFlag();
 }
 
 /** GQ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -2075,9 +2321,9 @@ function drawGrFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** GS 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** GS 国旗专门模板：蓝船旗、左上联合旗和南乔治亚徽章简化标记。 */
 function drawGsFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.gs);
+  drawBritishBlueEnsign("#243f78", "#1b2c56", "#fbfdfa", "#249064");
 }
 
 /** GT 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -2095,9 +2341,35 @@ function drawGtFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** GU 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** GU 国旗专门模板：蓝底红边和中心椭圆徽章。 */
 function drawGuFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.gu);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#253f78", "#1b2c56");
+  drawFlagBand(flagBox, 0, 0, 1, 0.08, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0.92, 1, 1, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0, 0.06, 1, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0.94, 0, 1, 1, "#c83c4a", "#8f2633");
+  roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 84, {
+    stroke: "#8f2633",
+    strokeWidth: 1.2,
+    fill: "#75a9d8",
+    fillStyle: "hachure",
+    hachureGap: 8,
+    fillWeight: 0.6,
+    roughness: 2.2,
+    bowing: 1.2,
+  });
+  roughCanvas.line(mapFlagX(0.44, 0.54, flagBox), mapFlagY(0.44, 0.54, flagBox), mapFlagX(0.56, 0.54, flagBox), mapFlagY(0.56, 0.54, flagBox), {
+    stroke: "#249064",
+    strokeWidth: 3,
+    roughness: 2.2,
+    bowing: 1.5,
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+  drawFlagBorder(flagBox);
 }
 
 /** GW 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -2180,9 +2452,9 @@ function drawHkFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** HM 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** HM 国旗专门模板：赫德岛和麦克唐纳群岛沿用澳大利亚旗。 */
 function drawHmFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.hm);
+  drawAustraliaFlag();
 }
 
 /** HN 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -2301,9 +2573,27 @@ function drawIlFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** IM 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** IM 国旗专门模板：红底三腿图案用三条旋转折线概括。 */
 function drawImFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.im);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+  const cx = mapFlagX(0.5, 0.5, flagBox);
+  const cy = mapFlagY(0.5, 0.5, flagBox);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  for (let i = 0; i < 3; i += 1) {
+    const angle = (-Math.PI / 2) + (Math.PI * 2 * i) / 3;
+    const kneeX = cx + Math.cos(angle) * 42;
+    const kneeY = cy + Math.sin(angle) * 42;
+    const footX = cx + Math.cos(angle + 0.55) * 78;
+    const footY = cy + Math.sin(angle + 0.55) * 78;
+    roughCanvas.line(cx, cy, kneeX, kneeY, { stroke: "#f0c83a", strokeWidth: 7, roughness: 2.4, bowing: 1.6 });
+    roughCanvas.line(kneeX, kneeY, footX, footY, { stroke: "#f0c83a", strokeWidth: 6, roughness: 2.4, bowing: 1.6 });
+  }
+  roughCanvas.circle(cx, cy, 24, { stroke: "#a98218", strokeWidth: 1, fill: "#f0c83a", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+  drawFlagBorder(flagBox);
 }
 
 /** IN 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -2339,9 +2629,26 @@ function drawInFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** IO 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** IO 国旗专门模板：英属印度洋领地用蓝白波纹、联合旗和棕榈徽章表示。 */
 function drawIoFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.io);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  for (let row = 0; row < 8; row += 1) {
+    drawFlagBand(flagBox, 0, row / 8, 1, (row + 0.5) / 8, "#2f5fa0", "#203a74");
+  }
+  drawUnionJackCanton(flagBox);
+  roughCanvas.line(mapFlagX(0.72, 0.42, flagBox), mapFlagY(0.72, 0.42, flagBox), mapFlagX(0.72, 0.7, flagBox), mapFlagY(0.72, 0.7, flagBox), {
+    stroke: "#6f4f28",
+    strokeWidth: 5,
+    roughness: 2.4,
+    bowing: 1.7,
+  });
+  drawSketchStar(mapFlagX(0.72, 0.34, flagBox), mapFlagY(0.72, 0.34, flagBox), 22, -18);
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#4d5d86");
+  drawFlagBorder(flagBox);
 }
 
 /** IQ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -2399,9 +2706,18 @@ function drawIsFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** JE 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** JE 国旗专门模板：白底红斜十字和顶部金色徽章。 */
 function drawJeFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.je);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawCantonLine(flagBox, 0, 0, 1, 1, "#c83c4a", 13);
+  drawCantonLine(flagBox, 1, 0, 0, 1, "#c83c4a", 13);
+  drawShieldBadge(flagBox, 0.5, 0.27, "#f0c83a", "#8f2633");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#cbd8ce");
+  drawFlagBorder(flagBox);
 }
 
 /** JM 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -2543,9 +2859,26 @@ function drawKhFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** KI 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** KI 国旗专门模板：红色上半、海浪条纹、太阳和飞鸟。 */
 function drawKiFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.ki);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0.5, 1, 1, "#253f78", "#1b2c56");
+  for (let row = 0; row < 3; row += 1) {
+    drawCantonLine({ x: flagBox.x, y: flagBox.y + flagBox.height * (0.58 + row * 0.11), width: flagBox.width, height: flagBox.height * 0.05 }, 0, 0, 1, 0, "#fbfdfa", 5);
+  }
+  drawSketchStar(mapFlagX(0.5, 0.34, flagBox), mapFlagY(0.5, 0.34, flagBox), 38, -18);
+  roughCanvas.line(mapFlagX(0.42, 0.24, flagBox), mapFlagY(0.42, 0.24, flagBox), mapFlagX(0.58, 0.24, flagBox), mapFlagY(0.58, 0.24, flagBox), {
+    stroke: "#f0c83a",
+    strokeWidth: 5,
+    roughness: 2.4,
+    bowing: 2,
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+  drawFlagBorder(flagBox);
 }
 
 /** KM 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -2708,9 +3041,9 @@ function drawKwFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** KY 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** KY 国旗专门模板：蓝船旗、联合旗和开曼群岛盾徽简化。 */
 function drawKyFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.ky);
+  drawBritishBlueEnsign("#243f78", "#1b2c56", "#fbfdfa", "#2f6fa4");
 }
 
 /** KZ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3017,9 +3350,24 @@ function drawMdFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** ME 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** ME 国旗专门模板：红底金边和中央双头鹰式徽章概括。 */
 function drawMeFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.me);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+  const cx = mapFlagX(0.5, 0.5, flagBox);
+  const cy = mapFlagY(0.5, 0.5, flagBox);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0, 1, 0.06, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0, 0.94, 1, 1, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0, 0, 0.05, 1, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0.95, 0, 1, 1, "#f0c83a", "#a98218");
+  drawSketchStar(cx - 28, cy - 16, 24, -18);
+  drawSketchStar(cx + 28, cy - 16, 24, 12);
+  drawShieldBadge(flagBox, 0.5, 0.56, "#f0c83a", "#8f2633");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+  drawFlagBorder(flagBox);
 }
 
 /** MF 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3050,9 +3398,22 @@ function drawMgFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** MH 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** MH 国旗专门模板：蓝底、橙白斜带和左上星。 */
 function drawMhFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.mh);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#253f78", "#1b2c56");
+  drawCantonLine(flagBox, 0, 0.94, 1, 0.4, "#fbfdfa", 34);
+  drawCantonLine(flagBox, 0, 0.98, 1, 0.52, "#ee8b2c", 24);
+  drawSketchStarWithColors(mapFlagX(0.2, 0.24, flagBox), mapFlagY(0.2, 0.24, flagBox), 34, -18, {
+    stroke: "#c7d1cc",
+    fill: "#fbfdfa",
+    hatch: "rgba(251, 253, 250, 0.7)",
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+  drawFlagBorder(flagBox);
 }
 
 /** MK 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3140,19 +3501,65 @@ function drawMnFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** MO 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** MO 国旗专门模板：绿底、莲花和五星。 */
 function drawMoFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.mo);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+  const cx = mapFlagX(0.5, 0.52, flagBox);
+  const cy = mapFlagY(0.5, 0.52, flagBox);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#176847", "#0f4f37");
+  for (let i = 0; i < 5; i += 1) {
+    roughCanvas.circle(cx + (i - 2) * 22, cy, 34, {
+      stroke: "#c7d1cc",
+      strokeWidth: 0.9,
+      fill: "#fbfdfa",
+      fillStyle: "solid",
+      roughness: 2.2,
+      bowing: 1.2,
+    });
+  }
+  [
+    [0.5, 0.22, 14],
+    [0.43, 0.32, 9],
+    [0.57, 0.32, 9],
+    [0.38, 0.43, 8],
+    [0.62, 0.43, 8],
+  ].forEach(([u, v, radius], index) => drawSketchStar(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), radius, -18 + index * 4));
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#0f4f37");
+  drawFlagBorder(flagBox);
 }
 
-/** MP 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** MP 国旗专门模板：蓝底、中心白星和花环式徽记。 */
 function drawMpFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.mp);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#253f78", "#1b2c56");
+  roughCanvas.circle(mapFlagX(0.5, 0.52, flagBox), mapFlagY(0.5, 0.52, flagBox), 86, {
+    stroke: "#c7d1cc",
+    strokeWidth: 1,
+    fill: "rgba(251, 253, 250, 0.14)",
+    fillStyle: "hachure",
+    hachureGap: 10,
+    fillWeight: 0.5,
+    roughness: 2.3,
+    bowing: 1.2,
+  });
+  drawSketchStarWithColors(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 32, -18, {
+    stroke: "#c7d1cc",
+    fill: "#fbfdfa",
+    hatch: "rgba(251, 253, 250, 0.7)",
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+  drawFlagBorder(flagBox);
 }
 
-/** MQ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** MQ 国旗专门模板：马提尼克按地区 emoji 常见回退绘制法国三色旗。 */
 function drawMqFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.mq);
+  drawFranceFlag();
 }
 
 /** MR 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3184,9 +3591,9 @@ function drawMrFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** MS 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** MS 国旗专门模板：蓝船旗、联合旗和蒙特塞拉特徽章简化。 */
 function drawMsFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.ms);
+  drawBritishBlueEnsign("#243f78", "#1b2c56", "#fbfdfa", "#249064");
 }
 
 /** MT 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3375,9 +3782,22 @@ function drawNaFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** NC 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** NC 国旗专门模板：蓝红绿三横带和左侧黄圆图腾。 */
 function drawNcFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.nc);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+  const cx = mapFlagX(0.24, 0.5, flagBox);
+  const cy = mapFlagY(0.24, 0.5, flagBox);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#253f78", "#1b2c56");
+  drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#249064", "#176847");
+  roughCanvas.circle(cx, cy, 86, { stroke: "#111615", strokeWidth: 2, fill: "#f0c83a", fillStyle: "hachure", hachureGap: 8, fillWeight: 0.6, roughness: 2.3, bowing: 1.2 });
+  roughCanvas.line(cx, cy - 34, cx, cy + 36, { stroke: "#111615", strokeWidth: 4, roughness: 2.3, bowing: 1.6 });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b3538");
+  drawFlagBorder(flagBox);
 }
 
 /** NE 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3402,9 +3822,30 @@ function drawNeFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** NF 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** NF 国旗专门模板：绿白绿竖带和中心松树。 */
 function drawNfFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.nf);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+  const cx = mapFlagX(0.5, 0.5, flagBox);
+  const cy = mapFlagY(0.5, 0.5, flagBox);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#176847", "#0f4f37");
+  drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#176847", "#0f4f37");
+  [0, 1, 2].forEach((index) => {
+    roughCanvas.polygon(
+      [
+        [cx, cy - 76 + index * 34],
+        [cx - 48 + index * 8, cy - 26 + index * 28],
+        [cx + 48 - index * 8, cy - 26 + index * 28],
+      ],
+      { stroke: "#0f4f37", strokeWidth: 1, fill: "#176847", fillStyle: "solid", roughness: 2.2, bowing: 1.2 },
+    );
+  });
+  roughCanvas.line(cx, cy - 24, cx, cy + 78, { stroke: "#6f4f28", strokeWidth: 4, roughness: 2.3, bowing: 1.6 });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3f755c");
+  drawFlagBorder(flagBox);
 }
 
 /** NG 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3421,9 +3862,19 @@ function drawNgFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** NI 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** NI 国旗专门模板：蓝白蓝横带和中心徽章。 */
 function drawNiFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.ni);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#2f78bd", "#20588e");
+  drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#2f78bd", "#20588e");
+  drawShieldBadge(flagBox, 0.5, 0.5, "#f0c83a", "#2f78bd");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3d6e98");
+  drawFlagBorder(flagBox);
 }
 
 /** NL 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3455,24 +3906,97 @@ function drawNoFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** NP 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** NP 国旗专门模板：双三角尼泊尔旗，保留月日符号。 */
 function drawNpFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.np);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  roughCanvas.polygon(
+    [
+      [mapFlagX(0.26, 0.08, flagBox), mapFlagY(0.26, 0.08, flagBox)],
+      [mapFlagX(0.72, 0.38, flagBox), mapFlagY(0.72, 0.38, flagBox)],
+      [mapFlagX(0.38, 0.42, flagBox), mapFlagY(0.38, 0.42, flagBox)],
+      [mapFlagX(0.74, 0.86, flagBox), mapFlagY(0.74, 0.86, flagBox)],
+      [mapFlagX(0.26, 0.86, flagBox), mapFlagY(0.26, 0.86, flagBox)],
+    ],
+    { stroke: "#203a74", strokeWidth: 10, fill: "#c83c4a", fillStyle: "solid", roughness: 2.4, bowing: 1.4 },
+  );
+  drawSketchStarWithColors(mapFlagX(0.42, 0.32, flagBox), mapFlagY(0.42, 0.32, flagBox), 20, -18, {
+    stroke: "#c7d1cc",
+    fill: "#fbfdfa",
+    hatch: "rgba(251, 253, 250, 0.7)",
+  });
+  roughCanvas.circle(mapFlagX(0.44, 0.68, flagBox), mapFlagY(0.44, 0.68, flagBox), 36, {
+    stroke: "#c7d1cc",
+    strokeWidth: 1,
+    fill: "#fbfdfa",
+    fillStyle: "solid",
+    roughness: 2.2,
+    bowing: 1.2,
+  });
 }
 
-/** NR 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** NR 国旗专门模板：蓝底、黄色赤道线和左下白星。 */
 function drawNrFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.nr);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#253f78", "#1b2c56");
+  drawFlagBand(flagBox, 0, 0.52, 1, 0.58, "#f0c83a", "#a98218");
+  drawSketchStarWithColors(mapFlagX(0.28, 0.72, flagBox), mapFlagY(0.28, 0.72, flagBox), 24, -18, {
+    stroke: "#c7d1cc",
+    fill: "#fbfdfa",
+    hatch: "rgba(251, 253, 250, 0.7)",
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+  drawFlagBorder(flagBox);
 }
 
-/** NU 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** NU 国旗专门模板：黄底、联合旗 canton 和蓝色星点。 */
 function drawNuFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.nu);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#f0c83a", "#a98218");
+  drawUnionJackCanton(flagBox);
+  [
+    [0.72, 0.3],
+    [0.84, 0.46],
+    [0.68, 0.62],
+    [0.82, 0.75],
+  ].forEach(([u, v], index) => drawSketchStarWithColors(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), index === 0 ? 16 : 10, -18 + index * 5, {
+    stroke: "#203a74",
+    fill: "#253f78",
+    hatch: "rgba(37, 63, 120, 0.6)",
+  }));
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+  drawFlagBorder(flagBox);
 }
 
-/** NZ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** NZ 国旗专门模板：蓝船旗、联合旗和红白南十字星。 */
 function drawNzFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.nz);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#243f78", "#1b2c56");
+  drawUnionJackCanton(flagBox);
+  [
+    [0.72, 0.28, 14],
+    [0.84, 0.44, 12],
+    [0.68, 0.58, 14],
+    [0.8, 0.72, 9],
+  ].forEach(([u, v, radius], index) => drawSketchStarWithColors(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), radius, -18 + index * 5, {
+    stroke: "#fbfdfa",
+    fill: "#c83c4a",
+    hatch: "rgba(251, 253, 250, 0.5)",
+  }));
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+  drawFlagBorder(flagBox);
 }
 
 /** OM 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3531,14 +4055,56 @@ function drawPeFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** PF 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** PF 国旗专门模板：法属波利尼西亚红白红横带和中心太阳船徽。 */
 function drawPfFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.pf);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1, 0.25, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0.75, 1, 1, "#c83c4a", "#8f2633");
+  roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 92, {
+    stroke: "#a98218",
+    strokeWidth: 1.2,
+    fill: "#f0c83a",
+    fillStyle: "hachure",
+    hachureGap: 8,
+    fillWeight: 0.5,
+    roughness: 2.2,
+    bowing: 1.2,
+  });
+  roughCanvas.line(mapFlagX(0.42, 0.54, flagBox), mapFlagY(0.42, 0.54, flagBox), mapFlagX(0.58, 0.54, flagBox), mapFlagY(0.58, 0.54, flagBox), {
+    stroke: "#c83c4a",
+    strokeWidth: 4,
+    roughness: 2.3,
+    bowing: 1.5,
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+  drawFlagBorder(flagBox);
 }
 
-/** PG 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** PG 国旗专门模板：黑红对角双色，白星与金色天堂鸟简化。 */
 function drawPgFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.pg);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#262d2b", "#111615");
+  roughCanvas.polygon(
+    [[mapFlagX(1, 0, flagBox), mapFlagY(1, 0, flagBox)], [mapFlagX(1, 1, flagBox), mapFlagY(1, 1, flagBox)], [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)]],
+    { stroke: "#8f2633", strokeWidth: 1.2, fill: "#c83c4a", fillStyle: "solid", roughness: 2.2, bowing: 1.2 },
+  );
+  drawSketchStar(mapFlagX(0.28, 0.3, flagBox), mapFlagY(0.28, 0.3, flagBox), 14, -18);
+  drawSketchStar(mapFlagX(0.4, 0.45, flagBox), mapFlagY(0.4, 0.45, flagBox), 10, -12);
+  roughCanvas.line(mapFlagX(0.62, 0.3, flagBox), mapFlagY(0.62, 0.3, flagBox), mapFlagX(0.82, 0.42, flagBox), mapFlagY(0.82, 0.42, flagBox), {
+    stroke: "#f0c83a",
+    strokeWidth: 5,
+    roughness: 2.4,
+    bowing: 1.8,
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+  drawFlagBorder(flagBox);
 }
 
 /** PH 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3612,19 +4178,39 @@ function drawPlFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** PM 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** PM 国旗专门模板：圣皮埃尔和密克隆按地区 emoji 常见回退绘制法国三色旗。 */
 function drawPmFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.pm);
+  drawFranceFlag();
 }
 
-/** PN 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** PN 国旗专门模板：蓝船旗、联合旗和皮特凯恩盾徽简化。 */
 function drawPnFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.pn);
+  drawBritishBlueEnsign("#243f78", "#1b2c56", "#fbfdfa", "#249064");
 }
 
-/** PR 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** PR 国旗专门模板：红白横纹、蓝三角和白星。 */
 function drawPrFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.pr);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  for (let row = 0; row < 5; row += 1) {
+    if (row % 2 === 0) {
+      drawFlagBand(flagBox, 0, row / 5, 1, (row + 1) / 5, "#c83c4a", "#8f2633");
+    }
+  }
+  roughCanvas.polygon(
+    [[mapFlagX(0, 0, flagBox), mapFlagY(0, 0, flagBox)], [mapFlagX(0.42, 0.5, flagBox), mapFlagY(0.42, 0.5, flagBox)], [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)]],
+    { stroke: "#203a74", strokeWidth: 1.2, fill: "#253f78", fillStyle: "solid", roughness: 2.2, bowing: 1.2 },
+  );
+  drawSketchStarWithColors(mapFlagX(0.16, 0.5, flagBox), mapFlagY(0.16, 0.5, flagBox), 20, -18, {
+    stroke: "#c7d1cc",
+    fill: "#fbfdfa",
+    hatch: "rgba(251, 253, 250, 0.7)",
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+  drawFlagBorder(flagBox);
 }
 
 /** PS 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3649,19 +4235,64 @@ function drawPsFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** PT 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** PT 国旗专门模板：葡萄牙绿红双竖带和交界徽章。 */
 function drawPtFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.pt);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0, 0.4, 1, "#176847", "#0f4f37");
+  drawFlagBand(flagBox, 0.4, 0, 1, 1, "#c83c4a", "#8f2633");
+  roughCanvas.circle(mapFlagX(0.4, 0.5, flagBox), mapFlagY(0.4, 0.5, flagBox), 72, {
+    stroke: "#a98218",
+    strokeWidth: 1.2,
+    fill: "#f0c83a",
+    fillStyle: "hachure",
+    hachureGap: 8,
+    fillWeight: 0.5,
+    roughness: 2.2,
+    bowing: 1.2,
+  });
+  drawShieldBadge(flagBox, 0.4, 0.5, "#fbfdfa", "#8f2633");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+  drawFlagBorder(flagBox);
 }
 
-/** PW 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** PW 国旗专门模板：浅蓝底和偏左金色圆月。 */
 function drawPwFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.pw);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#4f9fd3", "#2c6f9b");
+  roughCanvas.circle(mapFlagX(0.43, 0.5, flagBox), mapFlagY(0.43, 0.5, flagBox), 118, {
+    stroke: "#a98218",
+    strokeWidth: 1.2,
+    fill: "#f0c83a",
+    fillStyle: "hachure",
+    hachureGap: 9,
+    fillWeight: 0.6,
+    roughness: 2.2,
+    bowing: 1.2,
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#2c6f9b");
+  drawFlagBorder(flagBox);
 }
 
-/** PY 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** PY 国旗专门模板：红白蓝横带和中心徽章。 */
 function drawPyFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.py);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#253f78", "#1b2c56");
+  drawShieldBadge(flagBox, 0.5, 0.5, "#f0c83a", "#249064");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+  drawFlagBorder(flagBox);
 }
 
 /** QA 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3686,9 +4317,9 @@ function drawQaFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** RE 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** RE 国旗专门模板：留尼汪按地区 emoji 常见回退绘制法国三色旗。 */
 function drawReFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.re);
+  drawFranceFlag();
 }
 
 /** RO 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3705,9 +4336,19 @@ function drawRoFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** RS 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** RS 国旗专门模板：红蓝白横带和靠旗杆简化徽章。 */
 function drawRsFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.rs);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#253f78", "#1b2c56");
+  drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#fbfdfa", "#c7d1cc");
+  drawShieldBadge(flagBox, 0.32, 0.5, "#fbfdfa", "#8f2633");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+  drawFlagBorder(flagBox);
 }
 
 /** RU 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3724,24 +4365,89 @@ function drawRuFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** RW 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** RW 国旗专门模板：蓝黄绿横带和右上太阳。 */
 function drawRwFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.rw);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#4f9fd3", "#2c6f9b");
+  drawFlagBand(flagBox, 0, 0, 1, 0.5, "#4f9fd3", "#2c6f9b");
+  drawFlagBand(flagBox, 0, 0.5, 1, 0.75, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0, 0.75, 1, 1, "#249064", "#176847");
+  drawSketchStar(mapFlagX(0.82, 0.24, flagBox), mapFlagY(0.82, 0.24, flagBox), 28, -18);
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#477aa5");
+  drawFlagBorder(flagBox);
 }
 
-/** SA 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SA 国旗专门模板：绿底、白色铭文线和弯刀。 */
 function drawSaFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.sa);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#176847", "#0f4f37");
+  roughCanvas.line(mapFlagX(0.28, 0.42, flagBox), mapFlagY(0.28, 0.42, flagBox), mapFlagX(0.72, 0.42, flagBox), mapFlagY(0.72, 0.42, flagBox), {
+    stroke: "#fbfdfa",
+    strokeWidth: 5,
+    roughness: 2.4,
+    bowing: 1.6,
+  });
+  roughCanvas.line(mapFlagX(0.34, 0.6, flagBox), mapFlagY(0.34, 0.6, flagBox), mapFlagX(0.68, 0.56, flagBox), mapFlagY(0.68, 0.56, flagBox), {
+    stroke: "#fbfdfa",
+    strokeWidth: 4,
+    roughness: 2.4,
+    bowing: 1.8,
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#0f4f37");
+  drawFlagBorder(flagBox);
 }
 
-/** SB 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SB 国旗专门模板：蓝绿对角双色、黄色斜带和左上五星。 */
 function drawSbFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.sb);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#2f78bd", "#20588e");
+  roughCanvas.polygon(
+    [[mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)], [mapFlagX(1, 0, flagBox), mapFlagY(1, 0, flagBox)], [mapFlagX(1, 1, flagBox), mapFlagY(1, 1, flagBox)]],
+    { stroke: "#176847", strokeWidth: 1, fill: "#249064", fillStyle: "solid", roughness: 2.2, bowing: 1.2 },
+  );
+  drawCantonLine(flagBox, 0, 1, 1, 0, "#f0c83a", 32);
+  [
+    [0.18, 0.18],
+    [0.28, 0.18],
+    [0.23, 0.28],
+    [0.15, 0.34],
+    [0.31, 0.34],
+  ].forEach(([u, v], index) => drawSketchStar(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), 8, -18 + index));
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3d6e98");
+  drawFlagBorder(flagBox);
 }
 
-/** SC 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SC 国旗专门模板：从旗杆底部发散的五色扇形。 */
 function drawScFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.sc);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+  const origin = [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)];
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#253f78", "#1b2c56");
+  [
+    ["#253f78", 0, 0.18, "#1b2c56"],
+    ["#f0c83a", 0.18, 0.38, "#a98218"],
+    ["#c83c4a", 0.38, 0.58, "#8f2633"],
+    ["#fbfdfa", 0.58, 0.78, "#c7d1cc"],
+    ["#249064", 0.78, 1, "#176847"],
+  ].forEach(([fill, start, end, stroke]) => {
+    roughCanvas.polygon(
+      [origin, [mapFlagX(start as number, 0, flagBox), mapFlagY(start as number, 0, flagBox)], [mapFlagX(end as number, 0, flagBox), mapFlagY(end as number, 0, flagBox)]],
+      { stroke: stroke as string, strokeWidth: 1, fill: fill as string, fillStyle: "solid", roughness: 2.2, bowing: 1.2 },
+    );
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+  drawFlagBorder(flagBox);
 }
 
 /** SD 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3821,24 +4527,44 @@ function drawSgFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** SH 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SH 国旗专门模板：蓝船旗、联合旗和圣赫勒拿徽章简化。 */
 function drawShFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.sh);
+  drawBritishBlueEnsign("#243f78", "#1b2c56", "#fbfdfa", "#f0c83a");
 }
 
-/** SI 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SI 国旗专门模板：白蓝红横带和靠旗杆盾徽。 */
 function drawSiFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.si);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#253f78", "#1b2c56");
+  drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#c83c4a", "#8f2633");
+  drawShieldBadge(flagBox, 0.28, 0.38, "#fbfdfa", "#253f78");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+  drawFlagBorder(flagBox);
 }
 
-/** SJ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SJ 国旗专门模板：斯瓦尔巴和扬马延沿用挪威旗。 */
 function drawSjFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.sj);
+  drawNoFlag();
 }
 
-/** SK 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SK 国旗专门模板：白蓝红横带和靠旗杆盾徽。 */
 function drawSkFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.sk);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#253f78", "#1b2c56");
+  drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#c83c4a", "#8f2633");
+  drawShieldBadge(flagBox, 0.28, 0.5, "#fbfdfa", "#8f2633");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+  drawFlagBorder(flagBox);
 }
 
 /** SL 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3855,9 +4581,18 @@ function drawSlFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** SM 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SM 国旗专门模板：白蓝双横带和中心徽章。 */
 function drawSmFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.sm);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1, 0.5, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0.5, 1, 1, "#75a9d8", "#477aa5");
+  drawShieldBadge(flagBox, 0.5, 0.5, "#f0c83a", "#249064");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#477aa5");
+  drawFlagBorder(flagBox);
 }
 
 /** SN 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3895,29 +4630,92 @@ function drawSoFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** SR 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SR 国旗专门模板：绿白红白绿横带和中心黄星。 */
 function drawSrFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.sr);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#249064", "#176847");
+  drawFlagBand(flagBox, 0, 0, 1, 0.2, "#249064", "#176847");
+  drawFlagBand(flagBox, 0, 0.2, 1, 0.3, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0.3, 1, 0.7, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0.7, 1, 0.8, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0.8, 1, 1, "#249064", "#176847");
+  drawSketchStar(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 34, -18);
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+  drawFlagBorder(flagBox);
 }
 
-/** SS 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SS 国旗专门模板：黑红绿横带、蓝三角和黄星。 */
 function drawSsFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.ss);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1, 0.3, "#262d2b", "#111615");
+  drawFlagBand(flagBox, 0, 0.36, 1, 0.64, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0.7, 1, 1, "#249064", "#176847");
+  roughCanvas.polygon(
+    [[mapFlagX(0, 0, flagBox), mapFlagY(0, 0, flagBox)], [mapFlagX(0.42, 0.5, flagBox), mapFlagY(0.42, 0.5, flagBox)], [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)]],
+    { stroke: "#203a74", strokeWidth: 1.2, fill: "#253f78", fillStyle: "solid", roughness: 2.2, bowing: 1.2 },
+  );
+  drawSketchStar(mapFlagX(0.16, 0.5, flagBox), mapFlagY(0.16, 0.5, flagBox), 22, -18);
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+  drawFlagBorder(flagBox);
 }
 
-/** ST 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** ST 国旗专门模板：绿黄绿横带、红三角和双黑星。 */
 function drawStFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.st);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0, 0, 1, 0.25, "#249064", "#176847");
+  drawFlagBand(flagBox, 0, 0.75, 1, 1, "#249064", "#176847");
+  roughCanvas.polygon(
+    [[mapFlagX(0, 0, flagBox), mapFlagY(0, 0, flagBox)], [mapFlagX(0.34, 0.5, flagBox), mapFlagY(0.34, 0.5, flagBox)], [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)]],
+    { stroke: "#8f2633", strokeWidth: 1.2, fill: "#c83c4a", fillStyle: "solid", roughness: 2.2, bowing: 1.2 },
+  );
+  drawSketchStarWithColors(mapFlagX(0.48, 0.5, flagBox), mapFlagY(0.48, 0.5, flagBox), 18, -18, { stroke: "#111615", fill: "#262d2b", hatch: "rgba(38, 45, 43, 0.7)" });
+  drawSketchStarWithColors(mapFlagX(0.64, 0.5, flagBox), mapFlagY(0.64, 0.5, flagBox), 18, -18, { stroke: "#111615", fill: "#262d2b", hatch: "rgba(38, 45, 43, 0.7)" });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+  drawFlagBorder(flagBox);
 }
 
-/** SV 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SV 国旗专门模板：蓝白蓝横带和中心徽章。 */
 function drawSvFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.sv);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#253f78", "#1b2c56");
+  drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#253f78", "#1b2c56");
+  drawShieldBadge(flagBox, 0.5, 0.5, "#f0c83a", "#249064");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#4d5d86");
+  drawFlagBorder(flagBox);
 }
 
-/** SX 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SX 国旗专门模板：红蓝横底、白三角和徽章。 */
 function drawSxFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.sx);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#253f78", "#1b2c56");
+  drawFlagBand(flagBox, 0, 0, 1, 0.5, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0.5, 1, 1, "#253f78", "#1b2c56");
+  roughCanvas.polygon(
+    [[mapFlagX(0, 0, flagBox), mapFlagY(0, 0, flagBox)], [mapFlagX(0.46, 0.5, flagBox), mapFlagY(0.46, 0.5, flagBox)], [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)]],
+    { stroke: "#c7d1cc", strokeWidth: 1.2, fill: "#fbfdfa", fillStyle: "solid", roughness: 2.2, bowing: 1.2 },
+  );
+  drawShieldBadge(flagBox, 0.16, 0.5, "#f0c83a", "#8f2633");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+  drawFlagBorder(flagBox);
 }
 
 /** SY 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3944,14 +4742,31 @@ function drawSyFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** SZ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** SZ 国旗专门模板：蓝黄红横带和中心盾牌。 */
 function drawSzFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.sz);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0, 1, 0.18, "#253f78", "#1b2c56");
+  drawFlagBand(flagBox, 0, 0.18, 1, 0.26, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0, 0.74, 1, 0.82, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0, 0.82, 1, 1, "#253f78", "#1b2c56");
+  drawShieldBadge(flagBox, 0.5, 0.5, "#fbfdfa", "#262d2b");
+  roughCanvas.line(mapFlagX(0.32, 0.5, flagBox), mapFlagY(0.32, 0.5, flagBox), mapFlagX(0.68, 0.5, flagBox), mapFlagY(0.68, 0.5, flagBox), {
+    stroke: "#6f4f28",
+    strokeWidth: 3,
+    roughness: 2.3,
+    bowing: 1.5,
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+  drawFlagBorder(flagBox);
 }
 
-/** TC 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** TC 国旗专门模板：蓝船旗、联合旗和特克斯凯科斯徽章简化。 */
 function drawTcFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.tc);
+  drawBritishBlueEnsign("#243f78", "#1b2c56", "#f0c83a", "#249064");
 }
 
 /** TD 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -3968,34 +4783,87 @@ function drawTdFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** TF 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** TF 国旗专门模板：法属南部领地按地区 emoji 常见回退绘制法国三色旗。 */
 function drawTfFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.tf);
+  drawFranceFlag();
 }
 
-/** TG 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** TG 国旗专门模板：绿黄横条、红 canton 和白星。 */
 function drawTgFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.tg);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#249064", "#176847");
+  for (let row = 0; row < 5; row += 1) {
+    drawFlagBand(flagBox, 0, row / 5, 1, (row + 1) / 5, row % 2 === 0 ? "#249064" : "#f0c83a", row % 2 === 0 ? "#176847" : "#a98218");
+  }
+  drawFlagBand(flagBox, 0, 0, 0.38, 0.6, "#c83c4a", "#8f2633");
+  drawSketchStarWithColors(mapFlagX(0.19, 0.3, flagBox), mapFlagY(0.19, 0.3, flagBox), 20, -18, { stroke: "#c7d1cc", fill: "#fbfdfa", hatch: "rgba(251, 253, 250, 0.7)" });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+  drawFlagBorder(flagBox);
 }
 
-/** TJ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** TJ 国旗专门模板：红白绿横带和中心金冠星。 */
 function drawTjFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.tj);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1, 0.28, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0.28, 1, 0.72, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0.72, 1, 1, "#249064", "#176847");
+  roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 42, { stroke: "#a98218", strokeWidth: 1, fill: "#f0c83a", fillStyle: "hachure", hachureGap: 7, fillWeight: 0.6, roughness: 2.2, bowing: 1.2 });
+  drawSketchStar(mapFlagX(0.5, 0.42, flagBox), mapFlagY(0.5, 0.42, flagBox), 12, -18);
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+  drawFlagBorder(flagBox);
 }
 
-/** TK 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** TK 国旗专门模板：蓝底、左侧黄月和南十字星。 */
 function drawTkFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.tk);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#253f78", "#1b2c56");
+  roughCanvas.circle(mapFlagX(0.24, 0.34, flagBox), mapFlagY(0.24, 0.34, flagBox), 64, { stroke: "#a98218", strokeWidth: 1, fill: "#f0c83a", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  roughCanvas.circle(mapFlagX(0.28, 0.34, flagBox), mapFlagY(0.28, 0.34, flagBox), 58, { stroke: "#1b2c56", strokeWidth: 1, fill: "#253f78", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  [[0.68, 0.34], [0.82, 0.48], [0.66, 0.64], [0.78, 0.76]].forEach(([u, v], index) => drawSketchStar(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), index === 0 ? 12 : 9, -18 + index));
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+  drawFlagBorder(flagBox);
 }
 
-/** TL 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** TL 国旗专门模板：红底、黄黑双三角和白星。 */
 function drawTlFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.tl);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  roughCanvas.polygon([[mapFlagX(0, 0, flagBox), mapFlagY(0, 0, flagBox)], [mapFlagX(0.62, 0.5, flagBox), mapFlagY(0.62, 0.5, flagBox)], [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)]], { stroke: "#a98218", strokeWidth: 1.2, fill: "#f0c83a", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  roughCanvas.polygon([[mapFlagX(0, 0, flagBox), mapFlagY(0, 0, flagBox)], [mapFlagX(0.42, 0.5, flagBox), mapFlagY(0.42, 0.5, flagBox)], [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)]], { stroke: "#111615", strokeWidth: 1.2, fill: "#262d2b", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  drawSketchStarWithColors(mapFlagX(0.16, 0.5, flagBox), mapFlagY(0.16, 0.5, flagBox), 18, -18, { stroke: "#c7d1cc", fill: "#fbfdfa", hatch: "rgba(251, 253, 250, 0.7)" });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+  drawFlagBorder(flagBox);
 }
 
-/** TM 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** TM 国旗专门模板：绿底、左侧地毯纹和白色星月。 */
 function drawTmFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.tm);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#176847", "#0f4f37");
+  drawFlagBand(flagBox, 0.12, 0.08, 0.22, 0.92, "#8b2934", "#63202a");
+  for (let i = 0; i < 5; i += 1) {
+    roughCanvas.line(mapFlagX(0.13, 0.14 + i * 0.15, flagBox), mapFlagY(0.13, 0.14 + i * 0.15, flagBox), mapFlagX(0.21, 0.18 + i * 0.15, flagBox), mapFlagY(0.21, 0.18 + i * 0.15, flagBox), { stroke: "#f0c83a", strokeWidth: 1.4, roughness: 2.1, bowing: 1.4 });
+  }
+  roughCanvas.circle(mapFlagX(0.42, 0.36, flagBox), mapFlagY(0.42, 0.36, flagBox), 54, { stroke: "#c7d1cc", strokeWidth: 1, fill: "#fbfdfa", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  roughCanvas.circle(mapFlagX(0.46, 0.36, flagBox), mapFlagY(0.46, 0.36, flagBox), 48, { stroke: "#0f4f37", strokeWidth: 1, fill: "#176847", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  drawSketchStar(mapFlagX(0.58, 0.34, flagBox), mapFlagY(0.58, 0.34, flagBox), 11, -18);
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#0f4f37");
+  drawFlagBorder(flagBox);
 }
 
 /** TN 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -4038,9 +4906,18 @@ function drawTnFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** TO 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** TO 国旗专门模板：红底、白 canton 和红十字。 */
 function drawToFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.to);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0, 0.42, 0.46, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0.16, 0.08, 0.26, 0.38, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0.08, 0.18, 0.34, 0.28, "#c83c4a", "#8f2633");
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+  drawFlagBorder(flagBox);
 }
 
 /** TR 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -4075,24 +4952,61 @@ function drawTrFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** TT 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** TT 国旗专门模板：红底白边黑色斜带。 */
 function drawTtFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.tt);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  drawCantonLine(flagBox, 0, 0, 1, 1, "#fbfdfa", 48);
+  drawCantonLine(flagBox, 0, 0, 1, 1, "#262d2b", 28);
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+  drawFlagBorder(flagBox);
 }
 
-/** TV 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** TV 国旗专门模板：浅蓝船旗、联合旗和右侧黄星。 */
 function drawTvFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.tv);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#75a9d8", "#477aa5");
+  drawUnionJackCanton(flagBox);
+  [[0.7, 0.28], [0.84, 0.42], [0.74, 0.58], [0.88, 0.7], [0.62, 0.74]].forEach(([u, v], index) => drawSketchStar(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), 9, -18 + index));
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#477aa5");
+  drawFlagBorder(flagBox);
 }
 
-/** TW 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** TW 国旗专门模板：红底、蓝 canton 和白日。 */
 function drawTwFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.tw);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0, 0.5, 0.5, "#253f78", "#1b2c56");
+  drawSketchStarWithColors(mapFlagX(0.25, 0.25, flagBox), mapFlagY(0.25, 0.25, flagBox), 34, -18, {
+    stroke: "#c7d1cc",
+    fill: "#fbfdfa",
+    hatch: "rgba(251, 253, 250, 0.7)",
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+  drawFlagBorder(flagBox);
 }
 
-/** TZ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** TZ 国旗专门模板：绿蓝对角双色和黄边黑色斜带。 */
 function drawTzFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.tz);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#249064", "#176847");
+  roughCanvas.polygon([[mapFlagX(1, 0, flagBox), mapFlagY(1, 0, flagBox)], [mapFlagX(1, 1, flagBox), mapFlagY(1, 1, flagBox)], [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)]], { stroke: "#2c6f9b", strokeWidth: 1, fill: "#4f9fd3", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  drawCantonLine(flagBox, 0, 1, 1, 0, "#f0c83a", 46);
+  drawCantonLine(flagBox, 0, 1, 1, 0, "#262d2b", 28);
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3f755c");
+  drawFlagBorder(flagBox);
 }
 
 /** UA 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -4108,14 +5022,25 @@ function drawUaFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** UG 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** UG 国旗专门模板：黑黄红六横带和中心白圆鸟徽。 */
 function drawUgFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.ug);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#262d2b", "#111615");
+  ["#262d2b", "#f0c83a", "#c83c4a", "#262d2b", "#f0c83a", "#c83c4a"].forEach((fill, row) => {
+    drawFlagBand(flagBox, 0, row / 6, 1, (row + 1) / 6, fill, fill === "#262d2b" ? "#111615" : fill === "#f0c83a" ? "#a98218" : "#8f2633");
+  });
+  roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 76, { stroke: "#c7d1cc", strokeWidth: 1, fill: "#fbfdfa", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  roughCanvas.line(mapFlagX(0.48, 0.42, flagBox), mapFlagY(0.48, 0.42, flagBox), mapFlagX(0.56, 0.58, flagBox), mapFlagY(0.56, 0.58, flagBox), { stroke: "#262d2b", strokeWidth: 4, roughness: 2.3, bowing: 1.5 });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#705b4a");
+  drawFlagBorder(flagBox);
 }
 
-/** UM 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** UM 国旗专门模板：美国本土外小岛屿沿用美国国旗。 */
 function drawUmFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.um);
+  drawUnitedStatesFlag();
 }
 
 /** UY 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -4143,29 +5068,80 @@ function drawUyFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** UZ 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** UZ 国旗专门模板：蓝白绿横带、红分隔线和星月。 */
 function drawUzFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.uz);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1, 0.32, "#4f9fd3", "#2c6f9b");
+  drawFlagBand(flagBox, 0, 0.35, 1, 0.65, "#fbfdfa", "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0.68, 1, 1, "#249064", "#176847");
+  drawFlagBand(flagBox, 0, 0.32, 1, 0.35, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0.65, 1, 0.68, "#c83c4a", "#8f2633");
+  roughCanvas.circle(mapFlagX(0.22, 0.16, flagBox), mapFlagY(0.22, 0.16, flagBox), 36, { stroke: "#c7d1cc", strokeWidth: 1, fill: "#fbfdfa", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  roughCanvas.circle(mapFlagX(0.25, 0.16, flagBox), mapFlagY(0.25, 0.16, flagBox), 32, { stroke: "#2c6f9b", strokeWidth: 1, fill: "#4f9fd3", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  drawSketchStar(mapFlagX(0.36, 0.14, flagBox), mapFlagY(0.36, 0.14, flagBox), 8, -18);
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#477aa5");
+  drawFlagBorder(flagBox);
 }
 
-/** VC 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** VC 国旗专门模板：蓝黄绿竖带和三颗绿钻。 */
 function drawVcFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.vc);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0, 0, 0.25, 1, "#2f78bd", "#20588e");
+  drawFlagBand(flagBox, 0.25, 0, 0.75, 1, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0.75, 0, 1, 1, "#249064", "#176847");
+  [[0.45, 0.48], [0.55, 0.48], [0.5, 0.6]].forEach(([u, v]) => {
+    roughCanvas.polygon([[mapFlagX(u, v - 0.06, flagBox), mapFlagY(u, v - 0.06, flagBox)], [mapFlagX(u + 0.04, v, flagBox), mapFlagY(u + 0.04, v, flagBox)], [mapFlagX(u, v + 0.06, flagBox), mapFlagY(u, v + 0.06, flagBox)], [mapFlagX(u - 0.04, v, flagBox), mapFlagY(u - 0.04, v, flagBox)]], { stroke: "#176847", strokeWidth: 1, fill: "#249064", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+  drawFlagBorder(flagBox);
 }
 
-/** VE 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** VE 国旗专门模板：黄蓝红横带和蓝带星弧。 */
 function drawVeFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.ve);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#f0c83a", "#a98218");
+  drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#253f78", "#1b2c56");
+  drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#c83c4a", "#8f2633");
+  for (let i = 0; i < 8; i += 1) {
+    const angle = Math.PI * (0.95 + i * 0.1);
+    drawSketchStarWithColors(mapFlagX(0.5 + Math.cos(angle) * 0.22, 0.5, flagBox), mapFlagY(0.5 + Math.cos(angle) * 0.22, 0.5 + Math.sin(angle) * 0.18, flagBox), 8, -18 + i, { stroke: "#c7d1cc", fill: "#fbfdfa", hatch: "rgba(251,253,250,0.7)" });
+  }
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#705b4a");
+  drawFlagBorder(flagBox);
 }
 
-/** VG 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** VG 国旗专门模板：蓝船旗、联合旗和维尔京群岛徽章简化。 */
 function drawVgFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.vg);
+  drawBritishBlueEnsign("#243f78", "#1b2c56", "#fbfdfa", "#249064");
 }
 
-/** VI 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** VI 国旗专门模板：白底、金色鹰形和字母感短线。 */
 function drawViFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.vi);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+  const cx = mapFlagX(0.5, 0.48, flagBox);
+  const cy = mapFlagY(0.5, 0.48, flagBox);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+  drawSketchStar(cx, cy - 20, 26, -18);
+  roughCanvas.line(cx - 70, cy + 50, cx - 32, cy + 10, { stroke: "#2f4f9d", strokeWidth: 4, roughness: 2.3, bowing: 1.5 });
+  roughCanvas.line(cx + 70, cy + 50, cx + 32, cy + 10, { stroke: "#249064", strokeWidth: 4, roughness: 2.3, bowing: 1.5 });
+  roughCanvas.line(cx - 28, cy + 28, cx + 28, cy + 28, { stroke: "#f0c83a", strokeWidth: 5, roughness: 2.3, bowing: 1.5 });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#cbd8ce");
+  drawFlagBorder(flagBox);
 }
 
 /** VN 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -4180,24 +5156,56 @@ function drawVnFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** VU 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** VU 国旗专门模板：红绿横底、黑黄 Y 形和左侧徽记。 */
 function drawVuFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.vu);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0.5, 1, 1, "#249064", "#176847");
+  drawCantonLine(flagBox, 0, 0.5, 1, 0.5, "#f0c83a", 34);
+  drawCantonLine(flagBox, 0, 0.5, 1, 0.18, "#f0c83a", 28);
+  drawCantonLine(flagBox, 0, 0.5, 1, 0.82, "#f0c83a", 28);
+  drawCantonLine(flagBox, 0, 0.5, 1, 0.5, "#262d2b", 18);
+  drawCantonLine(flagBox, 0, 0.5, 1, 0.18, "#262d2b", 14);
+  drawCantonLine(flagBox, 0, 0.5, 1, 0.82, "#262d2b", 14);
+  roughCanvas.circle(mapFlagX(0.16, 0.5, flagBox), mapFlagY(0.16, 0.5, flagBox), 46, { stroke: "#f0c83a", strokeWidth: 2, fill: "transparent", roughness: 2.2, bowing: 1.2 });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+  drawFlagBorder(flagBox);
 }
 
-/** WF 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** WF 国旗专门模板：瓦利斯和富图纳按地区 emoji 常见回退绘制法国三色旗。 */
 function drawWfFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.wf);
+  drawFranceFlag();
 }
 
-/** WS 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** WS 国旗专门模板：红底、蓝 canton 和南十字星。 */
 function drawWsFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.ws);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0, 0.48, 0.55, "#253f78", "#1b2c56");
+  [[0.2, 0.18, 11], [0.34, 0.27, 9], [0.24, 0.39, 11], [0.38, 0.44, 8]].forEach(([u, v, radius], index) => drawSketchStarWithColors(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), radius, -18 + index, { stroke: "#c7d1cc", fill: "#fbfdfa", hatch: "rgba(251,253,250,0.7)" }));
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+  drawFlagBorder(flagBox);
 }
 
-/** XK 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** XK 国旗专门模板：蓝底、金色地图块和上方六星。 */
 function drawXkFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.xk);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#253f78", "#1b2c56");
+  roughCanvas.polygon([[mapFlagX(0.42, 0.48, flagBox), mapFlagY(0.42, 0.48, flagBox)], [mapFlagX(0.58, 0.42, flagBox), mapFlagY(0.58, 0.42, flagBox)], [mapFlagX(0.66, 0.62, flagBox), mapFlagY(0.66, 0.62, flagBox)], [mapFlagX(0.48, 0.72, flagBox), mapFlagY(0.48, 0.72, flagBox)]], { stroke: "#a98218", strokeWidth: 1.2, fill: "#f0c83a", fillStyle: "hachure", hachureGap: 8, fillWeight: 0.6, roughness: 2.2, bowing: 1.2 });
+  for (let i = 0; i < 6; i += 1) {
+    drawSketchStar(mapFlagX(0.34 + i * 0.065, 0.3, flagBox), mapFlagY(0.34 + i * 0.065, 0.3, flagBox), 8, -18 + i);
+  }
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+  drawFlagBorder(flagBox);
 }
 
 /** YE 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
@@ -4214,24 +5222,59 @@ function drawYeFlag() {
   drawFlagBorder(flagBox);
 }
 
-/** YT 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** YT 国旗专门模板：马约特按地区 emoji 常见回退绘制法国三色旗。 */
 function drawYtFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.yt);
+  drawFranceFlag();
 }
 
-/** ZA 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** ZA 国旗专门模板：南非 Y 形多色旗。 */
 function drawZaFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.za);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0, 0.5, 1, 1, "#253f78", "#1b2c56");
+  drawCantonLine(flagBox, 0, 0.5, 1, 0.5, "#fbfdfa", 58);
+  drawCantonLine(flagBox, 0, 0.5, 1, 0.22, "#fbfdfa", 48);
+  drawCantonLine(flagBox, 0, 0.5, 1, 0.78, "#fbfdfa", 48);
+  drawCantonLine(flagBox, 0, 0.5, 1, 0.5, "#f0c83a", 40);
+  drawCantonLine(flagBox, 0, 0.5, 1, 0.22, "#249064", 30);
+  drawCantonLine(flagBox, 0, 0.5, 1, 0.78, "#249064", 30);
+  roughCanvas.polygon([[mapFlagX(0, 0.1, flagBox), mapFlagY(0, 0.1, flagBox)], [mapFlagX(0.32, 0.5, flagBox), mapFlagY(0.32, 0.5, flagBox)], [mapFlagX(0, 0.9, flagBox), mapFlagY(0, 0.9, flagBox)]], { stroke: "#111615", strokeWidth: 1.2, fill: "#262d2b", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+  drawFlagBorder(flagBox);
 }
 
-/** ZM 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** ZM 国旗专门模板：绿底、右下三色竖带和飞鹰。 */
 function drawZmFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.zm);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#176847", "#0f4f37");
+  drawFlagBand(flagBox, 0.72, 0.55, 0.8, 1, "#c83c4a", "#8f2633");
+  drawFlagBand(flagBox, 0.8, 0.55, 0.88, 1, "#262d2b", "#111615");
+  drawFlagBand(flagBox, 0.88, 0.55, 0.96, 1, "#ee8b2c", "#a9601d");
+  roughCanvas.line(mapFlagX(0.76, 0.32, flagBox), mapFlagY(0.76, 0.32, flagBox), mapFlagX(0.92, 0.28, flagBox), mapFlagY(0.92, 0.28, flagBox), { stroke: "#ee8b2c", strokeWidth: 5, roughness: 2.4, bowing: 1.8 });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#0f4f37");
+  drawFlagBorder(flagBox);
 }
 
-/** ZW 国旗专门模板：复用采样式手绘 primitive，保持与已有模板一致的纸张、抖动和布纹风格。 */
+/** ZW 国旗专门模板：七横带、白三角和红星金鸟。 */
 function drawZwFlag() {
-  drawSampledFlagTemplate(TEMPLATE_FLAGS.zw);
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+  const colors = ["#249064", "#f0c83a", "#c83c4a", "#262d2b", "#c83c4a", "#f0c83a", "#249064"];
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, "#262d2b", "#111615");
+  colors.forEach((fill, row) => drawFlagBand(flagBox, 0, row / 7, 1, (row + 1) / 7, fill, fill === "#262d2b" ? "#111615" : softenColor(fill, 0.75)));
+  roughCanvas.polygon([[mapFlagX(0, 0, flagBox), mapFlagY(0, 0, flagBox)], [mapFlagX(0.42, 0.5, flagBox), mapFlagY(0.42, 0.5, flagBox)], [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)]], { stroke: "#111615", strokeWidth: 1.2, fill: "#fbfdfa", fillStyle: "solid", roughness: 2.2, bowing: 1.2 });
+  drawSketchStarWithColors(mapFlagX(0.16, 0.5, flagBox), mapFlagY(0.16, 0.5, flagBox), 28, -18, { stroke: "#8f2633", fill: "#c83c4a", hatch: "#d8585f" });
+  roughCanvas.line(mapFlagX(0.16, 0.47, flagBox), mapFlagY(0.16, 0.47, flagBox), mapFlagX(0.26, 0.53, flagBox), mapFlagY(0.26, 0.53, flagBox), { stroke: "#f0c83a", strokeWidth: 4, roughness: 2.3, bowing: 1.5 });
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+  drawFlagBorder(flagBox);
 }
 
 /** 返回大多数旗帜共用的画布内旗面矩形，后续归一化坐标都会映射到该区域。 */
@@ -4276,6 +5319,58 @@ function drawFlagBorder(flagBox) {
     roughness: 2.8,
     bowing: 1.6,
   });
+}
+
+/** 绘制英式蓝船旗类地区旗：左上联合旗，右侧用简化盾徽表达属地徽章。 */
+function drawBritishBlueEnsign(fill, stroke, badgeFill, badgeAccent) {
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, fill, stroke);
+  drawFlagBand(flagBox, 0, 0, 1, 1, fill, stroke);
+  drawUnionJackCanton(flagBox);
+  drawShieldBadge(flagBox, 0.74, 0.54, badgeFill, badgeAccent);
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, stroke);
+  drawFlagBorder(flagBox);
+}
+
+/** 绘制巴勒斯坦/西撒哈拉类横带红三角旗，可选星月。 */
+function drawPsLikeFlag(topFill, middleFill, bottomFill, hasCrescentStar) {
+  const flagBox = makeStandardFlagBox();
+  const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+  drawFlagShadow(flag);
+  drawBlankFlag(flag, middleFill, "#c7d1cc");
+  drawFlagBand(flagBox, 0, 0, 1, 1 / 3, topFill, topFill === "#262d2b" ? "#111615" : softenColor(topFill, 0.75));
+  drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, middleFill, middleFill === "#fbfdfa" ? "#c7d1cc" : softenColor(middleFill, 0.75));
+  drawFlagBand(flagBox, 0, 2 / 3, 1, 1, bottomFill, softenColor(bottomFill, 0.75));
+  roughCanvas.polygon(
+    [
+      [mapFlagX(0, 0, flagBox), mapFlagY(0, 0, flagBox)],
+      [mapFlagX(0.38, 0.5, flagBox), mapFlagY(0.38, 0.5, flagBox)],
+      [mapFlagX(0, 1, flagBox), mapFlagY(0, 1, flagBox)],
+    ],
+    { stroke: "#8f2633", strokeWidth: 1.2, fill: "#c83c4a", fillStyle: "solid", roughness: 2.2, bowing: 1.2 },
+  );
+
+  if (hasCrescentStar) {
+    roughCanvas.circle(mapFlagX(0.57, 0.5, flagBox), mapFlagY(0.57, 0.5, flagBox), 44, {
+      stroke: "#8f2633",
+      strokeWidth: 1,
+      fill: "transparent",
+      roughness: 2.2,
+      bowing: 1.2,
+    });
+    drawSketchStarWithColors(mapFlagX(0.64, 0.5, flagBox), mapFlagY(0.64, 0.5, flagBox), 13, -18, {
+      stroke: "#8f2633",
+      fill: "#c83c4a",
+      hatch: "#d8585f",
+    });
+  }
+
+  drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+  drawFlagBorder(flagBox);
 }
 
 /** 在给定旗面左上区域绘制简化联合旗，供澳大利亚等旗帜复用。 */
