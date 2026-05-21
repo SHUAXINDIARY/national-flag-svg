@@ -99,3 +99,117 @@
 - `.cursor/rules/project-rules.mdc`：同步项目规则中的 Rough.js 引入方式。
 - `dist/rough-emoji.js`：运行构建后同步更新浏览器产物。
 - `taskRecord.md`：追加本次 Rough.js 依赖内置任务记录。
+
+## 2026-05-21 pnpm 与 Node 版本约定
+
+### 日期
+
+2026-05-21
+
+### 任务目的
+
+约定项目必须使用 pnpm 安装依赖，且 Node.js 版本为 20 及以上，避免混用 npm 与低版本 Node 导致安装或构建失败。
+
+### 完成过程
+
+1. 在 `package.json` 中增加 `packageManager`、`engines` 与 `preinstall`（`only-allow pnpm`）。
+2. 新增 `.npmrc`（`engine-strict=true`）与 `.nvmrc`（`20`），并在 `.gitignore` 中忽略 `package-lock.json`。
+3. 更新 `README.md` 与 `.cursor/rules/project-rules.mdc`，将安装与验证命令统一为 `pnpm`。
+
+### 修改具体文件
+
+- `package.json`：锁定 pnpm 版本、声明 Node/pnpm 引擎、拦截非 pnpm 安装。
+- `.npmrc`、`.nvmrc`、`.gitignore`：环境与锁文件约定。
+- `README.md`、`.cursor/rules/project-rules.mdc`：文档与规则同步。
+- `pnpm-lock.yaml`：pnpm 依赖锁定（替代 `package-lock.json`）。
+- `taskRecord.md`：追加本次任务记录。
+
+## 2026-05-21 QA 页面本地预览
+
+### 日期
+
+2026-05-21
+
+### 任务目的
+
+解决通过 `file://` 直接打开 HTML 时浏览器拦截 `dist/rough-emoji.js` 导致的 `ERR_ACCESS_DENIED`，并提供本地 HTTP 预览方式。
+
+### 完成过程
+
+1. 安装 `serve` 开发依赖，在 `package.json` 中新增 `pnpm run dev`（端口 3000）。
+2. 将批量 QA 页面整理为 `index.html`，动态加载 bundle；在 `file://` 协议下显示提示而非请求被拦截的脚本。
+3. 更新 `README.md` 与项目规则，说明通过 `http://localhost:3000/` 访问而非本地文件路径。
+
+### 修改具体文件
+
+- `package.json`：新增 `dev` 脚本与 `serve` 开发依赖。
+- `index.html`：动态加载 `dist/rough-emoji.js`、`file://` 友好提示（由原 `flag-qa.html` 演进）。
+- `README.md`、`.cursor/rules/project-rules.mdc`：本地预览说明。
+- `pnpm-lock.yaml`：同步 `serve` 依赖。
+- `taskRecord.md`：追加本次任务记录。
+
+## 2026-05-21 QA 页面搜索过滤
+
+### 日期
+
+2026-05-21
+
+### 任务目的
+
+在 QA 页面新增搜索模块，支持按地区代码或中文地区名实时过滤已渲染的国旗卡片。
+
+### 完成过程
+
+1. 在 `index.html` 标题下方增加搜索栏与样式。
+2. 为每张卡片写入 `data-code`、`data-name`，在输入时切换 `item--hidden` 并隐藏无结果区块。
+3. 更新顶部状态文案，展示筛选结果数量或未匹配提示。
+
+### 修改具体文件
+
+- `index.html`：搜索 UI、过滤逻辑与状态栏联动。
+- `taskRecord.md`：追加本次任务记录。
+
+## 2026-05-21 QA 页面页头外链
+
+### 日期
+
+2026-05-21
+
+### 任务目的
+
+在 QA 页面页头增加「查看仓库」与「联系作者」按钮，分别在新标签页打开项目仓库与作者 GitHub 主页。
+
+### 完成过程
+
+1. 在 `index.html` 页头 `header-actions` 区域增加两个外链按钮。
+2. 补充主按钮与次要按钮样式，设置 `target="_blank"` 与 `rel="noopener noreferrer"`。
+
+### 修改具体文件
+
+- `index.html`：仓库链接（`national-flag-svg`）、作者链接（`SHUAXINDIARY`）及样式。
+- `taskRecord.md`：追加本次任务记录。
+
+## 2026-05-21 联合国旗帜模板
+
+### 日期
+
+2026-05-21
+
+### 任务目的
+
+为联合国旗帜 emoji 🇺🇳 新增手写模板，避免走像素采样 fallback。
+
+### 完成过程
+
+1. 在 `src/constant.ts` 的 `TEMPLATE_FLAGS` 中新增 `un: "🇺🇳"`。
+2. 在 `src/rough-emoji.ts` 中实现 `drawUnFlag`、`drawUnEmblem`、`drawUnWreathArc`，并注册到模板分发表。
+3. 在 `index.html` 重点样本中增加 `UN`，中文名回退为「联合国」，状态计数改为按实际卡片数统计。
+4. 运行 `pnpm run typecheck` 与 `pnpm run build` 验证。
+
+### 修改具体文件
+
+- `src/constant.ts`：新增 `TEMPLATE_FLAGS.un`。
+- `src/rough-emoji.ts`：联合国旗绘制函数与模板映射。
+- `index.html`：样本区 `UN`、地区名回退与状态计数。
+- `dist/rough-emoji.js`：运行构建后同步更新浏览器产物。
+- `taskRecord.md`：追加本次任务记录。
