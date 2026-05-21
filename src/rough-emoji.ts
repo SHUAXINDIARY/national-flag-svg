@@ -1,31 +1,9 @@
-import rough from "roughjs";
-import {
-  DEFAULT_FLAG,
-  DEVICE_PIXEL_RATIO,
-  DOWNLOAD_FILE_PREFIX,
-  ELEMENT_SELECTORS,
-  FLAG_PROMPT_MESSAGE,
-  PALETTE,
-  REGION_INDICATOR_MAX_CODE_POINT,
-  REGION_INDICATOR_MIN_CODE_POINT,
-  TEMPLATE_FLAGS,
-} from "./constant";
-import type { RoughCanvasLike, RoughEmojiApi } from "./type";
+import { DEVICE_PIXEL_RATIO, PALETTE, TEMPLATE_FLAGS } from "./constant";
+import { isFlagEmoji, resolveFlag } from "./flag-utils";
+import { RoughEmojiApp } from "./rough-emoji-app";
+import { ctx, roughCanvas, size, withCanvas } from "./render-context";
+import type { RoughEmojiApi } from "./type";
 
-/** 单页绘制入口的画布；QA 页不存在该节点时只暴露全局 API。 */
-const canvas = document.querySelector<HTMLCanvasElement>(ELEMENT_SELECTORS.canvas);
-/** 单页绘制入口的表单，用于提交用户输入的国旗。 */
-const form = document.querySelector<HTMLFormElement>(ELEMENT_SELECTORS.form);
-/** 单页绘制入口的输入框，值会被 resolveFlag 校验后绘制。 */
-const input = document.querySelector<HTMLInputElement>(ELEMENT_SELECTORS.input);
-/** 单页绘制入口的下载按钮，把当前画布导出成 PNG。 */
-const downloadButton = document.querySelector<HTMLButtonElement>(ELEMENT_SELECTORS.downloadButton);
-/** 当前正在绘制的 2D 上下文，由 withCanvas 在每次绘制前切换。 */
-let ctx: CanvasRenderingContext2D;
-/** 当前正在绘制的 Rough.js 上下文，与 ctx 生命周期保持一致。 */
-let roughCanvas: RoughCanvasLike;
-/** 当前画布尺寸，绘制函数都按正方形画布坐标系工作。 */
-let size = 0;
 /** 页面和 QA 工具共享的绘制门面：输入 emoji，输出到指定 canvas。 */
 const RoughEmoji: RoughEmojiApi = {
   draw(canvasElement, value) {
@@ -300,43 +278,7 @@ const TEMPLATE_FLAG_DRAWERS: Record<TemplateFlag, FlagDrawer> = {
 /** 给 IIFE 产物补充全局属性类型，保持 HTML 内联脚本可用 window.RoughEmoji。 */
 const browserWindow = window as Window & Partial<{ RoughEmoji: RoughEmojiApi }>;
 browserWindow.RoughEmoji = RoughEmoji;
-
-/** 如果当前页面包含交互表单，就自动完成首次绘制和表单事件绑定。 */
-if (canvas && form && input && downloadButton) {
-  withCanvas(canvas, () => {
-    const params = new URLSearchParams(window.location.search);
-    const initialFlag =
-      params.get("flag") || window.prompt(FLAG_PROMPT_MESSAGE, DEFAULT_FLAG) || DEFAULT_FLAG;
-
-    input.value = initialFlag;
-    drawFlag(resolveFlag(initialFlag));
-
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      drawFlag(resolveFlag(input.value));
-    });
-
-    downloadButton.addEventListener("click", () => {
-      const link = document.createElement("a");
-      link.download = `${DOWNLOAD_FILE_PREFIX}-${resolveFlag(input.value)}.png`;
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    });
-  });
-}
-
-/** 临时切换全局绘制上下文，让同一套绘制函数可以服务单页画布和 QA 多画布。 */
-function withCanvas(canvasElement: HTMLCanvasElement, callback: () => void) {
-  const previous = { ctx, roughCanvas, size };
-
-  ctx = canvasElement.getContext("2d", { willReadFrequently: true });
-  roughCanvas = rough.canvas(canvasElement);
-  size = canvasElement.width;
-  callback();
-  ctx = previous.ctx;
-  roughCanvas = previous.roughCanvas;
-  size = previous.size;
-}
+new RoughEmojiApp(RoughEmoji).mount();
 
 /** 绘制总入口：先铺纸张背景，再按已知旗帜走专门模板，未知旗帜走像素采样流程。 */
 function drawFlag(flag: string) {
@@ -350,26 +292,6 @@ function drawFlag(flag: string) {
   }
 
   drawGenericFlag(flag);
-}
-
-/** 把任意输入规范化为可绘制的国旗 emoji；非法输入回退到中国国旗。 */
-function resolveFlag(value: unknown) {
-  const input = String(value || "").trim();
-
-  return isFlagEmoji(input) ? input : DEFAULT_FLAG;
-}
-
-/** 判断字符串是否由两个区域指示符组成，这是 Unicode 国旗 emoji 的编码形式。 */
-function isFlagEmoji(value: string) {
-  const codePoints = [...value].map((char) => char.codePointAt(0));
-  return (
-    codePoints.length === 2 &&
-    codePoints.every(
-      (codePoint) =>
-        codePoint >= REGION_INDICATOR_MIN_CODE_POINT &&
-        codePoint <= REGION_INDICATOR_MAX_CODE_POINT,
-    )
-  );
 }
 
 /** 清空当前画布，为下一次完整重绘做准备。 */

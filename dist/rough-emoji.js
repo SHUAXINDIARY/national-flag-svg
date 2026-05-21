@@ -1,4 +1,324 @@
 (()=>{
+    const ELEMENT_SELECTORS = {
+        canvas: "#rough-canvas",
+        form: "#emoji-form",
+        input: "#emoji-input",
+        downloadButton: "#download-button"
+    };
+    const DEFAULT_FLAG = "🇨🇳";
+    const DOWNLOAD_FILE_PREFIX = "rough-flag";
+    const FLAG_PROMPT_MESSAGE = "请输入要绘制的国旗";
+    const TEMPLATE_FLAGS = {
+        ad: "🇦🇩",
+        ae: "🇦🇪",
+        af: "🇦🇫",
+        ag: "🇦🇬",
+        ai: "🇦🇮",
+        al: "🇦🇱",
+        am: "🇦🇲",
+        ao: "🇦🇴",
+        aq: "🇦🇶",
+        ar: "🇦🇷",
+        as: "🇦🇸",
+        at: "🇦🇹",
+        australia: "🇦🇺",
+        aw: "🇦🇼",
+        ax: "🇦🇽",
+        az: "🇦🇿",
+        ba: "🇧🇦",
+        bb: "🇧🇧",
+        bd: "🇧🇩",
+        be: "🇧🇪",
+        bf: "🇧🇫",
+        bg: "🇧🇬",
+        bh: "🇧🇭",
+        bi: "🇧🇮",
+        bj: "🇧🇯",
+        bl: "🇧🇱",
+        bm: "🇧🇲",
+        bn: "🇧🇳",
+        bo: "🇧🇴",
+        bq: "🇧🇶",
+        br: "🇧🇷",
+        bs: "🇧🇸",
+        bt: "🇧🇹",
+        bv: "🇧🇻",
+        bw: "🇧🇼",
+        by: "🇧🇾",
+        bz: "🇧🇿",
+        ca: "🇨🇦",
+        cc: "🇨🇨",
+        cd: "🇨🇩",
+        cf: "🇨🇫",
+        cg: "🇨🇬",
+        ch: "🇨🇭",
+        ci: "🇨🇮",
+        ck: "🇨🇰",
+        cl: "🇨🇱",
+        cm: "🇨🇲",
+        china: "🇨🇳",
+        co: "🇨🇴",
+        cr: "🇨🇷",
+        cu: "🇨🇺",
+        cv: "🇨🇻",
+        cw: "🇨🇼",
+        cx: "🇨🇽",
+        cy: "🇨🇾",
+        cz: "🇨🇿",
+        de: "🇩🇪",
+        dj: "🇩🇯",
+        dk: "🇩🇰",
+        dm: "🇩🇲",
+        do: "🇩🇴",
+        dz: "🇩🇿",
+        ec: "🇪🇨",
+        ee: "🇪🇪",
+        eg: "🇪🇬",
+        eh: "🇪🇭",
+        er: "🇪🇷",
+        spain: "🇪🇸",
+        et: "🇪🇹",
+        fi: "🇫🇮",
+        fj: "🇫🇯",
+        fk: "🇫🇰",
+        fm: "🇫🇲",
+        fo: "🇫🇴",
+        france: "🇫🇷",
+        ga: "🇬🇦",
+        gb: "🇬🇧",
+        gd: "🇬🇩",
+        ge: "🇬🇪",
+        gf: "🇬🇫",
+        gg: "🇬🇬",
+        gh: "🇬🇭",
+        gi: "🇬🇮",
+        gl: "🇬🇱",
+        gm: "🇬🇲",
+        gn: "🇬🇳",
+        gp: "🇬🇵",
+        gq: "🇬🇶",
+        gr: "🇬🇷",
+        gs: "🇬🇸",
+        gt: "🇬🇹",
+        gu: "🇬🇺",
+        gw: "🇬🇼",
+        gy: "🇬🇾",
+        hk: "🇭🇰",
+        hm: "🇭🇲",
+        hn: "🇭🇳",
+        hr: "🇭🇷",
+        ht: "🇭🇹",
+        hu: "🇭🇺",
+        id: "🇮🇩",
+        ie: "🇮🇪",
+        il: "🇮🇱",
+        im: "🇮🇲",
+        in: "🇮🇳",
+        io: "🇮🇴",
+        iq: "🇮🇶",
+        ir: "🇮🇷",
+        is: "🇮🇸",
+        italy: "🇮🇹",
+        je: "🇯🇪",
+        jm: "🇯🇲",
+        jo: "🇯🇴",
+        japan: "🇯🇵",
+        ke: "🇰🇪",
+        kg: "🇰🇬",
+        kh: "🇰🇭",
+        ki: "🇰🇮",
+        km: "🇰🇲",
+        kn: "🇰🇳",
+        kp: "🇰🇵",
+        kr: "🇰🇷",
+        kw: "🇰🇼",
+        ky: "🇰🇾",
+        kz: "🇰🇿",
+        la: "🇱🇦",
+        lb: "🇱🇧",
+        lc: "🇱🇨",
+        li: "🇱🇮",
+        lk: "🇱🇰",
+        lr: "🇱🇷",
+        ls: "🇱🇸",
+        lt: "🇱🇹",
+        lu: "🇱🇺",
+        lv: "🇱🇻",
+        ly: "🇱🇾",
+        ma: "🇲🇦",
+        mc: "🇲🇨",
+        md: "🇲🇩",
+        me: "🇲🇪",
+        mf: "🇲🇫",
+        mg: "🇲🇬",
+        mh: "🇲🇭",
+        mk: "🇲🇰",
+        ml: "🇲🇱",
+        mm: "🇲🇲",
+        mn: "🇲🇳",
+        mo: "🇲🇴",
+        mp: "🇲🇵",
+        mq: "🇲🇶",
+        mr: "🇲🇷",
+        ms: "🇲🇸",
+        mt: "🇲🇹",
+        mu: "🇲🇺",
+        mv: "🇲🇻",
+        mw: "🇲🇼",
+        mx: "🇲🇽",
+        my: "🇲🇾",
+        mz: "🇲🇿",
+        na: "🇳🇦",
+        nc: "🇳🇨",
+        ne: "🇳🇪",
+        nf: "🇳🇫",
+        ng: "🇳🇬",
+        ni: "🇳🇮",
+        nl: "🇳🇱",
+        no: "🇳🇴",
+        np: "🇳🇵",
+        nr: "🇳🇷",
+        nu: "🇳🇺",
+        nz: "🇳🇿",
+        om: "🇴🇲",
+        pa: "🇵🇦",
+        pe: "🇵🇪",
+        pf: "🇵🇫",
+        pg: "🇵🇬",
+        ph: "🇵🇭",
+        pk: "🇵🇰",
+        pl: "🇵🇱",
+        pm: "🇵🇲",
+        pn: "🇵🇳",
+        pr: "🇵🇷",
+        ps: "🇵🇸",
+        pt: "🇵🇹",
+        pw: "🇵🇼",
+        py: "🇵🇾",
+        qa: "🇶🇦",
+        re: "🇷🇪",
+        ro: "🇷🇴",
+        rs: "🇷🇸",
+        ru: "🇷🇺",
+        rw: "🇷🇼",
+        sa: "🇸🇦",
+        sb: "🇸🇧",
+        sc: "🇸🇨",
+        sd: "🇸🇩",
+        se: "🇸🇪",
+        sg: "🇸🇬",
+        sh: "🇸🇭",
+        si: "🇸🇮",
+        sj: "🇸🇯",
+        sk: "🇸🇰",
+        sl: "🇸🇱",
+        sm: "🇸🇲",
+        sn: "🇸🇳",
+        so: "🇸🇴",
+        sr: "🇸🇷",
+        ss: "🇸🇸",
+        st: "🇸🇹",
+        sv: "🇸🇻",
+        sx: "🇸🇽",
+        sy: "🇸🇾",
+        sz: "🇸🇿",
+        tc: "🇹🇨",
+        td: "🇹🇩",
+        tf: "🇹🇫",
+        tg: "🇹🇬",
+        thailand: "🇹🇭",
+        tj: "🇹🇯",
+        tk: "🇹🇰",
+        tl: "🇹🇱",
+        tm: "🇹🇲",
+        tn: "🇹🇳",
+        to: "🇹🇴",
+        tr: "🇹🇷",
+        tt: "🇹🇹",
+        tv: "🇹🇻",
+        tw: "🇹🇼",
+        tz: "🇹🇿",
+        ua: "🇺🇦",
+        ug: "🇺🇬",
+        um: "🇺🇲",
+        unitedStates: "🇺🇸",
+        uy: "🇺🇾",
+        uz: "🇺🇿",
+        vatican: "🇻🇦",
+        vc: "🇻🇨",
+        ve: "🇻🇪",
+        vg: "🇻🇬",
+        vi: "🇻🇮",
+        vn: "🇻🇳",
+        vu: "🇻🇺",
+        wf: "🇼🇫",
+        ws: "🇼🇸",
+        xk: "🇽🇰",
+        ye: "🇾🇪",
+        yt: "🇾🇹",
+        za: "🇿🇦",
+        zm: "🇿🇲",
+        zw: "🇿🇼"
+    };
+    const DEVICE_PIXEL_RATIO = window.devicePixelRatio || 1;
+    const PALETTE = {
+        paper: "#fbfdfa",
+        frame: "#d9e3db",
+        shadow: "rgba(36, 49, 44, 0.08)"
+    };
+    function resolveFlag(value) {
+        const input = String(value || "").trim();
+        return isFlagEmoji(input) ? input : DEFAULT_FLAG;
+    }
+    function isFlagEmoji(value) {
+        const codePoints = [
+            ...value
+        ].map((char)=>char.codePointAt(0));
+        return 2 === codePoints.length && codePoints.every((codePoint)=>void 0 !== codePoint && codePoint >= 127462 && codePoint <= 127487);
+    }
+    class RoughEmojiApp {
+        api;
+        doc;
+        win;
+        constructor(api, doc = document, win = window){
+            this.api = api;
+            this.doc = doc;
+            this.win = win;
+        }
+        mount() {
+            const elements = this.queryElements();
+            if (!elements) return;
+            const { canvas, form, input, downloadButton } = elements;
+            const params = new URLSearchParams(this.win.location.search);
+            const initialFlag = params.get("flag") || this.win.prompt(FLAG_PROMPT_MESSAGE, DEFAULT_FLAG) || DEFAULT_FLAG;
+            input.value = initialFlag;
+            this.api.draw(canvas, initialFlag);
+            form.addEventListener("submit", (event)=>{
+                event.preventDefault();
+                this.api.draw(canvas, input.value);
+            });
+            downloadButton.addEventListener("click", ()=>{
+                const link = this.doc.createElement("a");
+                const resolvedFlag = this.api.resolveFlag(input.value);
+                link.download = `${DOWNLOAD_FILE_PREFIX}-${resolvedFlag}.png`;
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        }
+        queryElements() {
+            const canvas = this.doc.querySelector(ELEMENT_SELECTORS.canvas);
+            const form = this.doc.querySelector(ELEMENT_SELECTORS.form);
+            const input = this.doc.querySelector(ELEMENT_SELECTORS.input);
+            const downloadButton = this.doc.querySelector(ELEMENT_SELECTORS.downloadButton);
+            if (!canvas || !form || !input || !downloadButton) return null;
+            return {
+                canvas,
+                form,
+                input,
+                downloadButton
+            };
+        }
+    }
     function rough_esm_t(t, e, s) {
         if (t && t.length) {
             const [n, o] = e, a = Math.PI / 180 * s, h = Math.cos(a), r = Math.sin(a);
@@ -1755,286 +2075,36 @@
         generator: (t)=>new et(t),
         newSeed: ()=>et.newSeed()
     };
-    const ELEMENT_SELECTORS = {
-        canvas: "#rough-canvas",
-        form: "#emoji-form",
-        input: "#emoji-input",
-        downloadButton: "#download-button"
-    };
-    const DEFAULT_FLAG = "🇨🇳";
-    const DOWNLOAD_FILE_PREFIX = "rough-flag";
-    const FLAG_PROMPT_MESSAGE = "请输入要绘制的国旗";
-    const TEMPLATE_FLAGS = {
-        ad: "🇦🇩",
-        ae: "🇦🇪",
-        af: "🇦🇫",
-        ag: "🇦🇬",
-        ai: "🇦🇮",
-        al: "🇦🇱",
-        am: "🇦🇲",
-        ao: "🇦🇴",
-        aq: "🇦🇶",
-        ar: "🇦🇷",
-        as: "🇦🇸",
-        at: "🇦🇹",
-        australia: "🇦🇺",
-        aw: "🇦🇼",
-        ax: "🇦🇽",
-        az: "🇦🇿",
-        ba: "🇧🇦",
-        bb: "🇧🇧",
-        bd: "🇧🇩",
-        be: "🇧🇪",
-        bf: "🇧🇫",
-        bg: "🇧🇬",
-        bh: "🇧🇭",
-        bi: "🇧🇮",
-        bj: "🇧🇯",
-        bl: "🇧🇱",
-        bm: "🇧🇲",
-        bn: "🇧🇳",
-        bo: "🇧🇴",
-        bq: "🇧🇶",
-        br: "🇧🇷",
-        bs: "🇧🇸",
-        bt: "🇧🇹",
-        bv: "🇧🇻",
-        bw: "🇧🇼",
-        by: "🇧🇾",
-        bz: "🇧🇿",
-        ca: "🇨🇦",
-        cc: "🇨🇨",
-        cd: "🇨🇩",
-        cf: "🇨🇫",
-        cg: "🇨🇬",
-        ch: "🇨🇭",
-        ci: "🇨🇮",
-        ck: "🇨🇰",
-        cl: "🇨🇱",
-        cm: "🇨🇲",
-        china: "🇨🇳",
-        co: "🇨🇴",
-        cr: "🇨🇷",
-        cu: "🇨🇺",
-        cv: "🇨🇻",
-        cw: "🇨🇼",
-        cx: "🇨🇽",
-        cy: "🇨🇾",
-        cz: "🇨🇿",
-        de: "🇩🇪",
-        dj: "🇩🇯",
-        dk: "🇩🇰",
-        dm: "🇩🇲",
-        do: "🇩🇴",
-        dz: "🇩🇿",
-        ec: "🇪🇨",
-        ee: "🇪🇪",
-        eg: "🇪🇬",
-        eh: "🇪🇭",
-        er: "🇪🇷",
-        spain: "🇪🇸",
-        et: "🇪🇹",
-        fi: "🇫🇮",
-        fj: "🇫🇯",
-        fk: "🇫🇰",
-        fm: "🇫🇲",
-        fo: "🇫🇴",
-        france: "🇫🇷",
-        ga: "🇬🇦",
-        gb: "🇬🇧",
-        gd: "🇬🇩",
-        ge: "🇬🇪",
-        gf: "🇬🇫",
-        gg: "🇬🇬",
-        gh: "🇬🇭",
-        gi: "🇬🇮",
-        gl: "🇬🇱",
-        gm: "🇬🇲",
-        gn: "🇬🇳",
-        gp: "🇬🇵",
-        gq: "🇬🇶",
-        gr: "🇬🇷",
-        gs: "🇬🇸",
-        gt: "🇬🇹",
-        gu: "🇬🇺",
-        gw: "🇬🇼",
-        gy: "🇬🇾",
-        hk: "🇭🇰",
-        hm: "🇭🇲",
-        hn: "🇭🇳",
-        hr: "🇭🇷",
-        ht: "🇭🇹",
-        hu: "🇭🇺",
-        id: "🇮🇩",
-        ie: "🇮🇪",
-        il: "🇮🇱",
-        im: "🇮🇲",
-        in: "🇮🇳",
-        io: "🇮🇴",
-        iq: "🇮🇶",
-        ir: "🇮🇷",
-        is: "🇮🇸",
-        italy: "🇮🇹",
-        je: "🇯🇪",
-        jm: "🇯🇲",
-        jo: "🇯🇴",
-        japan: "🇯🇵",
-        ke: "🇰🇪",
-        kg: "🇰🇬",
-        kh: "🇰🇭",
-        ki: "🇰🇮",
-        km: "🇰🇲",
-        kn: "🇰🇳",
-        kp: "🇰🇵",
-        kr: "🇰🇷",
-        kw: "🇰🇼",
-        ky: "🇰🇾",
-        kz: "🇰🇿",
-        la: "🇱🇦",
-        lb: "🇱🇧",
-        lc: "🇱🇨",
-        li: "🇱🇮",
-        lk: "🇱🇰",
-        lr: "🇱🇷",
-        ls: "🇱🇸",
-        lt: "🇱🇹",
-        lu: "🇱🇺",
-        lv: "🇱🇻",
-        ly: "🇱🇾",
-        ma: "🇲🇦",
-        mc: "🇲🇨",
-        md: "🇲🇩",
-        me: "🇲🇪",
-        mf: "🇲🇫",
-        mg: "🇲🇬",
-        mh: "🇲🇭",
-        mk: "🇲🇰",
-        ml: "🇲🇱",
-        mm: "🇲🇲",
-        mn: "🇲🇳",
-        mo: "🇲🇴",
-        mp: "🇲🇵",
-        mq: "🇲🇶",
-        mr: "🇲🇷",
-        ms: "🇲🇸",
-        mt: "🇲🇹",
-        mu: "🇲🇺",
-        mv: "🇲🇻",
-        mw: "🇲🇼",
-        mx: "🇲🇽",
-        my: "🇲🇾",
-        mz: "🇲🇿",
-        na: "🇳🇦",
-        nc: "🇳🇨",
-        ne: "🇳🇪",
-        nf: "🇳🇫",
-        ng: "🇳🇬",
-        ni: "🇳🇮",
-        nl: "🇳🇱",
-        no: "🇳🇴",
-        np: "🇳🇵",
-        nr: "🇳🇷",
-        nu: "🇳🇺",
-        nz: "🇳🇿",
-        om: "🇴🇲",
-        pa: "🇵🇦",
-        pe: "🇵🇪",
-        pf: "🇵🇫",
-        pg: "🇵🇬",
-        ph: "🇵🇭",
-        pk: "🇵🇰",
-        pl: "🇵🇱",
-        pm: "🇵🇲",
-        pn: "🇵🇳",
-        pr: "🇵🇷",
-        ps: "🇵🇸",
-        pt: "🇵🇹",
-        pw: "🇵🇼",
-        py: "🇵🇾",
-        qa: "🇶🇦",
-        re: "🇷🇪",
-        ro: "🇷🇴",
-        rs: "🇷🇸",
-        ru: "🇷🇺",
-        rw: "🇷🇼",
-        sa: "🇸🇦",
-        sb: "🇸🇧",
-        sc: "🇸🇨",
-        sd: "🇸🇩",
-        se: "🇸🇪",
-        sg: "🇸🇬",
-        sh: "🇸🇭",
-        si: "🇸🇮",
-        sj: "🇸🇯",
-        sk: "🇸🇰",
-        sl: "🇸🇱",
-        sm: "🇸🇲",
-        sn: "🇸🇳",
-        so: "🇸🇴",
-        sr: "🇸🇷",
-        ss: "🇸🇸",
-        st: "🇸🇹",
-        sv: "🇸🇻",
-        sx: "🇸🇽",
-        sy: "🇸🇾",
-        sz: "🇸🇿",
-        tc: "🇹🇨",
-        td: "🇹🇩",
-        tf: "🇹🇫",
-        tg: "🇹🇬",
-        thailand: "🇹🇭",
-        tj: "🇹🇯",
-        tk: "🇹🇰",
-        tl: "🇹🇱",
-        tm: "🇹🇲",
-        tn: "🇹🇳",
-        to: "🇹🇴",
-        tr: "🇹🇷",
-        tt: "🇹🇹",
-        tv: "🇹🇻",
-        tw: "🇹🇼",
-        tz: "🇹🇿",
-        ua: "🇺🇦",
-        ug: "🇺🇬",
-        um: "🇺🇲",
-        unitedStates: "🇺🇸",
-        uy: "🇺🇾",
-        uz: "🇺🇿",
-        vatican: "🇻🇦",
-        vc: "🇻🇨",
-        ve: "🇻🇪",
-        vg: "🇻🇬",
-        vi: "🇻🇮",
-        vn: "🇻🇳",
-        vu: "🇻🇺",
-        wf: "🇼🇫",
-        ws: "🇼🇸",
-        xk: "🇽🇰",
-        ye: "🇾🇪",
-        yt: "🇾🇹",
-        za: "🇿🇦",
-        zm: "🇿🇲",
-        zw: "🇿🇼"
-    };
-    const DEVICE_PIXEL_RATIO = window.devicePixelRatio || 1;
-    const PALETTE = {
-        paper: "#fbfdfa",
-        frame: "#d9e3db",
-        shadow: "rgba(36, 49, 44, 0.08)"
-    };
-    const canvas = document.querySelector(ELEMENT_SELECTORS.canvas);
-    const rough_emoji_form = document.querySelector(ELEMENT_SELECTORS.form);
-    const rough_emoji_input = document.querySelector(ELEMENT_SELECTORS.input);
-    const downloadButton = document.querySelector(ELEMENT_SELECTORS.downloadButton);
     let ctx;
     let roughCanvas;
     let size = 0;
+    function withCanvas(canvasElement, callback) {
+        const previous = {
+            ctx,
+            roughCanvas,
+            size
+        };
+        const nextContext = canvasElement.getContext("2d", {
+            willReadFrequently: true
+        });
+        if (!nextContext) throw new Error("Canvas 2D context is not available.");
+        ctx = nextContext;
+        roughCanvas = at.canvas(canvasElement);
+        size = canvasElement.width;
+        try {
+            callback();
+        } finally{
+            ctx = previous.ctx;
+            roughCanvas = previous.roughCanvas;
+            size = previous.size;
+        }
+    }
     const RoughEmoji = {
         draw (canvasElement, value) {
             withCanvas(canvasElement, ()=>drawFlag(resolveFlag(value)));
         },
-        isFlagEmoji,
-        resolveFlag
+        isFlagEmoji: isFlagEmoji,
+        resolveFlag: resolveFlag
     };
     const TEMPLATE_FLAG_DRAWERS = {
         [TEMPLATE_FLAGS.australia]: drawAustraliaFlag,
@@ -2290,54 +2360,13 @@
     };
     const browserWindow = window;
     browserWindow.RoughEmoji = RoughEmoji;
-    if (canvas && rough_emoji_form && rough_emoji_input && downloadButton) withCanvas(canvas, ()=>{
-        const params = new URLSearchParams(window.location.search);
-        const initialFlag = params.get("flag") || window.prompt(FLAG_PROMPT_MESSAGE, DEFAULT_FLAG) || DEFAULT_FLAG;
-        rough_emoji_input.value = initialFlag;
-        drawFlag(resolveFlag(initialFlag));
-        rough_emoji_form.addEventListener("submit", (event)=>{
-            event.preventDefault();
-            drawFlag(resolveFlag(rough_emoji_input.value));
-        });
-        downloadButton.addEventListener("click", ()=>{
-            const link = document.createElement("a");
-            link.download = `${DOWNLOAD_FILE_PREFIX}-${resolveFlag(rough_emoji_input.value)}.png`;
-            link.href = canvas.toDataURL("image/png");
-            link.click();
-        });
-    });
-    function withCanvas(canvasElement, callback) {
-        const previous = {
-            ctx,
-            roughCanvas,
-            size
-        };
-        ctx = canvasElement.getContext("2d", {
-            willReadFrequently: true
-        });
-        roughCanvas = at.canvas(canvasElement);
-        size = canvasElement.width;
-        callback();
-        ctx = previous.ctx;
-        roughCanvas = previous.roughCanvas;
-        size = previous.size;
-    }
+    new RoughEmojiApp(RoughEmoji).mount();
     function drawFlag(flag) {
         clearCanvas();
         drawPaper();
         const templateDrawer = TEMPLATE_FLAG_DRAWERS[flag];
         if (templateDrawer) return void templateDrawer();
         drawGenericFlag(flag);
-    }
-    function resolveFlag(value) {
-        const input = String(value || "").trim();
-        return isFlagEmoji(input) ? input : DEFAULT_FLAG;
-    }
-    function isFlagEmoji(value) {
-        const codePoints = [
-            ...value
-        ].map((char)=>char.codePointAt(0));
-        return 2 === codePoints.length && codePoints.every((codePoint)=>codePoint >= 127462 && codePoint <= 127487);
     }
     function clearCanvas() {
         ctx.clearRect(0, 0, size, size);
@@ -4691,10 +4720,41 @@
         drawFlagBorder(flagBox);
     }
     function drawLiFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.li);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.circle(mapFlagX(0.18, 0.24, flagBox), mapFlagY(0.18, 0.24, flagBox), 34, {
+            stroke: "#b68b12",
+            strokeWidth: 1,
+            fill: "#ffd84c",
+            fillStyle: "hachure",
+            hachureGap: 6,
+            fillWeight: 0.8,
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFlagBand(flagBox, 0.13, 0.29, 0.23, 0.34, "#ffd84c", "#b68b12");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
     }
     function drawLkFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.lk);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0.08, 0.1, 0.22, 0.9, "#249064", "#176847");
+        drawFlagBand(flagBox, 0.22, 0.1, 0.36, 0.9, "#ee8b2c", "#a9601d");
+        drawFlagBand(flagBox, 0.4, 0.1, 0.92, 0.9, "#7b314b", "#572439");
+        drawSketchStarWithColors(mapFlagX(0.66, 0.5, flagBox), mapFlagY(0.66, 0.5, flagBox), 42, -18, {
+            stroke: "#b68b12",
+            fill: "#ffd84c",
+            hatch: "#ffec62"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#80623f");
+        drawFlagBorder(flagBox);
     }
     function drawLrFlag() {
         const flagBox = makeStandardFlagBox();
@@ -4838,13 +4898,30 @@
         drawFlagBorder(flagBox);
     }
     function drawMdFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.md);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#c83c4a", "#8f2633");
+        drawShieldBadge(flagBox, 0.5, 0.5, "#fbfdfa", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#705b4a");
+        drawFlagBorder(flagBox);
     }
     function drawMeFlag() {
         drawSampledFlagTemplate(TEMPLATE_FLAGS.me);
     }
     function drawMfFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.mf);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#2d4e8c", "#1e3768");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#cf3d45", "#912936");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6d7082");
+        drawFlagBorder(flagBox);
     }
     function drawMgFlag() {
         const flagBox = makeStandardFlagBox();
@@ -4915,7 +4992,23 @@
         drawFlagBorder(flagBox);
     }
     function drawMnFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.mn);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.12, 0.22, 0.2, 0.78, "#ffd84c", "#b68b12");
+        roughCanvas.circle(mapFlagX(0.16, 0.5, flagBox), mapFlagY(0.16, 0.5, flagBox), 38, {
+            stroke: "#b68b12",
+            strokeWidth: 1,
+            fill: "transparent",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
     }
     function drawMoFlag() {
         drawSampledFlagTemplate(TEMPLATE_FLAGS.mo);
@@ -4956,7 +5049,16 @@
         drawSampledFlagTemplate(TEMPLATE_FLAGS.ms);
     }
     function drawMtFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.mt);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 0.5, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.5, 0, 1, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.11, 0.16, 0.17, 0.31, "#c7d1cc", "#8f9b96");
+        drawFlagBand(flagBox, 0.07, 0.2, 0.21, 0.27, "#c7d1cc", "#8f9b96");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
     }
     function drawMuFlag() {
         const flagBox = makeStandardFlagBox();
@@ -5017,7 +5119,25 @@
         drawFlagBorder(flagBox);
     }
     function drawMxFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.mx);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#176847", "#0f4f37");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 58, {
+            stroke: "#a98218",
+            strokeWidth: 1.2,
+            fill: "#f0c83a",
+            fillStyle: "hachure",
+            hachureGap: 8,
+            fillWeight: 0.45,
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
     }
     function drawMyFlag() {
         const flagBox = makeStandardFlagBox();
