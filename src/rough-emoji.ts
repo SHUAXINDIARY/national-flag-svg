@@ -1,14 +1,13 @@
 import { DEVICE_PIXEL_RATIO, PALETTE, TEMPLATE_FLAGS } from "./constant";
 import { isFlagEmoji, resolveFlag } from "./flag-utils";
-import { RoughEmojiApp } from "./rough-emoji-app";
 import { ctx, roughCanvas, size, withCanvas } from "./render-context";
-import type { RoughEmojiApi } from "./type";
+import type { RoughEmojiApi } from "./types";
 
 /** 绘制流程封装实例，外部入口只需要把已解析的国旗交给它。 */
 let renderer: RoughEmojiRenderer;
 
 /** 页面和 QA 工具共享的绘制门面：输入 emoji，输出到指定 canvas。 */
-const RoughEmoji: RoughEmojiApi = {
+export const RoughEmoji: RoughEmojiApi = {
     draw(canvasElement, value) {
         withCanvas(canvasElement, () => renderer.draw(resolveFlag(value)));
     },
@@ -318,11 +317,7 @@ class RoughEmojiRenderer {
     }
 }
 
-/** 给 IIFE 产物补充全局属性类型，保持 HTML 内联脚本可用 window.RoughEmoji。 */
 renderer = new RoughEmojiRenderer();
-const browserWindow = window as Window & Partial<{ RoughEmoji: RoughEmojiApi }>;
-browserWindow.RoughEmoji = RoughEmoji;
-new RoughEmojiApp(RoughEmoji).mount();
 
 /** 中国国旗模板：红色旗面、布纹、五颗手绘五角星和最终边框。 */
 function drawChinaFlag() {

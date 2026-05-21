@@ -2,7 +2,27 @@
   "name": "rough-emoji-draw",
   "version": "0.1.0",
   "private": true,
+  "description": "将 Unicode 国旗 emoji 绘制成 Rough.js 手写风格 Canvas 图像的轻量前端库",
   "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./browser": {
+      "default": "./dist/rough-emoji.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "./dist/rough-emoji.js"
+  ],
   "packageManager": "pnpm@10.14.0",
   "engines": {
     "node": ">=20",

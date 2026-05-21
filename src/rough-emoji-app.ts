@@ -1,5 +1,5 @@
 import { DEFAULT_FLAG, DOWNLOAD_FILE_PREFIX, ELEMENT_SELECTORS, FLAG_PROMPT_MESSAGE } from "./constant";
-import type { RoughEmojiApi } from "./type";
+import type { RoughEmojiApi } from "./types";
 
 /** 单页演示入口依赖的 DOM 节点集合，缺失时只保留全局 API。 */
 interface RoughEmojiAppElements {

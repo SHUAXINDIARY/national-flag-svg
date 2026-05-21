@@ -1,5 +1,5 @@
 import rough from "roughjs";
-import type { RoughCanvasLike } from "./type";
+import type { RoughCanvasLike } from "./types";
 
 /** 当前正在绘制的 2D 上下文，由 withCanvas 在每次绘制前切换。 */
 export let ctx: CanvasRenderingContext2D;

@@ -34,3 +34,10 @@ export interface RoughEmojiApi {
   resolveFlag(value: unknown): string;
 }
 
+declare global {
+  interface Window {
+    RoughEmoji?: RoughEmojiApi;
+  }
+}
+
+export {};

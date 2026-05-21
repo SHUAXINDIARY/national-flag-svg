@@ -277,7 +277,12 @@ export const REGION_INDICATOR_MIN_CODE_POINT = 0x1f1e6;
 export const REGION_INDICATOR_MAX_CODE_POINT = 0x1f1ff;
 
 /** 离屏 emoji 栅格化时使用的像素倍率，保证高分屏采样足够细。 */
-export const DEVICE_PIXEL_RATIO = window.devicePixelRatio || 1;
+export const DEVICE_PIXEL_RATIO =
+    typeof globalThis !== "undefined" &&
+    "devicePixelRatio" in globalThis &&
+    typeof globalThis.devicePixelRatio === "number"
+        ? globalThis.devicePixelRatio
+        : 1;
 
 /** 全局视觉色板：纸张、边框和投影色在多个旗帜绘制函数中复用。 */
 export const PALETTE = {
