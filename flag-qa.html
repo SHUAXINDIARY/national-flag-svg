@@ -1,185 +1,188 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flag QA</title>
-    <style>
-      * {
-        box-sizing: border-box;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flag QA</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      color: #1f2933;
+      background: #f4f8f5;
+    }
+
+    main {
+      width: min(1280px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 24px 0 36px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 650;
+    }
+
+    .status {
+      font-size: 14px;
+      color: #52645d;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+    }
+
+    .sample-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .item {
+      border: 1px solid #d9e3db;
+      border-radius: 8px;
+      background: #fbfdfa;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+    }
+
+    .label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 10px 10px;
+      border-top: 1px solid #e2ebe5;
+      font-size: 13px;
+    }
+
+    .name {
+      min-width: 0;
+      color: #52645d;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .emoji {
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header>
+      <h1>国家/地区国旗手绘风格 QA</h1>
+      <div class="status" id="status">Rendering...</div>
+    </header>
+    <section class="sample-grid" id="samples"></section>
+    <section class="grid" id="grid"></section>
+  </main>
+
+  <script src="./dist/rough-emoji.js"></script>
+  <script>
+    const regionCodes = [
+      "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW",
+      "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN",
+      "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY", "BZ", "CA", "CC", "CD", "CF", "CG",
+      "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU", "CV", "CW", "CX", "CY", "CZ",
+      "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ER", "ES", "ET", "FI",
+      "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL",
+      "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR",
+      "HT", "HU", "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IR", "IS", "IT", "JE", "JM",
+      "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KP", "KW", "KY", "KZ", "LA",
+      "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME",
+      "MF", "MG", "MH", "MK", "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU",
+      "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NI", "NL", "NO", "NP",
+      "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR",
+      "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RU", "RW", "SA", "SB", "SC", "SD",
+      "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV",
+      "SX", "SY", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO",
+      "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE",
+      "VG", "VI", "VN", "VU", "WF", "WS", "XK", "YE", "YT", "ZA", "ZM", "ZW"
+    ];
+
+    function flagFromCode(code) {
+      return [...code]
+        .map((letter) => String.fromCodePoint(0x1f1e6 + letter.charCodeAt(0) - 65))
+        .join("");
+    }
+
+    const regionNames = new Intl.DisplayNames(["zh-CN"], { type: "region" });
+    const regionNameFallbacks = {
+      HK: "中国香港",
+      MO: "中国澳门",
+      TW: "中国台湾",
+      XK: "科索沃",
+    };
+
+    function regionNameFromCode(code) {
+      return regionNameFallbacks[code] || regionNames.of(code) || code;
+    }
+
+    const sampleCodes = ["CN", "JP", "US", "AU", "TH", "FR", "IT", "ES", "VA", "KR"];
+    const sampleCodeSet = new Set(sampleCodes);
+    const samples = document.querySelector("#samples");
+    const grid = document.querySelector("#grid");
+    const status = document.querySelector("#status");
+
+    sampleCodes.forEach((code) => renderFlagCard(samples, code));
+    regionCodes.forEach((code) => {
+      if (sampleCodeSet.has(code)) {
+        return;
       }
 
-      body {
-        margin: 0;
-        font-family:
-          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-          "Segoe UI", sans-serif;
-        color: #1f2933;
-        background: #f4f8f5;
-      }
+      renderFlagCard(grid, code);
+    });
 
-      main {
-        width: min(1280px, calc(100vw - 32px));
-        margin: 0 auto;
-        padding: 24px 0 36px;
-      }
+    function renderFlagCard(parent, code) {
+      const item = document.createElement("article");
+      item.className = "item";
 
-      header {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px 18px;
-        align-items: baseline;
-        justify-content: space-between;
-        margin-bottom: 18px;
-      }
+      const canvas = document.createElement("canvas");
+      canvas.width = 720;
+      canvas.height = 720;
 
-      h1 {
-        margin: 0;
-        font-size: 22px;
-        font-weight: 650;
-      }
+      const label = document.createElement("div");
+      label.className = "label";
+      const emoji = flagFromCode(code);
+      label.innerHTML = `<span>${code}</span><span class="name" title="${regionNameFromCode(code)}">${regionNameFromCode(
+        code,
+      )}</span><span class="emoji">${emoji}</span>`;
 
-      .status {
-        font-size: 14px;
-        color: #52645d;
-      }
+      item.append(canvas, label);
+      parent.append(item);
+      window.RoughEmoji.draw(canvas, emoji);
+    }
 
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 14px;
-      }
+    status.textContent = `${regionCodes.length} flags rendered with one flag style`;
+  </script>
+</body>
 
-      .sample-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 16px;
-        margin-bottom: 22px;
-      }
-
-      .item {
-        border: 1px solid #d9e3db;
-        border-radius: 8px;
-        background: #fbfdfa;
-        overflow: hidden;
-      }
-
-      canvas {
-        display: block;
-        width: 100%;
-        aspect-ratio: 1;
-      }
-
-      .label {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        padding: 8px 10px 10px;
-        border-top: 1px solid #e2ebe5;
-        font-size: 13px;
-      }
-
-      .name {
-        min-width: 0;
-        color: #52645d;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .emoji {
-        font-size: 18px;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <header>
-        <h1>国家/地区国旗手绘风格 QA</h1>
-        <div class="status" id="status">Rendering...</div>
-      </header>
-      <section class="sample-grid" id="samples"></section>
-      <section class="grid" id="grid"></section>
-    </main>
-
-    <script src="./dist/rough-emoji.js"></script>
-    <script>
-      const regionCodes = [
-        "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW",
-        "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN",
-        "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY", "BZ", "CA", "CC", "CD", "CF", "CG",
-        "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU", "CV", "CW", "CX", "CY", "CZ",
-        "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ER", "ES", "ET", "FI",
-        "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL",
-        "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR",
-        "HT", "HU", "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IR", "IS", "IT", "JE", "JM",
-        "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA",
-        "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME",
-        "MF", "MG", "MH", "MK", "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU",
-        "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NI", "NL", "NO", "NP",
-        "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR",
-        "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RU", "RW", "SA", "SB", "SC", "SD",
-        "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV",
-        "SX", "SY", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO",
-        "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE",
-        "VG", "VI", "VN", "VU", "WF", "WS", "XK", "YE", "YT", "ZA", "ZM", "ZW"
-      ];
-
-      function flagFromCode(code) {
-        return [...code]
-          .map((letter) => String.fromCodePoint(0x1f1e6 + letter.charCodeAt(0) - 65))
-          .join("");
-      }
-
-      const regionNames = new Intl.DisplayNames(["zh-CN"], { type: "region" });
-      const regionNameFallbacks = {
-        HK: "中国香港",
-        MO: "中国澳门",
-        TW: "中国台湾",
-        XK: "科索沃",
-      };
-
-      function regionNameFromCode(code) {
-        return regionNameFallbacks[code] || regionNames.of(code) || code;
-      }
-
-      const sampleCodes = ["CN", "JP", "US", "AU", "TH", "FR", "IT", "ES", "VA"];
-      const sampleCodeSet = new Set(sampleCodes);
-      const samples = document.querySelector("#samples");
-      const grid = document.querySelector("#grid");
-      const status = document.querySelector("#status");
-
-      sampleCodes.forEach((code) => renderFlagCard(samples, code));
-      regionCodes.forEach((code) => {
-        if (sampleCodeSet.has(code)) {
-          return;
-        }
-
-        renderFlagCard(grid, code);
-      });
-
-      function renderFlagCard(parent, code) {
-        const item = document.createElement("article");
-        item.className = "item";
-
-        const canvas = document.createElement("canvas");
-        canvas.width = 720;
-        canvas.height = 720;
-
-        const label = document.createElement("div");
-        label.className = "label";
-        const emoji = flagFromCode(code);
-        label.innerHTML = `<span>${code}</span><span class="name" title="${regionNameFromCode(code)}">${regionNameFromCode(
-          code,
-        )}</span><span class="emoji">${emoji}</span>`;
-
-        item.append(canvas, label);
-        parent.append(item);
-        window.RoughEmoji.draw(canvas, emoji);
-      }
-
-      status.textContent = `${regionCodes.length} flags rendered with one flag style`;
-    </script>
-  </body>
 </html>

@@ -1765,15 +1765,256 @@
     const DOWNLOAD_FILE_PREFIX = "rough-flag";
     const FLAG_PROMPT_MESSAGE = "请输入要绘制的国旗";
     const TEMPLATE_FLAGS = {
-        china: "🇨🇳",
-        japan: "🇯🇵",
-        unitedStates: "🇺🇸",
+        ad: "🇦🇩",
+        ae: "🇦🇪",
+        af: "🇦🇫",
+        ag: "🇦🇬",
+        ai: "🇦🇮",
+        al: "🇦🇱",
+        am: "🇦🇲",
+        ao: "🇦🇴",
+        aq: "🇦🇶",
+        ar: "🇦🇷",
+        as: "🇦🇸",
+        at: "🇦🇹",
         australia: "🇦🇺",
-        thailand: "🇹🇭",
-        france: "🇫🇷",
-        italy: "🇮🇹",
+        aw: "🇦🇼",
+        ax: "🇦🇽",
+        az: "🇦🇿",
+        ba: "🇧🇦",
+        bb: "🇧🇧",
+        bd: "🇧🇩",
+        be: "🇧🇪",
+        bf: "🇧🇫",
+        bg: "🇧🇬",
+        bh: "🇧🇭",
+        bi: "🇧🇮",
+        bj: "🇧🇯",
+        bl: "🇧🇱",
+        bm: "🇧🇲",
+        bn: "🇧🇳",
+        bo: "🇧🇴",
+        bq: "🇧🇶",
+        br: "🇧🇷",
+        bs: "🇧🇸",
+        bt: "🇧🇹",
+        bv: "🇧🇻",
+        bw: "🇧🇼",
+        by: "🇧🇾",
+        bz: "🇧🇿",
+        ca: "🇨🇦",
+        cc: "🇨🇨",
+        cd: "🇨🇩",
+        cf: "🇨🇫",
+        cg: "🇨🇬",
+        ch: "🇨🇭",
+        ci: "🇨🇮",
+        ck: "🇨🇰",
+        cl: "🇨🇱",
+        cm: "🇨🇲",
+        china: "🇨🇳",
+        co: "🇨🇴",
+        cr: "🇨🇷",
+        cu: "🇨🇺",
+        cv: "🇨🇻",
+        cw: "🇨🇼",
+        cx: "🇨🇽",
+        cy: "🇨🇾",
+        cz: "🇨🇿",
+        de: "🇩🇪",
+        dj: "🇩🇯",
+        dk: "🇩🇰",
+        dm: "🇩🇲",
+        do: "🇩🇴",
+        dz: "🇩🇿",
+        ec: "🇪🇨",
+        ee: "🇪🇪",
+        eg: "🇪🇬",
+        eh: "🇪🇭",
+        er: "🇪🇷",
         spain: "🇪🇸",
-        vatican: "🇻🇦"
+        et: "🇪🇹",
+        fi: "🇫🇮",
+        fj: "🇫🇯",
+        fk: "🇫🇰",
+        fm: "🇫🇲",
+        fo: "🇫🇴",
+        france: "🇫🇷",
+        ga: "🇬🇦",
+        gb: "🇬🇧",
+        gd: "🇬🇩",
+        ge: "🇬🇪",
+        gf: "🇬🇫",
+        gg: "🇬🇬",
+        gh: "🇬🇭",
+        gi: "🇬🇮",
+        gl: "🇬🇱",
+        gm: "🇬🇲",
+        gn: "🇬🇳",
+        gp: "🇬🇵",
+        gq: "🇬🇶",
+        gr: "🇬🇷",
+        gs: "🇬🇸",
+        gt: "🇬🇹",
+        gu: "🇬🇺",
+        gw: "🇬🇼",
+        gy: "🇬🇾",
+        hk: "🇭🇰",
+        hm: "🇭🇲",
+        hn: "🇭🇳",
+        hr: "🇭🇷",
+        ht: "🇭🇹",
+        hu: "🇭🇺",
+        id: "🇮🇩",
+        ie: "🇮🇪",
+        il: "🇮🇱",
+        im: "🇮🇲",
+        in: "🇮🇳",
+        io: "🇮🇴",
+        iq: "🇮🇶",
+        ir: "🇮🇷",
+        is: "🇮🇸",
+        italy: "🇮🇹",
+        je: "🇯🇪",
+        jm: "🇯🇲",
+        jo: "🇯🇴",
+        japan: "🇯🇵",
+        ke: "🇰🇪",
+        kg: "🇰🇬",
+        kh: "🇰🇭",
+        ki: "🇰🇮",
+        km: "🇰🇲",
+        kn: "🇰🇳",
+        kp: "🇰🇵",
+        kr: "🇰🇷",
+        kw: "🇰🇼",
+        ky: "🇰🇾",
+        kz: "🇰🇿",
+        la: "🇱🇦",
+        lb: "🇱🇧",
+        lc: "🇱🇨",
+        li: "🇱🇮",
+        lk: "🇱🇰",
+        lr: "🇱🇷",
+        ls: "🇱🇸",
+        lt: "🇱🇹",
+        lu: "🇱🇺",
+        lv: "🇱🇻",
+        ly: "🇱🇾",
+        ma: "🇲🇦",
+        mc: "🇲🇨",
+        md: "🇲🇩",
+        me: "🇲🇪",
+        mf: "🇲🇫",
+        mg: "🇲🇬",
+        mh: "🇲🇭",
+        mk: "🇲🇰",
+        ml: "🇲🇱",
+        mm: "🇲🇲",
+        mn: "🇲🇳",
+        mo: "🇲🇴",
+        mp: "🇲🇵",
+        mq: "🇲🇶",
+        mr: "🇲🇷",
+        ms: "🇲🇸",
+        mt: "🇲🇹",
+        mu: "🇲🇺",
+        mv: "🇲🇻",
+        mw: "🇲🇼",
+        mx: "🇲🇽",
+        my: "🇲🇾",
+        mz: "🇲🇿",
+        na: "🇳🇦",
+        nc: "🇳🇨",
+        ne: "🇳🇪",
+        nf: "🇳🇫",
+        ng: "🇳🇬",
+        ni: "🇳🇮",
+        nl: "🇳🇱",
+        no: "🇳🇴",
+        np: "🇳🇵",
+        nr: "🇳🇷",
+        nu: "🇳🇺",
+        nz: "🇳🇿",
+        om: "🇴🇲",
+        pa: "🇵🇦",
+        pe: "🇵🇪",
+        pf: "🇵🇫",
+        pg: "🇵🇬",
+        ph: "🇵🇭",
+        pk: "🇵🇰",
+        pl: "🇵🇱",
+        pm: "🇵🇲",
+        pn: "🇵🇳",
+        pr: "🇵🇷",
+        ps: "🇵🇸",
+        pt: "🇵🇹",
+        pw: "🇵🇼",
+        py: "🇵🇾",
+        qa: "🇶🇦",
+        re: "🇷🇪",
+        ro: "🇷🇴",
+        rs: "🇷🇸",
+        ru: "🇷🇺",
+        rw: "🇷🇼",
+        sa: "🇸🇦",
+        sb: "🇸🇧",
+        sc: "🇸🇨",
+        sd: "🇸🇩",
+        se: "🇸🇪",
+        sg: "🇸🇬",
+        sh: "🇸🇭",
+        si: "🇸🇮",
+        sj: "🇸🇯",
+        sk: "🇸🇰",
+        sl: "🇸🇱",
+        sm: "🇸🇲",
+        sn: "🇸🇳",
+        so: "🇸🇴",
+        sr: "🇸🇷",
+        ss: "🇸🇸",
+        st: "🇸🇹",
+        sv: "🇸🇻",
+        sx: "🇸🇽",
+        sy: "🇸🇾",
+        sz: "🇸🇿",
+        tc: "🇹🇨",
+        td: "🇹🇩",
+        tf: "🇹🇫",
+        tg: "🇹🇬",
+        thailand: "🇹🇭",
+        tj: "🇹🇯",
+        tk: "🇹🇰",
+        tl: "🇹🇱",
+        tm: "🇹🇲",
+        tn: "🇹🇳",
+        to: "🇹🇴",
+        tr: "🇹🇷",
+        tt: "🇹🇹",
+        tv: "🇹🇻",
+        tw: "🇹🇼",
+        tz: "🇹🇿",
+        ua: "🇺🇦",
+        ug: "🇺🇬",
+        um: "🇺🇲",
+        unitedStates: "🇺🇸",
+        uy: "🇺🇾",
+        uz: "🇺🇿",
+        vatican: "🇻🇦",
+        vc: "🇻🇨",
+        ve: "🇻🇪",
+        vg: "🇻🇬",
+        vi: "🇻🇮",
+        vn: "🇻🇳",
+        vu: "🇻🇺",
+        wf: "🇼🇫",
+        ws: "🇼🇸",
+        xk: "🇽🇰",
+        ye: "🇾🇪",
+        yt: "🇾🇹",
+        za: "🇿🇦",
+        zm: "🇿🇲",
+        zw: "🇿🇼"
     };
     const DEVICE_PIXEL_RATIO = window.devicePixelRatio || 1;
     const PALETTE = {
@@ -1794,6 +2035,258 @@
         },
         isFlagEmoji,
         resolveFlag
+    };
+    const TEMPLATE_FLAG_DRAWERS = {
+        [TEMPLATE_FLAGS.australia]: drawAustraliaFlag,
+        [TEMPLATE_FLAGS.china]: drawChinaFlag,
+        [TEMPLATE_FLAGS.spain]: drawSpainFlag,
+        [TEMPLATE_FLAGS.france]: drawFranceFlag,
+        [TEMPLATE_FLAGS.italy]: drawItalyFlag,
+        [TEMPLATE_FLAGS.japan]: drawJapanFlag,
+        [TEMPLATE_FLAGS.thailand]: drawThailandFlag,
+        [TEMPLATE_FLAGS.unitedStates]: drawUnitedStatesFlag,
+        [TEMPLATE_FLAGS.vatican]: drawVaticanFlag,
+        [TEMPLATE_FLAGS.ad]: drawAdFlag,
+        [TEMPLATE_FLAGS.ae]: drawAeFlag,
+        [TEMPLATE_FLAGS.af]: drawAfFlag,
+        [TEMPLATE_FLAGS.ag]: drawAgFlag,
+        [TEMPLATE_FLAGS.ai]: drawAiFlag,
+        [TEMPLATE_FLAGS.al]: drawAlFlag,
+        [TEMPLATE_FLAGS.am]: drawAmFlag,
+        [TEMPLATE_FLAGS.ao]: drawAoFlag,
+        [TEMPLATE_FLAGS.aq]: drawAqFlag,
+        [TEMPLATE_FLAGS.ar]: drawArFlag,
+        [TEMPLATE_FLAGS.as]: drawAsFlag,
+        [TEMPLATE_FLAGS.at]: drawAtFlag,
+        [TEMPLATE_FLAGS.aw]: drawAwFlag,
+        [TEMPLATE_FLAGS.ax]: drawAxFlag,
+        [TEMPLATE_FLAGS.az]: drawAzFlag,
+        [TEMPLATE_FLAGS.ba]: drawBaFlag,
+        [TEMPLATE_FLAGS.bb]: drawBbFlag,
+        [TEMPLATE_FLAGS.bd]: drawBdFlag,
+        [TEMPLATE_FLAGS.be]: drawBeFlag,
+        [TEMPLATE_FLAGS.bf]: drawBfFlag,
+        [TEMPLATE_FLAGS.bg]: drawBgFlag,
+        [TEMPLATE_FLAGS.bh]: drawBhFlag,
+        [TEMPLATE_FLAGS.bi]: drawBiFlag,
+        [TEMPLATE_FLAGS.bj]: drawBjFlag,
+        [TEMPLATE_FLAGS.bl]: drawBlFlag,
+        [TEMPLATE_FLAGS.bm]: drawBmFlag,
+        [TEMPLATE_FLAGS.bn]: drawBnFlag,
+        [TEMPLATE_FLAGS.bo]: drawBoFlag,
+        [TEMPLATE_FLAGS.bq]: drawBqFlag,
+        [TEMPLATE_FLAGS.br]: drawBrFlag,
+        [TEMPLATE_FLAGS.bs]: drawBsFlag,
+        [TEMPLATE_FLAGS.bt]: drawBtFlag,
+        [TEMPLATE_FLAGS.bv]: drawBvFlag,
+        [TEMPLATE_FLAGS.bw]: drawBwFlag,
+        [TEMPLATE_FLAGS.by]: drawByFlag,
+        [TEMPLATE_FLAGS.bz]: drawBzFlag,
+        [TEMPLATE_FLAGS.ca]: drawCaFlag,
+        [TEMPLATE_FLAGS.cc]: drawCcFlag,
+        [TEMPLATE_FLAGS.cd]: drawCdFlag,
+        [TEMPLATE_FLAGS.cf]: drawCfFlag,
+        [TEMPLATE_FLAGS.cg]: drawCgFlag,
+        [TEMPLATE_FLAGS.ch]: drawChFlag,
+        [TEMPLATE_FLAGS.ci]: drawCiFlag,
+        [TEMPLATE_FLAGS.ck]: drawCkFlag,
+        [TEMPLATE_FLAGS.cl]: drawClFlag,
+        [TEMPLATE_FLAGS.cm]: drawCmFlag,
+        [TEMPLATE_FLAGS.co]: drawCoFlag,
+        [TEMPLATE_FLAGS.cr]: drawCrFlag,
+        [TEMPLATE_FLAGS.cu]: drawCuFlag,
+        [TEMPLATE_FLAGS.cv]: drawCvFlag,
+        [TEMPLATE_FLAGS.cw]: drawCwFlag,
+        [TEMPLATE_FLAGS.cx]: drawCxFlag,
+        [TEMPLATE_FLAGS.cy]: drawCyFlag,
+        [TEMPLATE_FLAGS.cz]: drawCzFlag,
+        [TEMPLATE_FLAGS.de]: drawDeFlag,
+        [TEMPLATE_FLAGS.dj]: drawDjFlag,
+        [TEMPLATE_FLAGS.dk]: drawDkFlag,
+        [TEMPLATE_FLAGS.dm]: drawDmFlag,
+        [TEMPLATE_FLAGS["do"]]: drawDoFlag,
+        [TEMPLATE_FLAGS.dz]: drawDzFlag,
+        [TEMPLATE_FLAGS.ec]: drawEcFlag,
+        [TEMPLATE_FLAGS.ee]: drawEeFlag,
+        [TEMPLATE_FLAGS.eg]: drawEgFlag,
+        [TEMPLATE_FLAGS.eh]: drawEhFlag,
+        [TEMPLATE_FLAGS.er]: drawErFlag,
+        [TEMPLATE_FLAGS.et]: drawEtFlag,
+        [TEMPLATE_FLAGS.fi]: drawFiFlag,
+        [TEMPLATE_FLAGS.fj]: drawFjFlag,
+        [TEMPLATE_FLAGS.fk]: drawFkFlag,
+        [TEMPLATE_FLAGS.fm]: drawFmFlag,
+        [TEMPLATE_FLAGS.fo]: drawFoFlag,
+        [TEMPLATE_FLAGS.ga]: drawGaFlag,
+        [TEMPLATE_FLAGS.gb]: drawGbFlag,
+        [TEMPLATE_FLAGS.gd]: drawGdFlag,
+        [TEMPLATE_FLAGS.ge]: drawGeFlag,
+        [TEMPLATE_FLAGS.gf]: drawGfFlag,
+        [TEMPLATE_FLAGS.gg]: drawGgFlag,
+        [TEMPLATE_FLAGS.gh]: drawGhFlag,
+        [TEMPLATE_FLAGS.gi]: drawGiFlag,
+        [TEMPLATE_FLAGS.gl]: drawGlFlag,
+        [TEMPLATE_FLAGS.gm]: drawGmFlag,
+        [TEMPLATE_FLAGS.gn]: drawGnFlag,
+        [TEMPLATE_FLAGS.gp]: drawGpFlag,
+        [TEMPLATE_FLAGS.gq]: drawGqFlag,
+        [TEMPLATE_FLAGS.gr]: drawGrFlag,
+        [TEMPLATE_FLAGS.gs]: drawGsFlag,
+        [TEMPLATE_FLAGS.gt]: drawGtFlag,
+        [TEMPLATE_FLAGS.gu]: drawGuFlag,
+        [TEMPLATE_FLAGS.gw]: drawGwFlag,
+        [TEMPLATE_FLAGS.gy]: drawGyFlag,
+        [TEMPLATE_FLAGS.hk]: drawHkFlag,
+        [TEMPLATE_FLAGS.hm]: drawHmFlag,
+        [TEMPLATE_FLAGS.hn]: drawHnFlag,
+        [TEMPLATE_FLAGS.hr]: drawHrFlag,
+        [TEMPLATE_FLAGS.ht]: drawHtFlag,
+        [TEMPLATE_FLAGS.hu]: drawHuFlag,
+        [TEMPLATE_FLAGS.id]: drawIdFlag,
+        [TEMPLATE_FLAGS.ie]: drawIeFlag,
+        [TEMPLATE_FLAGS.il]: drawIlFlag,
+        [TEMPLATE_FLAGS.im]: drawImFlag,
+        [TEMPLATE_FLAGS["in"]]: drawInFlag,
+        [TEMPLATE_FLAGS.io]: drawIoFlag,
+        [TEMPLATE_FLAGS.iq]: drawIqFlag,
+        [TEMPLATE_FLAGS.ir]: drawIrFlag,
+        [TEMPLATE_FLAGS.is]: drawIsFlag,
+        [TEMPLATE_FLAGS.je]: drawJeFlag,
+        [TEMPLATE_FLAGS.jm]: drawJmFlag,
+        [TEMPLATE_FLAGS.jo]: drawJoFlag,
+        [TEMPLATE_FLAGS.ke]: drawKeFlag,
+        [TEMPLATE_FLAGS.kg]: drawKgFlag,
+        [TEMPLATE_FLAGS.kh]: drawKhFlag,
+        [TEMPLATE_FLAGS.ki]: drawKiFlag,
+        [TEMPLATE_FLAGS.km]: drawKmFlag,
+        [TEMPLATE_FLAGS.kn]: drawKnFlag,
+        [TEMPLATE_FLAGS.kp]: drawKpFlag,
+        [TEMPLATE_FLAGS.kr]: drawKrFlag,
+        [TEMPLATE_FLAGS.kw]: drawKwFlag,
+        [TEMPLATE_FLAGS.ky]: drawKyFlag,
+        [TEMPLATE_FLAGS.kz]: drawKzFlag,
+        [TEMPLATE_FLAGS.la]: drawLaFlag,
+        [TEMPLATE_FLAGS.lb]: drawLbFlag,
+        [TEMPLATE_FLAGS.lc]: drawLcFlag,
+        [TEMPLATE_FLAGS.li]: drawLiFlag,
+        [TEMPLATE_FLAGS.lk]: drawLkFlag,
+        [TEMPLATE_FLAGS.lr]: drawLrFlag,
+        [TEMPLATE_FLAGS.ls]: drawLsFlag,
+        [TEMPLATE_FLAGS.lt]: drawLtFlag,
+        [TEMPLATE_FLAGS.lu]: drawLuFlag,
+        [TEMPLATE_FLAGS.lv]: drawLvFlag,
+        [TEMPLATE_FLAGS.ly]: drawLyFlag,
+        [TEMPLATE_FLAGS.ma]: drawMaFlag,
+        [TEMPLATE_FLAGS.mc]: drawMcFlag,
+        [TEMPLATE_FLAGS.md]: drawMdFlag,
+        [TEMPLATE_FLAGS.me]: drawMeFlag,
+        [TEMPLATE_FLAGS.mf]: drawMfFlag,
+        [TEMPLATE_FLAGS.mg]: drawMgFlag,
+        [TEMPLATE_FLAGS.mh]: drawMhFlag,
+        [TEMPLATE_FLAGS.mk]: drawMkFlag,
+        [TEMPLATE_FLAGS.ml]: drawMlFlag,
+        [TEMPLATE_FLAGS.mm]: drawMmFlag,
+        [TEMPLATE_FLAGS.mn]: drawMnFlag,
+        [TEMPLATE_FLAGS.mo]: drawMoFlag,
+        [TEMPLATE_FLAGS.mp]: drawMpFlag,
+        [TEMPLATE_FLAGS.mq]: drawMqFlag,
+        [TEMPLATE_FLAGS.mr]: drawMrFlag,
+        [TEMPLATE_FLAGS.ms]: drawMsFlag,
+        [TEMPLATE_FLAGS.mt]: drawMtFlag,
+        [TEMPLATE_FLAGS.mu]: drawMuFlag,
+        [TEMPLATE_FLAGS.mv]: drawMvFlag,
+        [TEMPLATE_FLAGS.mw]: drawMwFlag,
+        [TEMPLATE_FLAGS.mx]: drawMxFlag,
+        [TEMPLATE_FLAGS.my]: drawMyFlag,
+        [TEMPLATE_FLAGS.mz]: drawMzFlag,
+        [TEMPLATE_FLAGS.na]: drawNaFlag,
+        [TEMPLATE_FLAGS.nc]: drawNcFlag,
+        [TEMPLATE_FLAGS.ne]: drawNeFlag,
+        [TEMPLATE_FLAGS.nf]: drawNfFlag,
+        [TEMPLATE_FLAGS.ng]: drawNgFlag,
+        [TEMPLATE_FLAGS.ni]: drawNiFlag,
+        [TEMPLATE_FLAGS.nl]: drawNlFlag,
+        [TEMPLATE_FLAGS.no]: drawNoFlag,
+        [TEMPLATE_FLAGS.np]: drawNpFlag,
+        [TEMPLATE_FLAGS.nr]: drawNrFlag,
+        [TEMPLATE_FLAGS.nu]: drawNuFlag,
+        [TEMPLATE_FLAGS.nz]: drawNzFlag,
+        [TEMPLATE_FLAGS.om]: drawOmFlag,
+        [TEMPLATE_FLAGS.pa]: drawPaFlag,
+        [TEMPLATE_FLAGS.pe]: drawPeFlag,
+        [TEMPLATE_FLAGS.pf]: drawPfFlag,
+        [TEMPLATE_FLAGS.pg]: drawPgFlag,
+        [TEMPLATE_FLAGS.ph]: drawPhFlag,
+        [TEMPLATE_FLAGS.pk]: drawPkFlag,
+        [TEMPLATE_FLAGS.pl]: drawPlFlag,
+        [TEMPLATE_FLAGS.pm]: drawPmFlag,
+        [TEMPLATE_FLAGS.pn]: drawPnFlag,
+        [TEMPLATE_FLAGS.pr]: drawPrFlag,
+        [TEMPLATE_FLAGS.ps]: drawPsFlag,
+        [TEMPLATE_FLAGS.pt]: drawPtFlag,
+        [TEMPLATE_FLAGS.pw]: drawPwFlag,
+        [TEMPLATE_FLAGS.py]: drawPyFlag,
+        [TEMPLATE_FLAGS.qa]: drawQaFlag,
+        [TEMPLATE_FLAGS.re]: drawReFlag,
+        [TEMPLATE_FLAGS.ro]: drawRoFlag,
+        [TEMPLATE_FLAGS.rs]: drawRsFlag,
+        [TEMPLATE_FLAGS.ru]: drawRuFlag,
+        [TEMPLATE_FLAGS.rw]: drawRwFlag,
+        [TEMPLATE_FLAGS.sa]: drawSaFlag,
+        [TEMPLATE_FLAGS.sb]: drawSbFlag,
+        [TEMPLATE_FLAGS.sc]: drawScFlag,
+        [TEMPLATE_FLAGS.sd]: drawSdFlag,
+        [TEMPLATE_FLAGS.se]: drawSeFlag,
+        [TEMPLATE_FLAGS.sg]: drawSgFlag,
+        [TEMPLATE_FLAGS.sh]: drawShFlag,
+        [TEMPLATE_FLAGS.si]: drawSiFlag,
+        [TEMPLATE_FLAGS.sj]: drawSjFlag,
+        [TEMPLATE_FLAGS.sk]: drawSkFlag,
+        [TEMPLATE_FLAGS.sl]: drawSlFlag,
+        [TEMPLATE_FLAGS.sm]: drawSmFlag,
+        [TEMPLATE_FLAGS.sn]: drawSnFlag,
+        [TEMPLATE_FLAGS.so]: drawSoFlag,
+        [TEMPLATE_FLAGS.sr]: drawSrFlag,
+        [TEMPLATE_FLAGS.ss]: drawSsFlag,
+        [TEMPLATE_FLAGS.st]: drawStFlag,
+        [TEMPLATE_FLAGS.sv]: drawSvFlag,
+        [TEMPLATE_FLAGS.sx]: drawSxFlag,
+        [TEMPLATE_FLAGS.sy]: drawSyFlag,
+        [TEMPLATE_FLAGS.sz]: drawSzFlag,
+        [TEMPLATE_FLAGS.tc]: drawTcFlag,
+        [TEMPLATE_FLAGS.td]: drawTdFlag,
+        [TEMPLATE_FLAGS.tf]: drawTfFlag,
+        [TEMPLATE_FLAGS.tg]: drawTgFlag,
+        [TEMPLATE_FLAGS.tj]: drawTjFlag,
+        [TEMPLATE_FLAGS.tk]: drawTkFlag,
+        [TEMPLATE_FLAGS.tl]: drawTlFlag,
+        [TEMPLATE_FLAGS.tm]: drawTmFlag,
+        [TEMPLATE_FLAGS.tn]: drawTnFlag,
+        [TEMPLATE_FLAGS.to]: drawToFlag,
+        [TEMPLATE_FLAGS.tr]: drawTrFlag,
+        [TEMPLATE_FLAGS.tt]: drawTtFlag,
+        [TEMPLATE_FLAGS.tv]: drawTvFlag,
+        [TEMPLATE_FLAGS.tw]: drawTwFlag,
+        [TEMPLATE_FLAGS.tz]: drawTzFlag,
+        [TEMPLATE_FLAGS.ua]: drawUaFlag,
+        [TEMPLATE_FLAGS.ug]: drawUgFlag,
+        [TEMPLATE_FLAGS.um]: drawUmFlag,
+        [TEMPLATE_FLAGS.uy]: drawUyFlag,
+        [TEMPLATE_FLAGS.uz]: drawUzFlag,
+        [TEMPLATE_FLAGS.vc]: drawVcFlag,
+        [TEMPLATE_FLAGS.ve]: drawVeFlag,
+        [TEMPLATE_FLAGS.vg]: drawVgFlag,
+        [TEMPLATE_FLAGS.vi]: drawViFlag,
+        [TEMPLATE_FLAGS.vn]: drawVnFlag,
+        [TEMPLATE_FLAGS.vu]: drawVuFlag,
+        [TEMPLATE_FLAGS.wf]: drawWfFlag,
+        [TEMPLATE_FLAGS.ws]: drawWsFlag,
+        [TEMPLATE_FLAGS.xk]: drawXkFlag,
+        [TEMPLATE_FLAGS.ye]: drawYeFlag,
+        [TEMPLATE_FLAGS.yt]: drawYtFlag,
+        [TEMPLATE_FLAGS.za]: drawZaFlag,
+        [TEMPLATE_FLAGS.zm]: drawZmFlag,
+        [TEMPLATE_FLAGS.zw]: drawZwFlag
     };
     const browserWindow = window;
     browserWindow.RoughEmoji = RoughEmoji;
@@ -1832,15 +2325,8 @@
     function drawFlag(flag) {
         clearCanvas();
         drawPaper();
-        if (flag === TEMPLATE_FLAGS.china) return void drawChinaFlag();
-        if (flag === TEMPLATE_FLAGS.japan) return void drawJapanFlag();
-        if (flag === TEMPLATE_FLAGS.unitedStates) return void drawUnitedStatesFlag();
-        if (flag === TEMPLATE_FLAGS.australia) return void drawAustraliaFlag();
-        if (flag === TEMPLATE_FLAGS.thailand) return void drawThailandFlag();
-        if (flag === TEMPLATE_FLAGS.france) return void drawFranceFlag();
-        if (flag === TEMPLATE_FLAGS.italy) return void drawItalyFlag();
-        if (flag === TEMPLATE_FLAGS.spain) return void drawSpainFlag();
-        if (flag === TEMPLATE_FLAGS.vatican) return void drawVaticanFlag();
+        const templateDrawer = TEMPLATE_FLAG_DRAWERS[flag];
+        if (templateDrawer) return void templateDrawer();
         drawGenericFlag(flag);
     }
     function resolveFlag(value) {
@@ -2091,6 +2577,3232 @@
         drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#b49835");
         drawFlagBorder(flagBox);
     }
+    function drawAdFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#c83c4a", "#8f2633");
+        drawShieldBadge(flagBox, 0.5, 0.5, "#fbfdfa", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#705b4a");
+        drawFlagBorder(flagBox);
+    }
+    function drawAeFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 0.25, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.25, 0, 1, 1 / 3, "#15945f", "#0f6646");
+        drawFlagBand(flagBox, 0.25, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.25, 2 / 3, 1, 1, "#262d2b", "#111615");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b3538");
+        drawFlagBorder(flagBox);
+    }
+    function drawAfFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.af);
+    }
+    function drawAgFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ag);
+    }
+    function drawAiFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ai);
+    }
+    function drawAlFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const cx = mapFlagX(0.5, 0.5, flagBox);
+        const cy = mapFlagY(0.5, 0.5, flagBox);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        roughCanvas.polygon([
+            [
+                cx - 62,
+                cy - 42
+            ],
+            [
+                cx - 18,
+                cy - 18
+            ],
+            [
+                cx,
+                cy - 58
+            ],
+            [
+                cx + 18,
+                cy - 18
+            ],
+            [
+                cx + 62,
+                cy - 42
+            ],
+            [
+                cx + 28,
+                cy + 14
+            ],
+            [
+                cx + 44,
+                cy + 64
+            ],
+            [
+                cx,
+                cy + 35
+            ],
+            [
+                cx - 44,
+                cy + 64
+            ],
+            [
+                cx - 28,
+                cy + 14
+            ]
+        ], {
+            stroke: "#111615",
+            strokeWidth: 2,
+            fill: "#262d2b",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawAmFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#d23b43", "#912936");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#2f4f9d", "#203a74");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#f0a330", "#a96f1f");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#734268");
+        drawFlagBorder(flagBox);
+    }
+    function drawAoFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ao);
+    }
+    function drawAqFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.aq);
+    }
+    function drawArFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#75a9d8", "#477aa5");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#75a9d8", "#477aa5");
+        roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 43, {
+            stroke: "#b68b12",
+            strokeWidth: 1.2,
+            fill: "#ffd84c",
+            fillStyle: "hachure",
+            hachureGap: 7,
+            fillWeight: 0.8,
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#477aa5");
+        drawFlagBorder(flagBox);
+    }
+    function drawAsFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.as);
+    }
+    function drawAtFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawAwFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.aw);
+    }
+    function drawAxFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ax);
+    }
+    function drawAzFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#3d9fd3", "#2c6f9b");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#249064", "#176847");
+        roughCanvas.circle(mapFlagX(0.48, 0.5, flagBox), mapFlagY(0.48, 0.5, flagBox), 0.24 * flagBox.height, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.52, 0.5, flagBox), mapFlagY(0.52, 0.5, flagBox), 0.2 * flagBox.height, {
+            stroke: "#8f2633",
+            strokeWidth: 1,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawSketchStarWithColors(mapFlagX(0.59, 0.5, flagBox), mapFlagY(0.59, 0.5, flagBox), 18, -18, {
+            stroke: "#c7d1cc",
+            fill: "#fbfdfa",
+            hatch: "rgba(251, 253, 250, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#756b4d");
+        drawFlagBorder(flagBox);
+    }
+    function drawBaFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#253f78", "#1b2c56");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.34, 0, flagBox),
+                mapFlagY(0.34, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.78, 0, flagBox),
+                mapFlagY(0.78, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.78, 1, flagBox),
+                mapFlagY(0.78, 1, flagBox)
+            ]
+        ], {
+            stroke: "#a98218",
+            strokeWidth: 1.2,
+            fill: "#f0c83a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        for(let i = 0; i < 8; i += 1)drawSketchStarWithColors(mapFlagX(0.36 + 0.055 * i, 0.08 + 0.115 * i, flagBox), mapFlagY(0.36 + 0.055 * i, 0.08 + 0.115 * i, flagBox), 10, -18 + 4 * i, {
+            stroke: "#c7d1cc",
+            fill: "#fbfdfa",
+            hatch: "rgba(251, 253, 250, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+        drawFlagBorder(flagBox);
+    }
+    function drawBbFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const cx = mapFlagX(0.5, 0.5, flagBox);
+        const cy = mapFlagY(0.5, 0.5, flagBox);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#253f78", "#1b2c56");
+        roughCanvas.line(cx, cy - 48, cx, cy + 54, {
+            stroke: "#262d2b",
+            strokeWidth: 4,
+            roughness: 2.2,
+            bowing: 1.4
+        });
+        roughCanvas.line(cx, cy - 10, cx - 24, cy - 42, {
+            stroke: "#262d2b",
+            strokeWidth: 3,
+            roughness: 2.2,
+            bowing: 1.4
+        });
+        roughCanvas.line(cx, cy - 10, cx + 24, cy - 42, {
+            stroke: "#262d2b",
+            strokeWidth: 3,
+            roughness: 2.2,
+            bowing: 1.4
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#705b4a");
+        drawFlagBorder(flagBox);
+    }
+    function drawBdFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#176847", "#0f4f37");
+        roughCanvas.circle(mapFlagX(0.47, 0.5, flagBox), mapFlagY(0.47, 0.5, flagBox), 0.42 * flagBox.height, {
+            stroke: "#8f2633",
+            strokeWidth: 1.2,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#0f4f37");
+        drawFlagBorder(flagBox);
+    }
+    function drawBeFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f4cf34", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#262d2b", "#111615");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#f4cf34", "#a98218");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f4f28");
+        drawFlagBorder(flagBox);
+    }
+    function drawBfFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#249064", "#176847");
+        drawSketchStar(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 30, -18);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawBgFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#5d5a48");
+        drawFlagBorder(flagBox);
+    }
+    function drawBhFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const teeth = 5;
+        const zigzag = [
+            [
+                mapFlagX(0.28, 0, flagBox),
+                mapFlagY(0.28, 0, flagBox)
+            ]
+        ];
+        for(let i = 0; i < teeth; i += 1){
+            zigzag.push([
+                mapFlagX(0.42, (i + 0.5) / teeth, flagBox),
+                mapFlagY(0.42, (i + 0.5) / teeth, flagBox)
+            ]);
+            zigzag.push([
+                mapFlagX(0.28, (i + 1) / teeth, flagBox),
+                mapFlagY(0.28, (i + 1) / teeth, flagBox)
+            ]);
+        }
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            ...zigzag,
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawBiFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.bi);
+    }
+    function drawBjFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 0.4, 1, "#168453", "#0f5f3d");
+        drawFlagBand(flagBox, 0.4, 0, 1, 0.5, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0.4, 0.5, 1, 1, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#76623a");
+        drawFlagBorder(flagBox);
+    }
+    function drawBlFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.bl);
+    }
+    function drawBmFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.bm);
+    }
+    function drawBnFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.bn);
+    }
+    function drawBoFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.bo);
+    }
+    function drawBqFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.bq);
+    }
+    function drawBrFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#249064", "#176847");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.5, 0.12, flagBox),
+                mapFlagY(0.5, 0.12, flagBox)
+            ],
+            [
+                mapFlagX(0.88, 0.5, flagBox),
+                mapFlagY(0.88, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0.5, 0.88, flagBox),
+                mapFlagY(0.5, 0.88, flagBox)
+            ],
+            [
+                mapFlagX(0.12, 0.5, flagBox),
+                mapFlagY(0.12, 0.5, flagBox)
+            ]
+        ], {
+            stroke: "#a98218",
+            strokeWidth: 1.2,
+            fill: "#f0c83a",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 0.38 * flagBox.height, {
+            stroke: "#203a74",
+            strokeWidth: 1.2,
+            fill: "#2f4f9d",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawFlagBand({
+            x: flagBox.x + 0.35 * flagBox.width,
+            y: flagBox.y + 0.47 * flagBox.height,
+            width: 0.3 * flagBox.width,
+            height: 0.08 * flagBox.height
+        }, 0, 0, 1, 1, "#fbfdfa", "#c7d1cc");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3f755c");
+        drawFlagBorder(flagBox);
+    }
+    function drawBsFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.bs);
+    }
+    function drawBtFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.bt);
+    }
+    function drawBvFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.bv);
+    }
+    function drawBwFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#75a9d8", "#477aa5");
+        drawFlagBand(flagBox, 0, 0, 1, 0.36, "#75a9d8", "#477aa5");
+        drawFlagBand(flagBox, 0, 0.36, 1, 0.42, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.42, 1, 0.58, "#262d2b", "#111615");
+        drawFlagBand(flagBox, 0, 0.58, 1, 0.64, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.64, 1, 1, "#75a9d8", "#477aa5");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#416a88");
+        drawFlagBorder(flagBox);
+    }
+    function drawByFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 0, 0.18, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.18, 0, 1, 0.68, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.18, 0.68, 1, 1, "#249064", "#176847");
+        for(let i = 0; i < 6; i += 1)roughCanvas.line(mapFlagX(0.035, i / 6, flagBox), mapFlagY(0.035, i / 6, flagBox), mapFlagX(0.145, (i + 0.5) / 6, flagBox), mapFlagY(0.145, (i + 0.5) / 6, flagBox), {
+            stroke: "#c83c4a",
+            strokeWidth: 2.4,
+            roughness: 2.2,
+            bowing: 1.5
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawBzFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0, 1, 0.12, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.88, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 0.42 * flagBox.height, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "#fbfdfa",
+            fillStyle: "hachure",
+            hachureGap: 9,
+            fillWeight: 0.45,
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawShieldBadge(flagBox, 0.5, 0.5, "#f0c83a", "#249064");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+        drawFlagBorder(flagBox);
+    }
+    function drawCaFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const cx = mapFlagX(0.5, 0.5, flagBox);
+        const cy = mapFlagY(0.5, 0.5, flagBox);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 0.25, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.75, 0, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.polygon([
+            [
+                cx,
+                cy - 74
+            ],
+            [
+                cx + 17,
+                cy - 28
+            ],
+            [
+                cx + 55,
+                cy - 42
+            ],
+            [
+                cx + 34,
+                cy - 4
+            ],
+            [
+                cx + 70,
+                cy + 8
+            ],
+            [
+                cx + 28,
+                cy + 22
+            ],
+            [
+                cx + 36,
+                cy + 64
+            ],
+            [
+                cx,
+                cy + 36
+            ],
+            [
+                cx - 36,
+                cy + 64
+            ],
+            [
+                cx - 28,
+                cy + 22
+            ],
+            [
+                cx - 70,
+                cy + 8
+            ],
+            [
+                cx - 34,
+                cy - 4
+            ],
+            [
+                cx - 55,
+                cy - 42
+            ],
+            [
+                cx - 17,
+                cy - 28
+            ]
+        ], {
+            stroke: "#8f2633",
+            strokeWidth: 1.8,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.4,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawCcFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.cc);
+    }
+    function drawCdFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.cd);
+    }
+    function drawCfFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.cf);
+    }
+    function drawCgFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#249064", "#176847");
+        roughCanvas.polygon(makeFlagCellOutline(0, 0, 1, 1, flagBox), {
+            stroke: "#176847",
+            strokeWidth: 1.2,
+            fill: "#249064",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.28, 1, flagBox),
+                mapFlagY(0.28, 1, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ],
+            [
+                mapFlagX(0.72, 0, flagBox),
+                mapFlagY(0.72, 0, flagBox)
+            ],
+            [
+                mapFlagX(1, 0, flagBox),
+                mapFlagY(1, 0, flagBox)
+            ]
+        ], {
+            stroke: "#a98218",
+            strokeWidth: 1.2,
+            fill: "#f0c83a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.72, 0, flagBox),
+                mapFlagY(0.72, 0, flagBox)
+            ],
+            [
+                mapFlagX(1, 0, flagBox),
+                mapFlagY(1, 0, flagBox)
+            ],
+            [
+                mapFlagX(1, 1, flagBox),
+                mapFlagY(1, 1, flagBox)
+            ],
+            [
+                mapFlagX(0.28, 1, flagBox),
+                mapFlagY(0.28, 1, flagBox)
+            ]
+        ], {
+            stroke: "#8f2633",
+            strokeWidth: 1.2,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawChFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.41, 0.23, 0.59, 0.77, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.25, 0.41, 0.75, 0.59, "#fbfdfa", "#c7d1cc");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawCiFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#ee8b2c", "#a9601d");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#249064", "#176847");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#7f7041");
+        drawFlagBorder(flagBox);
+    }
+    function drawCkFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ck);
+    }
+    function drawClFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 0.33, 0.5, "#2f4f9d", "#203a74");
+        drawFlagBand(flagBox, 0.33, 0, 1, 0.5, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#c83c4a", "#8f2633");
+        drawSketchStarWithColors(mapFlagX(0.165, 0.25, flagBox), mapFlagY(0.165, 0.25, flagBox), 18, -18, {
+            stroke: "#c7d1cc",
+            fill: "#fbfdfa",
+            hatch: "rgba(251, 253, 250, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawCmFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#249064", "#176847");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#f0c83a", "#a98218");
+        drawSketchStar(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 31, -18);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawCoFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f4cf34", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#f4cf34", "#a98218");
+        drawFlagBand(flagBox, 0, 0.5, 1, 0.75, "#2f4f9d", "#203a74");
+        drawFlagBand(flagBox, 0, 0.75, 1, 1, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#80623f");
+        drawFlagBorder(flagBox);
+    }
+    function drawCrFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 6, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 1 / 6, 1, 2 / 6, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 6, 1, 4 / 6, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 4 / 6, 1, 5 / 6, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 5 / 6, 1, 1, "#253f78", "#1b2c56");
+        roughCanvas.circle(mapFlagX(0.38, 0.5, flagBox), mapFlagY(0.38, 0.5, flagBox), 36, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1,
+            fill: "#fbfdfa",
+            fillStyle: "hachure",
+            hachureGap: 7,
+            fillWeight: 0.45,
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawCuFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        for(let row = 0; row < 5; row += 1)drawFlagBand(flagBox, 0, row / 5, 1, (row + 1) / 5, row % 2 === 0 ? "#2f4f9d" : "#fbfdfa", row % 2 === 0 ? "#203a74" : "#c7d1cc");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.42, 0.5, flagBox),
+                mapFlagY(0.42, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#8f2633",
+            strokeWidth: 1.2,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawSketchStarWithColors(mapFlagX(0.16, 0.5, flagBox), mapFlagY(0.16, 0.5, flagBox), 18, -18, {
+            stroke: "#c7d1cc",
+            fill: "#fbfdfa",
+            hatch: "rgba(251, 253, 250, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#4d5d86");
+        drawFlagBorder(flagBox);
+    }
+    function drawCvFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.cv);
+    }
+    function drawCwFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.cw);
+    }
+    function drawCxFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.cx);
+    }
+    function drawCyFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.cy);
+    }
+    function drawCzFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.46, 0.5, flagBox),
+                mapFlagY(0.46, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#203a74",
+            strokeWidth: 1.2,
+            fill: "#2f4f9d",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawDeFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f4cf34", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#262d2b", "#111615");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#f4cf34", "#a98218");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#745232");
+        drawFlagBorder(flagBox);
+    }
+    function drawDjFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#4f9fd3", "#2c6f9b");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#249064", "#176847");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.42, 0.5, flagBox),
+                mapFlagY(0.42, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawSketchStarWithColors(mapFlagX(0.16, 0.5, flagBox), mapFlagY(0.16, 0.5, flagBox), 19, -18, {
+            stroke: "#8f2633",
+            fill: "#c83c4a",
+            hatch: "#d8585f"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3f755c");
+        drawFlagBorder(flagBox);
+    }
+    function drawDkFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.29, 0, 0.41, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.42, 1, 0.58, "#fbfdfa", "#c7d1cc");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawDmFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.dm);
+    }
+    function drawDoFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 0.44, 0.42, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0.56, 0, 1, 0.42, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.58, 0.44, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.56, 0.58, 1, 1, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0.44, 0, 0.56, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.42, 1, 0.58, "#fbfdfa", "#c7d1cc");
+        drawShieldBadge(flagBox, 0.5, 0.5, "#fbfdfa", "#249064");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawDzFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 0.5, 1, "#249064", "#176847");
+        drawFlagBand(flagBox, 0.5, 0, 1, 1, "#fbfdfa", "#c7d1cc");
+        roughCanvas.circle(mapFlagX(0.52, 0.5, flagBox), mapFlagY(0.52, 0.5, flagBox), 0.32 * flagBox.height, {
+            stroke: "#8f2633",
+            strokeWidth: 1.2,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.57, 0.5, flagBox), mapFlagY(0.57, 0.5, flagBox), 0.27 * flagBox.height, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawSketchStarWithColors(mapFlagX(0.62, 0.5, flagBox), mapFlagY(0.62, 0.5, flagBox), 22, -18, {
+            stroke: "#8f2633",
+            fill: "#c83c4a",
+            hatch: "#d8585f"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3f755c");
+        drawFlagBorder(flagBox);
+    }
+    function drawEcFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0.5, 1, 0.75, "#2f4f9d", "#203a74");
+        drawFlagBand(flagBox, 0, 0.75, 1, 1, "#c83c4a", "#8f2633");
+        drawShieldBadge(flagBox, 0.5, 0.5, "#fbfdfa", "#a98218");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#80623f");
+        drawFlagBorder(flagBox);
+    }
+    function drawEeFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#4f9fd3", "#2c6f9b");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#262d2b", "#111615");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#fbfdfa", "#c7d1cc");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3c5f73");
+        drawFlagBorder(flagBox);
+    }
+    function drawEgFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#262d2b", "#111615");
+        drawShieldBadge(flagBox, 0.5, 0.5, "#d7a735", "#a98218");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawEhFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.eh);
+    }
+    function drawErFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.er);
+    }
+    function drawEtFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 0.34 * flagBox.height, {
+            stroke: "#203a74",
+            strokeWidth: 1.2,
+            fill: "#2f4f9d",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawSketchStar(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 28, -18);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawFiFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.28, 0, 0.42, 1, "#2f4f9d", "#203a74");
+        drawFlagBand(flagBox, 0, 0.38, 1, 0.56, "#2f4f9d", "#203a74");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#4d5d86");
+        drawFlagBorder(flagBox);
+    }
+    function drawFjFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.fj);
+    }
+    function drawFkFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.fk);
+    }
+    function drawFmFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#4f9fd3", "#2c6f9b");
+        [
+            [
+                0.5,
+                0.28
+            ],
+            [
+                0.68,
+                0.5
+            ],
+            [
+                0.5,
+                0.72
+            ],
+            [
+                0.32,
+                0.5
+            ]
+        ].forEach(([u, v], index)=>{
+            drawSketchStarWithColors(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), 20, -18 + 5 * index, {
+                stroke: "#c7d1cc",
+                fill: "#fbfdfa",
+                hatch: "rgba(251, 253, 250, 0.7)"
+            });
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#2c6f9b");
+        drawFlagBorder(flagBox);
+    }
+    function drawFoFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.fo);
+    }
+    function drawGaFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#3d78bd", "#284f84");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#5d7653");
+        drawFlagBorder(flagBox);
+    }
+    function drawGbFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#253f78", "#1b2c56");
+        drawCantonLine(flagBox, 0, 0, 1, 1, "#fbfdfa", 26);
+        drawCantonLine(flagBox, 1, 0, 0, 1, "#fbfdfa", 26);
+        drawCantonLine(flagBox, 0, 0, 1, 1, "#c83c4a", 10);
+        drawCantonLine(flagBox, 1, 0, 0, 1, "#c83c4a", 10);
+        drawFlagBand(flagBox, 0.43, 0, 0.57, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.39, 1, 0.61, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.47, 0, 0.53, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.45, 1, 0.55, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1b2c56");
+        drawFlagBorder(flagBox);
+    }
+    function drawGdFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.1, 0.16, 0.9, 0.84, "#f0c83a", "#a98218");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.1, 0.16, flagBox),
+                mapFlagY(0.1, 0.16, flagBox)
+            ],
+            [
+                mapFlagX(0.5, 0.5, flagBox),
+                mapFlagY(0.5, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0.1, 0.84, flagBox),
+                mapFlagY(0.1, 0.84, flagBox)
+            ]
+        ], {
+            stroke: "#176847",
+            strokeWidth: 1,
+            fill: "#249064",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.9, 0.16, flagBox),
+                mapFlagY(0.9, 0.16, flagBox)
+            ],
+            [
+                mapFlagX(0.5, 0.5, flagBox),
+                mapFlagY(0.5, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0.9, 0.84, flagBox),
+                mapFlagY(0.9, 0.84, flagBox)
+            ]
+        ], {
+            stroke: "#176847",
+            strokeWidth: 1,
+            fill: "#249064",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawSketchStarWithColors(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 28, -18, {
+            stroke: "#b68b12",
+            fill: "#ffd84c",
+            hatch: "#ffec62"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawGeFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.44, 0, 0.56, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.42, 1, 0.58, "#c83c4a", "#8f2633");
+        [
+            [
+                0.24,
+                0.23
+            ],
+            [
+                0.76,
+                0.23
+            ],
+            [
+                0.24,
+                0.77
+            ],
+            [
+                0.76,
+                0.77
+            ]
+        ].forEach(([u, v])=>{
+            drawFlagBand(flagBox, u - 0.035, v - 0.11, u + 0.035, v + 0.11, "#c83c4a", "#8f2633");
+            drawFlagBand(flagBox, u - 0.105, v - 0.035, u + 0.105, v + 0.035, "#c83c4a", "#8f2633");
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawGfFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.gf);
+    }
+    function drawGgFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.43, 0, 0.57, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.4, 1, 0.6, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.47, 0.18, 0.53, 0.82, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0.24, 0.47, 0.76, 0.53, "#f0c83a", "#a98218");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawGhFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#249064", "#176847");
+        drawSketchStarWithColors(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 30, -18, {
+            stroke: "#111615",
+            fill: "#262d2b",
+            hatch: "rgba(38, 45, 43, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawGiFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.gi);
+    }
+    function drawGlFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.circle(mapFlagX(0.38, 0.5, flagBox), mapFlagY(0.38, 0.5, flagBox), 0.42 * flagBox.height, {
+            stroke: "#8f2633",
+            strokeWidth: 1,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawFlagBand({
+            x: mapFlagX(0.17, 0.5, flagBox),
+            y: mapFlagY(0.5, 0.5, flagBox),
+            width: 0.42 * flagBox.width,
+            height: 0.22 * flagBox.height
+        }, 0, 0, 1, 1, "#fbfdfa", "#c7d1cc");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawGmFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 0, 1, 0.33, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.33, 1, 0.4, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.4, 1, 0.6, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0.6, 1, 0.67, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.67, 1, 1, "#249064", "#176847");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawGnFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f4cf34", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#f4cf34", "#a98218");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#249064", "#176847");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawGpFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.gp);
+    }
+    function drawGqFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.32, 0.5, flagBox),
+                mapFlagY(0.32, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#2c6f9b",
+            strokeWidth: 1.2,
+            fill: "#4f9fd3",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawShieldBadge(flagBox, 0.5, 0.5, "#fbfdfa", "#249064");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawGrFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        for(let row = 0; row < 9; row += 1){
+            const fill = row % 2 === 0 ? "#2f78bd" : "#fbfdfa";
+            const stroke = row % 2 === 0 ? "#20588e" : "#c7d1cc";
+            drawFlagBand(flagBox, 0, row / 9, 1, (row + 1) / 9, fill, stroke);
+        }
+        drawFlagBand(flagBox, 0, 0, 0.38, 5 / 9, "#2f78bd", "#20588e");
+        drawFlagBand(flagBox, 0.145, 0, 0.235, 5 / 9, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 9, 0.38, 3 / 9, "#fbfdfa", "#c7d1cc");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3d6e98");
+        drawFlagBorder(flagBox);
+    }
+    function drawGsFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.gs);
+    }
+    function drawGtFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#75a9d8", "#477aa5");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#75a9d8", "#477aa5");
+        drawShieldBadge(flagBox, 0.5, 0.5, "#f0c83a", "#249064");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#477aa5");
+        drawFlagBorder(flagBox);
+    }
+    function drawGuFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.gu);
+    }
+    function drawGwFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 0.33, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.33, 0, 1, 0.5, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0.33, 0.5, 1, 1, "#249064", "#176847");
+        drawSketchStarWithColors(mapFlagX(0.165, 0.5, flagBox), mapFlagY(0.165, 0.5, flagBox), 26, -18, {
+            stroke: "#111615",
+            fill: "#262d2b",
+            hatch: "rgba(38, 45, 43, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawGyFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#249064", "#176847");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.9, 0.5, flagBox),
+                mapFlagY(0.9, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#c7d1cc",
+            strokeWidth: 7,
+            fill: "#f0c83a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0.05, flagBox),
+                mapFlagY(0, 0.05, flagBox)
+            ],
+            [
+                mapFlagX(0.42, 0.5, flagBox),
+                mapFlagY(0.42, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 0.95, flagBox),
+                mapFlagY(0, 0.95, flagBox)
+            ]
+        ], {
+            stroke: "#111615",
+            strokeWidth: 5,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3f755c");
+        drawFlagBorder(flagBox);
+    }
+    function drawHkFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const cx = mapFlagX(0.5, 0.5, flagBox);
+        const cy = mapFlagY(0.5, 0.5, flagBox);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        for(let i = 0; i < 5; i += 1){
+            const angle = -Math.PI / 2 + 2 * Math.PI * i / 5;
+            const petalX = cx + 42 * Math.cos(angle);
+            const petalY = cy + 42 * Math.sin(angle);
+            roughCanvas.circle(petalX, petalY, 42, {
+                stroke: "#c7d1cc",
+                strokeWidth: 1,
+                fill: "#fbfdfa",
+                fillStyle: "solid",
+                roughness: 2.4,
+                bowing: 1.2
+            });
+        }
+        roughCanvas.circle(cx, cy, 22, {
+            stroke: "#8f2633",
+            strokeWidth: 1,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.1
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawHmFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.hm);
+    }
+    function drawHnFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#4f9fd3", "#2c6f9b");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#4f9fd3", "#2c6f9b");
+        [
+            [
+                0.42,
+                0.43
+            ],
+            [
+                0.58,
+                0.43
+            ],
+            [
+                0.5,
+                0.5
+            ],
+            [
+                0.42,
+                0.57
+            ],
+            [
+                0.58,
+                0.57
+            ]
+        ].forEach(([u, v], index)=>{
+            drawSketchStarWithColors(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), 9, -18 + 4 * index, {
+                stroke: "#2c6f9b",
+                fill: "#4f9fd3",
+                hatch: "#75b6de"
+            });
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#2c6f9b");
+        drawFlagBorder(flagBox);
+    }
+    function drawHrFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#253f78", "#1b2c56");
+        drawShieldBadge(flagBox, 0.5, 0.5, "#fbfdfa", "#c83c4a");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawHtFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.38, 0.38, 0.62, 0.62, "#fbfdfa", "#c7d1cc");
+        drawShieldBadge(flagBox, 0.5, 0.5, "#f0c83a", "#249064");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawHuFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#249064", "#176847");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#71634e");
+        drawFlagBorder(flagBox);
+    }
+    function drawIdFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#fbfdfa", "#c7d1cc");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawIeFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#249064", "#176847");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#ee8b2c", "#a9601d");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#75744a");
+        drawFlagBorder(flagBox);
+    }
+    function drawIlFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.16, 1, 0.26, "#2f4f9d", "#203a74");
+        drawFlagBand(flagBox, 0, 0.74, 1, 0.84, "#2f4f9d", "#203a74");
+        drawSketchStarWithColors(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 46, -30, {
+            stroke: "#203a74",
+            fill: "rgba(47, 79, 157, 0.08)",
+            hatch: "#2f4f9d"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#4d5d86");
+        drawFlagBorder(flagBox);
+    }
+    function drawImFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.im);
+    }
+    function drawInFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const cx = mapFlagX(0.5, 0.5, flagBox);
+        const cy = mapFlagY(0.5, 0.5, flagBox);
+        const wheelRadius = 34;
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#ee8b2c", "#a9601d");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#249064", "#176847");
+        roughCanvas.circle(cx, cy, 2 * wheelRadius, {
+            stroke: "#203a74",
+            strokeWidth: 1.4,
+            fill: "transparent",
+            roughness: 2.1,
+            bowing: 1.1
+        });
+        for(let i = 0; i < 12; i += 1){
+            const angle = 2 * Math.PI * i / 12;
+            roughCanvas.line(cx, cy, cx + Math.cos(angle) * wheelRadius, cy + Math.sin(angle) * wheelRadius, {
+                stroke: "#203a74",
+                strokeWidth: 0.65,
+                roughness: 2,
+                bowing: 1.3
+            });
+        }
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#756b4d");
+        drawFlagBorder(flagBox);
+    }
+    function drawIoFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.io);
+    }
+    function drawIqFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#262d2b", "#111615");
+        roughCanvas.line(mapFlagX(0.38, 0.5, flagBox), mapFlagY(0.38, 0.5, flagBox), mapFlagX(0.62, 0.5, flagBox), mapFlagY(0.62, 0.5, flagBox), {
+            stroke: "#249064",
+            strokeWidth: 5,
+            roughness: 2.2,
+            bowing: 1.5
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawIrFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.47, 0.39, 0.53, 0.61, "#c83c4a", "#8f2633");
+        drawSketchStarWithColors(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 20, -18, {
+            stroke: "#8f2633",
+            fill: "rgba(200, 60, 74, 0.18)",
+            hatch: "#c83c4a"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawIsFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#2f4f9d", "#203a74");
+        drawFlagBand(flagBox, 0.28, 0, 0.46, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.36, 1, 0.58, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.33, 0, 0.41, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.43, 1, 0.51, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#4f4e86");
+        drawFlagBorder(flagBox);
+    }
+    function drawJeFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.je);
+    }
+    function drawJmFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#249064", "#176847");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.5, 0.5, flagBox),
+                mapFlagY(0.5, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#111615",
+            strokeWidth: 1,
+            fill: "#262d2b",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.polygon([
+            [
+                mapFlagX(1, 0, flagBox),
+                mapFlagY(1, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.5, 0.5, flagBox),
+                mapFlagY(0.5, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(1, 1, flagBox),
+                mapFlagY(1, 1, flagBox)
+            ]
+        ], {
+            stroke: "#111615",
+            strokeWidth: 1,
+            fill: "#262d2b",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawCantonLine(flagBox, 0, 0, 1, 1, "#f0c83a", 26);
+        drawCantonLine(flagBox, 1, 0, 0, 1, "#f0c83a", 26);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3f755c");
+        drawFlagBorder(flagBox);
+    }
+    function drawJoFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#262d2b", "#111615");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#249064", "#176847");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.44, 0.5, flagBox),
+                mapFlagY(0.44, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#8f2633",
+            strokeWidth: 1.2,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawSketchStarWithColors(mapFlagX(0.18, 0.5, flagBox), mapFlagY(0.18, 0.5, flagBox), 16, -18, {
+            stroke: "#c7d1cc",
+            fill: "#fbfdfa",
+            hatch: "rgba(251, 253, 250, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawKeFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.3, "#262d2b", "#111615");
+        drawFlagBand(flagBox, 0, 0.34, 1, 0.66, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.7, 1, 1, "#249064", "#176847");
+        roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 76, {
+            stroke: "#111615",
+            strokeWidth: 1.3,
+            fill: "#b64f36",
+            fillStyle: "hachure",
+            hachureGap: 8,
+            fillWeight: 0.55,
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        roughCanvas.line(mapFlagX(0.42, 0.25, flagBox), mapFlagY(0.42, 0.25, flagBox), mapFlagX(0.58, 0.75, flagBox), mapFlagY(0.58, 0.75, flagBox), {
+            stroke: "#fbfdfa",
+            strokeWidth: 3,
+            roughness: 2.2,
+            bowing: 1.5
+        });
+        roughCanvas.line(mapFlagX(0.58, 0.25, flagBox), mapFlagY(0.58, 0.25, flagBox), mapFlagX(0.42, 0.75, flagBox), mapFlagY(0.42, 0.75, flagBox), {
+            stroke: "#fbfdfa",
+            strokeWidth: 3,
+            roughness: 2.2,
+            bowing: 1.5
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawKgFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const cx = mapFlagX(0.5, 0.5, flagBox);
+        const cy = mapFlagY(0.5, 0.5, flagBox);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        roughCanvas.circle(cx, cy, 90, {
+            stroke: "#b68b12",
+            strokeWidth: 1.2,
+            fill: "#ffd84c",
+            fillStyle: "hachure",
+            hachureGap: 9,
+            fillWeight: 0.7,
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        for(let i = 0; i < 8; i += 1){
+            const angle = 2 * Math.PI * i / 8;
+            roughCanvas.line(cx, cy, cx + 68 * Math.cos(angle), cy + 68 * Math.sin(angle), {
+                stroke: "#c83c4a",
+                strokeWidth: 1,
+                roughness: 2,
+                bowing: 1.3
+            });
+        }
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawKhFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0, 1, 0.25, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0.25, 1, 0.75, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.75, 1, 1, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0.38, 0.48, 0.62, 0.66, "#fbfdfa", "#c7d1cc");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.4, 0.48, flagBox),
+                mapFlagY(0.4, 0.48, flagBox)
+            ],
+            [
+                mapFlagX(0.5, 0.34, flagBox),
+                mapFlagY(0.5, 0.34, flagBox)
+            ],
+            [
+                mapFlagX(0.6, 0.48, flagBox),
+                mapFlagY(0.6, 0.48, flagBox)
+            ]
+        ], {
+            stroke: "#c7d1cc",
+            strokeWidth: 1,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawKiFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ki);
+    }
+    function drawKmFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.25, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0.25, 1, 0.5, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.5, 1, 0.75, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.75, 1, 1, "#253f78", "#1b2c56");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.42, 0.5, flagBox),
+                mapFlagY(0.42, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#176847",
+            strokeWidth: 1.2,
+            fill: "#249064",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.17, 0.5, flagBox), mapFlagY(0.17, 0.5, flagBox), 54, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.2, 0.5, flagBox), mapFlagY(0.2, 0.5, flagBox), 48, {
+            stroke: "#176847",
+            strokeWidth: 1,
+            fill: "#249064",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawKnFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#249064", "#176847");
+        roughCanvas.polygon([
+            [
+                mapFlagX(1, 0, flagBox),
+                mapFlagY(1, 0, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ],
+            [
+                mapFlagX(1, 1, flagBox),
+                mapFlagY(1, 1, flagBox)
+            ]
+        ], {
+            stroke: "#8f2633",
+            strokeWidth: 1,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawCantonLine(flagBox, 0, 1, 1, 0, "#f0c83a", 46);
+        drawCantonLine(flagBox, 0, 1, 1, 0, "#262d2b", 28);
+        [
+            [
+                0.38,
+                0.58
+            ],
+            [
+                0.62,
+                0.42
+            ]
+        ].forEach(([u, v])=>drawSketchStarWithColors(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), 18, -18, {
+                stroke: "#c7d1cc",
+                fill: "#fbfdfa",
+                hatch: "rgba(251, 253, 250, 0.7)"
+            }));
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3f755c");
+        drawFlagBorder(flagBox);
+    }
+    function drawKpFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0, 1, 0.18, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0.18, 1, 0.24, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.76, 1, 0.82, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.82, 1, 1, "#253f78", "#1b2c56");
+        roughCanvas.circle(mapFlagX(0.32, 0.5, flagBox), mapFlagY(0.32, 0.5, flagBox), 82, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawSketchStarWithColors(mapFlagX(0.32, 0.5, flagBox), mapFlagY(0.32, 0.5, flagBox), 30, -18, {
+            stroke: "#8f2633",
+            fill: "#c83c4a",
+            hatch: "#d8585f"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawKrFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.kr);
+    }
+    function drawKwFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.28, 1 / 3, flagBox),
+                mapFlagY(0.28, 1 / 3, flagBox)
+            ],
+            [
+                mapFlagX(0.28, 2 / 3, flagBox),
+                mapFlagY(0.28, 2 / 3, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#111615",
+            strokeWidth: 1.2,
+            fill: "#262d2b",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawKyFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ky);
+    }
+    function drawKzFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#4f9fd3", "#2c6f9b");
+        drawFlagBand(flagBox, 0.08, 0.08, 0.12, 0.92, "#f0c83a", "#a98218");
+        roughCanvas.circle(mapFlagX(0.55, 0.42, flagBox), mapFlagY(0.55, 0.42, flagBox), 76, {
+            stroke: "#b68b12",
+            strokeWidth: 1,
+            fill: "#ffd84c",
+            fillStyle: "hachure",
+            hachureGap: 8,
+            fillWeight: 0.6,
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.line(mapFlagX(0.42, 0.62, flagBox), mapFlagY(0.42, 0.62, flagBox), mapFlagX(0.68, 0.62, flagBox), mapFlagY(0.68, 0.62, flagBox), {
+            stroke: "#a98218",
+            strokeWidth: 5,
+            roughness: 2.2,
+            bowing: 1.6
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#2c6f9b");
+        drawFlagBorder(flagBox);
+    }
+    function drawLaFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#273f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0, 1, 0.25, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.25, 1, 0.75, "#273f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0.75, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 0.34 * flagBox.height, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#4f4e86");
+        drawFlagBorder(flagBox);
+    }
+    function drawLbFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.25, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.75, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.5, 0.34, flagBox),
+                mapFlagY(0.5, 0.34, flagBox)
+            ],
+            [
+                mapFlagX(0.6, 0.6, flagBox),
+                mapFlagY(0.6, 0.6, flagBox)
+            ],
+            [
+                mapFlagX(0.53, 0.6, flagBox),
+                mapFlagY(0.53, 0.6, flagBox)
+            ],
+            [
+                mapFlagX(0.53, 0.68, flagBox),
+                mapFlagY(0.53, 0.68, flagBox)
+            ],
+            [
+                mapFlagX(0.47, 0.68, flagBox),
+                mapFlagY(0.47, 0.68, flagBox)
+            ],
+            [
+                mapFlagX(0.47, 0.6, flagBox),
+                mapFlagY(0.47, 0.6, flagBox)
+            ],
+            [
+                mapFlagX(0.4, 0.6, flagBox),
+                mapFlagY(0.4, 0.6, flagBox)
+            ]
+        ], {
+            stroke: "#176847",
+            strokeWidth: 1.2,
+            fill: "#249064",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawLcFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#4f9fd3", "#2c6f9b");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.5, 0.2, flagBox),
+                mapFlagY(0.5, 0.2, flagBox)
+            ],
+            [
+                mapFlagX(0.73, 0.78, flagBox),
+                mapFlagY(0.73, 0.78, flagBox)
+            ],
+            [
+                mapFlagX(0.27, 0.78, flagBox),
+                mapFlagY(0.27, 0.78, flagBox)
+            ]
+        ], {
+            stroke: "#111615",
+            strokeWidth: 1.2,
+            fill: "#262d2b",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.5, 0.29, flagBox),
+                mapFlagY(0.5, 0.29, flagBox)
+            ],
+            [
+                mapFlagX(0.64, 0.74, flagBox),
+                mapFlagY(0.64, 0.74, flagBox)
+            ],
+            [
+                mapFlagX(0.36, 0.74, flagBox),
+                mapFlagY(0.36, 0.74, flagBox)
+            ]
+        ], {
+            stroke: "#a98218",
+            strokeWidth: 1.1,
+            fill: "#f0c83a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#2c6f9b");
+        drawFlagBorder(flagBox);
+    }
+    function drawLiFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.li);
+    }
+    function drawLkFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.lk);
+    }
+    function drawLrFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        for(let row = 0; row < 11; row += 1)if (row % 2 === 0) drawFlagBand(flagBox, 0, row / 11, 1, (row + 1) / 11, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0, 0.36, 5 / 11, "#253f78", "#1b2c56");
+        drawSketchStarWithColors(mapFlagX(0.18, 0.23, flagBox), mapFlagY(0.18, 0.23, flagBox), 18, -18, {
+            stroke: "#c7d1cc",
+            fill: "#fbfdfa",
+            hatch: "rgba(251, 253, 250, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawLsFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.3, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0.3, 1, 0.7, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.7, 1, 1, "#249064", "#176847");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0.5, 0.42, flagBox),
+                mapFlagY(0.5, 0.42, flagBox)
+            ],
+            [
+                mapFlagX(0.6, 0.62, flagBox),
+                mapFlagY(0.6, 0.62, flagBox)
+            ],
+            [
+                mapFlagX(0.4, 0.62, flagBox),
+                mapFlagY(0.4, 0.62, flagBox)
+            ]
+        ], {
+            stroke: "#111615",
+            strokeWidth: 1.2,
+            fill: "#262d2b",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        roughCanvas.line(mapFlagX(0.38, 0.63, flagBox), mapFlagY(0.38, 0.63, flagBox), mapFlagX(0.62, 0.63, flagBox), mapFlagY(0.62, 0.63, flagBox), {
+            stroke: "#262d2b",
+            strokeWidth: 4,
+            roughness: 2.2,
+            bowing: 1.5
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#4d5d86");
+        drawFlagBorder(flagBox);
+    }
+    function drawLtFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawLuFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#56a9d8", "#35789d");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6d7082");
+        drawFlagBorder(flagBox);
+    }
+    function drawLvFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#8b2934", "#63202a");
+        drawFlagBand(flagBox, 0, 0, 1, 0.4, "#8b2934", "#63202a");
+        drawFlagBand(flagBox, 0, 0.4, 1, 0.6, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.6, 1, 1, "#8b2934", "#63202a");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#63202a");
+        drawFlagBorder(flagBox);
+    }
+    function drawLyFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#262d2b", "#111615");
+        drawFlagBand(flagBox, 0, 0, 1, 0.25, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.25, 1, 0.75, "#262d2b", "#111615");
+        drawFlagBand(flagBox, 0, 0.75, 1, 1, "#249064", "#176847");
+        roughCanvas.circle(mapFlagX(0.48, 0.5, flagBox), mapFlagY(0.48, 0.5, flagBox), 0.25 * flagBox.height, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.1,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.53, 0.5, flagBox), mapFlagY(0.53, 0.5, flagBox), 0.22 * flagBox.height, {
+            stroke: "#111615",
+            strokeWidth: 1,
+            fill: "#262d2b",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawSketchStarWithColors(mapFlagX(0.6, 0.5, flagBox), mapFlagY(0.6, 0.5, flagBox), 18, -18, {
+            stroke: "#c7d1cc",
+            fill: "#fbfdfa",
+            hatch: "rgba(251, 253, 250, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#111615");
+        drawFlagBorder(flagBox);
+    }
+    function drawMaFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawSketchStarWithColors(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 54, -18, {
+            stroke: "#176847",
+            fill: "rgba(36, 144, 100, 0.16)",
+            hatch: "#249064"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawMcFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#fbfdfa", "#c7d1cc");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawMdFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.md);
+    }
+    function drawMeFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.me);
+    }
+    function drawMfFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.mf);
+    }
+    function drawMgFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 0.35, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.35, 0, 1, 0.5, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.35, 0.5, 1, 1, "#249064", "#176847");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#71634e");
+        drawFlagBorder(flagBox);
+    }
+    function drawMhFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.mh);
+    }
+    function drawMkFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const cx = mapFlagX(0.5, 0.5, flagBox);
+        const cy = mapFlagY(0.5, 0.5, flagBox);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        for(let i = 0; i < 8; i += 1){
+            const angle = 2 * Math.PI * i / 8;
+            roughCanvas.line(cx, cy, cx + Math.cos(angle) * flagBox.width * 0.55, cy + Math.sin(angle) * flagBox.height * 0.55, {
+                stroke: "#f0c83a",
+                strokeWidth: 13,
+                roughness: 2.3,
+                bowing: 1.5
+            });
+        }
+        roughCanvas.circle(cx, cy, 76, {
+            stroke: "#a98218",
+            strokeWidth: 1.2,
+            fill: "#ffd84c",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawMlFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#249064", "#176847");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawMmFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#c83c4a", "#8f2633");
+        drawSketchStarWithColors(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 58, -18, {
+            stroke: "#c7d1cc",
+            fill: "#fbfdfa",
+            hatch: "rgba(251, 253, 250, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawMnFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.mn);
+    }
+    function drawMoFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.mo);
+    }
+    function drawMpFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.mp);
+    }
+    function drawMqFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.mq);
+    }
+    function drawMrFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#176847", "#0f4f37");
+        drawFlagBand(flagBox, 0, 0, 1, 0.18, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.82, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.circle(mapFlagX(0.5, 0.47, flagBox), mapFlagY(0.5, 0.47, flagBox), 0.32 * flagBox.height, {
+            stroke: "#b68b12",
+            strokeWidth: 1.2,
+            fill: "transparent",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.5, 0.41, flagBox), mapFlagY(0.5, 0.41, flagBox), 0.3 * flagBox.height, {
+            stroke: "#0f4f37",
+            strokeWidth: 1,
+            fill: "#176847",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawSketchStar(mapFlagX(0.5, 0.38, flagBox), mapFlagY(0.5, 0.38, flagBox), 25, -18);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#0f4f37");
+        drawFlagBorder(flagBox);
+    }
+    function drawMsFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ms);
+    }
+    function drawMtFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.mt);
+    }
+    function drawMuFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 0, 1, 0.25, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.25, 1, 0.5, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0.5, 1, 0.75, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0.75, 1, 1, "#249064", "#176847");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#705b4a");
+        drawFlagBorder(flagBox);
+    }
+    function drawMvFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.18, 0.22, 0.82, 0.78, "#176847", "#0f4f37");
+        roughCanvas.circle(mapFlagX(0.53, 0.5, flagBox), mapFlagY(0.53, 0.5, flagBox), 0.27 * flagBox.height, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.58, 0.5, flagBox), mapFlagY(0.58, 0.5, flagBox), 0.24 * flagBox.height, {
+            stroke: "#0f4f37",
+            strokeWidth: 1,
+            fill: "#176847",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawMwFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#262d2b", "#111615");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#249064", "#176847");
+        roughCanvas.circle(mapFlagX(0.5, 0.19, flagBox), mapFlagY(0.5, 0.19, flagBox), 56, {
+            stroke: "#8f2633",
+            strokeWidth: 1,
+            fill: "#c83c4a",
+            fillStyle: "hachure",
+            hachureGap: 8,
+            fillWeight: 0.7,
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawMxFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.mx);
+    }
+    function drawMyFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        for(let row = 0; row < 14; row += 1)if (row % 2 === 0) drawFlagBand(flagBox, 0, row / 14, 1, (row + 1) / 14, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0, 0.48, 0.55, "#253f78", "#1b2c56");
+        roughCanvas.circle(mapFlagX(0.22, 0.28, flagBox), mapFlagY(0.22, 0.28, flagBox), 54, {
+            stroke: "#b68b12",
+            strokeWidth: 1,
+            fill: "#ffd84c",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.26, 0.28, flagBox), mapFlagY(0.26, 0.28, flagBox), 48, {
+            stroke: "#1b2c56",
+            strokeWidth: 1,
+            fill: "#253f78",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawSketchStar(mapFlagX(0.34, 0.28, flagBox), mapFlagY(0.34, 0.28, flagBox), 20, -18);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawMzFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.3, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 0.35, 1, 0.65, "#262d2b", "#111615");
+        drawFlagBand(flagBox, 0, 0.7, 1, 1, "#f0c83a", "#a98218");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.42, 0.5, flagBox),
+                mapFlagY(0.42, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#8f2633",
+            strokeWidth: 1.2,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawSketchStar(mapFlagX(0.16, 0.5, flagBox), mapFlagY(0.16, 0.5, flagBox), 22, -18);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawNaFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#253f78", "#1b2c56");
+        roughCanvas.polygon([
+            [
+                mapFlagX(1, 0, flagBox),
+                mapFlagY(1, 0, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ],
+            [
+                mapFlagX(1, 1, flagBox),
+                mapFlagY(1, 1, flagBox)
+            ]
+        ], {
+            stroke: "#176847",
+            strokeWidth: 1,
+            fill: "#249064",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawCantonLine(flagBox, 0, 1, 1, 0, "#fbfdfa", 38);
+        drawCantonLine(flagBox, 0, 1, 1, 0, "#c83c4a", 22);
+        roughCanvas.circle(mapFlagX(0.2, 0.22, flagBox), mapFlagY(0.2, 0.22, flagBox), 48, {
+            stroke: "#b68b12",
+            strokeWidth: 1,
+            fill: "#ffd84c",
+            fillStyle: "hachure",
+            hachureGap: 7,
+            fillWeight: 0.7,
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawNcFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.nc);
+    }
+    function drawNeFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#ee8b2c", "#a9601d");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#249064", "#176847");
+        roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 42, {
+            stroke: "#a9601d",
+            strokeWidth: 1,
+            fill: "#ee8b2c",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#756b4d");
+        drawFlagBorder(flagBox);
+    }
+    function drawNfFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.nf);
+    }
+    function drawNgFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#249064", "#176847");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#249064", "#176847");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3f755c");
+        drawFlagBorder(flagBox);
+    }
+    function drawNiFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ni);
+    }
+    function drawNlFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#b63842", "#7d2530");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#2f4f9d", "#203a74");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#634b67");
+        drawFlagBorder(flagBox);
+    }
+    function drawNoFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.28, 0, 0.46, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.36, 1, 0.58, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.33, 0, 0.41, 1, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0.43, 1, 0.51, "#253f78", "#1b2c56");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawNpFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.np);
+    }
+    function drawNrFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.nr);
+    }
+    function drawNuFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.nu);
+    }
+    function drawNzFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.nz);
+    }
+    function drawOmFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 0.25, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.25, 0, 1, 1 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.25, 1 / 3, 1, 2 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0.25, 2 / 3, 1, 1, "#249064", "#176847");
+        drawShieldBadge(flagBox, 0.125, 0.2, "#fbfdfa", "#c7d1cc");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawPaFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 0.5, 0.5, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0.5, 0, 1, 0.5, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.5, 0.5, 1, "#2f4f9d", "#203a74");
+        drawFlagBand(flagBox, 0.5, 0.5, 1, 1, "#fbfdfa", "#c7d1cc");
+        drawSketchStarWithColors(mapFlagX(0.25, 0.25, flagBox), mapFlagY(0.25, 0.25, flagBox), 22, -18, {
+            stroke: "#203a74",
+            fill: "#2f4f9d",
+            hatch: "#4770bd"
+        });
+        drawSketchStarWithColors(mapFlagX(0.75, 0.75, flagBox), mapFlagY(0.75, 0.75, flagBox), 22, -18, {
+            stroke: "#8f2633",
+            fill: "#c83c4a",
+            hatch: "#d8585f"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawPeFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#c83c4a", "#8f2633");
+        drawShieldBadge(flagBox, 0.5, 0.5, "#f0c83a", "#249064");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawPfFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.pf);
+    }
+    function drawPgFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.pg);
+    }
+    function drawPhFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#c83c4a", "#8f2633");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.42, 0.5, flagBox),
+                mapFlagY(0.42, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.17, 0.5, flagBox), mapFlagY(0.17, 0.5, flagBox), 34, {
+            stroke: "#b68b12",
+            strokeWidth: 1,
+            fill: "#ffd84c",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawPkFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#176847", "#0f4f37");
+        drawFlagBand(flagBox, 0, 0, 0.25, 1, "#fbfdfa", "#c7d1cc");
+        roughCanvas.circle(mapFlagX(0.58, 0.47, flagBox), mapFlagY(0.58, 0.47, flagBox), 0.35 * flagBox.height, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.64, 0.45, flagBox), mapFlagY(0.64, 0.45, flagBox), 0.31 * flagBox.height, {
+            stroke: "#0f4f37",
+            strokeWidth: 1,
+            fill: "#176847",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawSketchStarWithColors(mapFlagX(0.68, 0.34, flagBox), mapFlagY(0.68, 0.34, flagBox), 24, -18, {
+            stroke: "#c7d1cc",
+            fill: "#fbfdfa",
+            hatch: "rgba(251, 253, 250, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#0f4f37");
+        drawFlagBorder(flagBox);
+    }
+    function drawPlFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawPmFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.pm);
+    }
+    function drawPnFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.pn);
+    }
+    function drawPrFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.pr);
+    }
+    function drawPsFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#262d2b", "#111615");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#249064", "#176847");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.38, 0.5, flagBox),
+                mapFlagY(0.38, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#8f2633",
+            strokeWidth: 1.2,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawPtFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.pt);
+    }
+    function drawPwFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.pw);
+    }
+    function drawPyFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.py);
+    }
+    function drawQaFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const teeth = 9;
+        const zigzag = [
+            [
+                mapFlagX(0.25, 0, flagBox),
+                mapFlagY(0.25, 0, flagBox)
+            ]
+        ];
+        for(let i = 0; i < teeth; i += 1){
+            zigzag.push([
+                mapFlagX(0.36, (i + 0.5) / teeth, flagBox),
+                mapFlagY(0.36, (i + 0.5) / teeth, flagBox)
+            ]);
+            zigzag.push([
+                mapFlagX(0.25, (i + 1) / teeth, flagBox),
+                mapFlagY(0.25, (i + 1) / teeth, flagBox)
+            ]);
+        }
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#7b314b", "#572439");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            ...zigzag,
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#572439");
+        drawFlagBorder(flagBox);
+    }
+    function drawReFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.re);
+    }
+    function drawRoFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#2f4f9d", "#203a74");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#705c4d");
+        drawFlagBorder(flagBox);
+    }
+    function drawRsFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.rs);
+    }
+    function drawRuFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#2f4f9d", "#203a74");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6b4e74");
+        drawFlagBorder(flagBox);
+    }
+    function drawRwFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.rw);
+    }
+    function drawSaFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.sa);
+    }
+    function drawSbFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.sb);
+    }
+    function drawScFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.sc);
+    }
+    function drawSdFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#262d2b", "#111615");
+        roughCanvas.polygon([
+            [
+                mapFlagX(0, 0, flagBox),
+                mapFlagY(0, 0, flagBox)
+            ],
+            [
+                mapFlagX(0.36, 0.5, flagBox),
+                mapFlagY(0.36, 0.5, flagBox)
+            ],
+            [
+                mapFlagX(0, 1, flagBox),
+                mapFlagY(0, 1, flagBox)
+            ]
+        ], {
+            stroke: "#176847",
+            strokeWidth: 1.2,
+            fill: "#249064",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawSeFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#2f78bd", "#20588e");
+        drawFlagBand(flagBox, 0.28, 0, 0.42, 1, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0.4, 1, 0.56, "#f0c83a", "#a98218");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3d6e98");
+        drawFlagBorder(flagBox);
+    }
+    function drawSgFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#fbfdfa", "#c7d1cc");
+        roughCanvas.circle(mapFlagX(0.22, 0.25, flagBox), mapFlagY(0.22, 0.25, flagBox), 0.24 * flagBox.height, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.26, 0.25, flagBox), mapFlagY(0.26, 0.25, flagBox), 0.2 * flagBox.height, {
+            stroke: "#8f2633",
+            strokeWidth: 1,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        [
+            [
+                0.34,
+                0.15
+            ],
+            [
+                0.39,
+                0.21
+            ],
+            [
+                0.38,
+                0.31
+            ],
+            [
+                0.3,
+                0.35
+            ],
+            [
+                0.28,
+                0.23
+            ]
+        ].forEach(([u, v], index)=>{
+            drawSketchStarWithColors(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), 8, -18 + 5 * index, {
+                stroke: "#c7d1cc",
+                fill: "#fbfdfa",
+                hatch: "rgba(251, 253, 250, 0.7)"
+            });
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawShFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.sh);
+    }
+    function drawSiFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.si);
+    }
+    function drawSjFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.sj);
+    }
+    function drawSkFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.sk);
+    }
+    function drawSlFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#249064", "#176847");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#4f9fd3", "#2c6f9b");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3f755c");
+        drawFlagBorder(flagBox);
+    }
+    function drawSmFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.sm);
+    }
+    function drawSnFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#249064", "#176847");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#c83c4a", "#8f2633");
+        drawSketchStarWithColors(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 30, -18, {
+            stroke: "#176847",
+            fill: "#249064",
+            hatch: "#38a975"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#70623c");
+        drawFlagBorder(flagBox);
+    }
+    function drawSoFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#4f9fd3", "#2c6f9b");
+        drawSketchStarWithColors(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 44, -18, {
+            stroke: "#c7d1cc",
+            fill: "#fbfdfa",
+            hatch: "rgba(251, 253, 250, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#2c6f9b");
+        drawFlagBorder(flagBox);
+    }
+    function drawSrFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.sr);
+    }
+    function drawSsFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ss);
+    }
+    function drawStFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.st);
+    }
+    function drawSvFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.sv);
+    }
+    function drawSxFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.sx);
+    }
+    function drawSyFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#262d2b", "#111615");
+        drawSketchStarWithColors(mapFlagX(0.42, 0.5, flagBox), mapFlagY(0.42, 0.5, flagBox), 20, -18, {
+            stroke: "#176847",
+            fill: "#249064",
+            hatch: "#38a975"
+        });
+        drawSketchStarWithColors(mapFlagX(0.58, 0.5, flagBox), mapFlagY(0.58, 0.5, flagBox), 20, -18, {
+            stroke: "#176847",
+            fill: "#249064",
+            hatch: "#38a975"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawSzFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.sz);
+    }
+    function drawTcFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.tc);
+    }
+    function drawTdFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#253f78", "#1b2c56");
+        drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#c83c4a", "#8f2633");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#705b4a");
+        drawFlagBorder(flagBox);
+    }
+    function drawTfFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.tf);
+    }
+    function drawTgFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.tg);
+    }
+    function drawTjFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.tj);
+    }
+    function drawTkFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.tk);
+    }
+    function drawTlFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.tl);
+    }
+    function drawTmFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.tm);
+    }
+    function drawTnFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        roughCanvas.circle(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 0.44 * flagBox.height, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.48, 0.5, flagBox), mapFlagY(0.48, 0.5, flagBox), 0.25 * flagBox.height, {
+            stroke: "#8f2633",
+            strokeWidth: 1.2,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.53, 0.5, flagBox), mapFlagY(0.53, 0.5, flagBox), 0.21 * flagBox.height, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawSketchStarWithColors(mapFlagX(0.58, 0.5, flagBox), mapFlagY(0.58, 0.5, flagBox), 20, -18, {
+            stroke: "#8f2633",
+            fill: "#c83c4a",
+            hatch: "#d8585f"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawToFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.to);
+    }
+    function drawTrFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        roughCanvas.circle(mapFlagX(0.42, 0.5, flagBox), mapFlagY(0.42, 0.5, flagBox), 0.36 * flagBox.height, {
+            stroke: "#c7d1cc",
+            strokeWidth: 1.2,
+            fill: "#fbfdfa",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        roughCanvas.circle(mapFlagX(0.47, 0.5, flagBox), mapFlagY(0.47, 0.5, flagBox), 0.29 * flagBox.height, {
+            stroke: "#8f2633",
+            strokeWidth: 1,
+            fill: "#c83c4a",
+            fillStyle: "solid",
+            roughness: 2.3,
+            bowing: 1.2
+        });
+        drawSketchStarWithColors(mapFlagX(0.59, 0.5, flagBox), mapFlagY(0.59, 0.5, flagBox), 26, -18, {
+            stroke: "#c7d1cc",
+            fill: "#fbfdfa",
+            hatch: "rgba(251, 253, 250, 0.7)"
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawTtFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.tt);
+    }
+    function drawTvFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.tv);
+    }
+    function drawTwFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.tw);
+    }
+    function drawTzFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.tz);
+    }
+    function drawUaFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#f0c83a", "#a98218");
+        drawFlagBand(flagBox, 0, 0, 1, 0.5, "#3d78bd", "#284f84");
+        drawFlagBand(flagBox, 0, 0.5, 1, 1, "#f0c83a", "#a98218");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#5d7653");
+        drawFlagBorder(flagBox);
+    }
+    function drawUgFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ug);
+    }
+    function drawUmFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.um);
+    }
+    function drawUyFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        for(let row = 1; row < 9; row += 2)drawFlagBand(flagBox, 0, row / 9, 1, (row + 1) / 9, "#2f78bd", "#20588e");
+        drawFlagBand(flagBox, 0, 0, 0.34, 5 / 9, "#fbfdfa", "#c7d1cc");
+        roughCanvas.circle(mapFlagX(0.17, 0.27, flagBox), mapFlagY(0.17, 0.27, flagBox), 40, {
+            stroke: "#b68b12",
+            strokeWidth: 1.2,
+            fill: "#ffd84c",
+            fillStyle: "hachure",
+            hachureGap: 7,
+            fillWeight: 0.8,
+            roughness: 2.2,
+            bowing: 1.2
+        });
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3d6e98");
+        drawFlagBorder(flagBox);
+    }
+    function drawUzFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.uz);
+    }
+    function drawVcFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.vc);
+    }
+    function drawVeFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ve);
+    }
+    function drawVgFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.vg);
+    }
+    function drawViFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.vi);
+    }
+    function drawVnFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#c83c4a", "#8f2633");
+        drawSketchStar(mapFlagX(0.5, 0.5, flagBox), mapFlagY(0.5, 0.5, flagBox), 54, -18);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8f2633");
+        drawFlagBorder(flagBox);
+    }
+    function drawVuFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.vu);
+    }
+    function drawWfFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.wf);
+    }
+    function drawWsFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.ws);
+    }
+    function drawXkFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.xk);
+    }
+    function drawYeFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 0, 1, 1 / 3, "#c83c4a", "#8f2633");
+        drawFlagBand(flagBox, 0, 1 / 3, 1, 2 / 3, "#fbfdfa", "#c7d1cc");
+        drawFlagBand(flagBox, 0, 2 / 3, 1, 1, "#262d2b", "#111615");
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f353c");
+        drawFlagBorder(flagBox);
+    }
+    function drawYtFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.yt);
+    }
+    function drawZaFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.za);
+    }
+    function drawZmFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.zm);
+    }
+    function drawZwFlag() {
+        drawSampledFlagTemplate(TEMPLATE_FLAGS.zw);
+    }
     function makeStandardFlagBox() {
         return {
             x: 118,
@@ -2310,33 +6022,75 @@
             }
         }
     }
-    function drawGenericFlag(flagEmoji) {
-        const flagBox = {
-            x: 118,
-            y: 174,
-            width: 486,
-            height: 342
-        };
-        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
-        const source = rasterizeFlagEmoji(flagEmoji, 520);
-        const segments = collectFlagSegments(source, flagBox);
-        const dominant = getDominantFlagColor(segments) || "#d94444";
-        const shadow = offsetPoints(flag, 8, 10);
-        roughCanvas.polygon(shadow, {
-            stroke: "transparent",
-            fill: PALETTE.shadow,
+    function drawShieldBadge(flagBox, u, v, fill, accent) {
+        const cx = mapFlagX(u, v, flagBox);
+        const cy = mapFlagY(u, v, flagBox);
+        const width = 0.13 * flagBox.width;
+        const height = 0.22 * flagBox.height;
+        roughCanvas.polygon([
+            [
+                cx - width / 2,
+                cy - height / 2
+            ],
+            [
+                cx + width / 2,
+                cy - height / 2
+            ],
+            [
+                cx + 0.42 * width,
+                cy + 0.16 * height
+            ],
+            [
+                cx,
+                cy + height / 2
+            ],
+            [
+                cx - 0.42 * width,
+                cy + 0.16 * height
+            ]
+        ], {
+            stroke: softenColor(accent, 0.75),
+            strokeWidth: 1.2,
+            fill,
             fillStyle: "solid",
             roughness: 2.2,
-            bowing: 1.2
+            bowing: 1.15
         });
-        roughCanvas.polygon(flag, {
-            stroke: "#b9c4c0",
-            strokeWidth: 2.4,
-            fill: "#fbfdfa",
-            fillStyle: "solid",
-            roughness: 2.4,
+        roughCanvas.line(cx - 0.32 * width, cy, cx + 0.32 * width, cy, {
+            stroke: accent,
+            strokeWidth: 1,
+            roughness: 2.1,
             bowing: 1.4
         });
+        roughCanvas.line(cx, cy - 0.36 * height, cx, cy + 0.28 * height, {
+            stroke: accent,
+            strokeWidth: 1,
+            roughness: 2.1,
+            bowing: 1.4
+        });
+    }
+    function drawSampledFlagTemplate(flagEmoji) {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const source = rasterizeFlagEmoji(flagEmoji, 460);
+        const segments = collectFlagSegments(source, flagBox, 18, 12);
+        const dominant = getDominantFlagColor(segments) || "#d94444";
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#b9c4c0");
+        drawTemplateBaseWash(flag, dominant);
+        drawTemplateFlagSegments(segments);
+        drawTemplateDetailMarks(source, flagBox, dominant);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, softenColor(dominant, 0.28));
+        drawFlagBorder(flagBox);
+    }
+    function drawGenericFlag(flagEmoji) {
+        drawSampledFlag(flagEmoji, {
+            detailLimit: 180,
+            hachureGap: 18,
+            textureWeight: 0.38
+        });
+    }
+    function drawTemplateBaseWash(flag, dominant) {
         roughCanvas.polygon(flag, {
             stroke: softenColor(dominant, 0.34),
             strokeWidth: 1.1,
@@ -2344,7 +6098,97 @@
             fillStyle: "hachure",
             hachureAngle: -10,
             hachureGap: 18,
-            fillWeight: 0.38,
+            fillWeight: 0.32,
+            roughness: 2.1,
+            bowing: 1.15
+        });
+    }
+    function drawTemplateFlagSegments(segments) {
+        segments.filter((segment)=>segment.area > 420).forEach((segment, index)=>{
+            roughCanvas.polygon(segment.outline, {
+                stroke: segment.isLightNeutral ? "rgba(38, 49, 45, 0.12)" : softenColor(segment.color, 0.4),
+                strokeWidth: segment.isLightNeutral ? 0.55 : 1.05,
+                fill: segment.color,
+                fillStyle: "solid",
+                roughness: 2.35,
+                bowing: 1.32
+            });
+            if (!segment.isLightNeutral && (segment.area > 2600 || index % 3 === 0)) roughCanvas.polygon(segment.outline, {
+                stroke: "rgba(38, 49, 45, 0.09)",
+                strokeWidth: 0.45,
+                fill: segment.color,
+                fillStyle: "hachure",
+                hachureAngle: -12,
+                hachureGap: 15,
+                fillWeight: 0.42,
+                roughness: 1.95
+            });
+        });
+    }
+    function drawTemplateDetailMarks(source, flagBox, dominant) {
+        const { data, bounds } = source;
+        const pixels = data.data;
+        const contentWidth = Math.max(1, bounds.maxX - bounds.minX);
+        const contentHeight = Math.max(1, bounds.maxY - bounds.minY);
+        const step = Math.max(14, Math.floor(data.width / 30));
+        let detailCount = 0;
+        for(let y = bounds.minY + step; y < bounds.maxY - step; y += step)for(let x = bounds.minX + step; x < bounds.maxX - step; x += step){
+            const index = (y * data.width + x) * 4;
+            const alpha = pixels[index + 3];
+            if (alpha < 64 || !isFlagDetailPixel(pixels, data.width, data.height, x, y, step)) continue;
+            const metrics = normalizeFlagMetrics(getColorMetrics(pixels, index));
+            const isLightNeutral = metrics.brightness > 232 && metrics.saturation < 30;
+            if (isLightNeutral && detailCount % 4 !== 0) continue;
+            const u = (x - bounds.minX) / contentWidth;
+            const v = (y - bounds.minY) / contentHeight;
+            const px = mapFlagX(u, v, flagBox) + jitter(1.5);
+            const py = mapFlagY(u, v, flagBox) + jitter(1.5);
+            const color = "rgba(" + metrics.red + ", " + metrics.green + ", " + metrics.blue + ", " + (isLightNeutral ? 0.42 : 0.76) + ")";
+            if (!isLightNeutral && metrics.brightness > 150 && metrics.saturation > 42 && detailCount % 5 === 0) drawSketchStarWithColors(px, py, randomBetween(6, 9), -18 + 3 * detailCount, {
+                stroke: softenColor(color, 0.45),
+                fill: color,
+                hatch: softenColor(color, 0.24)
+            });
+            else roughCanvas.circle(px, py, randomBetween(5.2, 9.4), {
+                stroke: isLightNeutral ? "rgba(38, 49, 45, 0.2)" : softenColor(color, 0.46),
+                strokeWidth: isLightNeutral ? 0.55 : 0.9,
+                fill: color,
+                fillStyle: "solid",
+                roughness: 2.2,
+                bowing: 1.15
+            });
+            if (!isLightNeutral && detailCount % 6 === 0) roughCanvas.line(px + jitter(5), py + jitter(4), px + jitter(16), py + jitter(10), {
+                stroke: "rgba(38, 49, 45, 0.2)",
+                strokeWidth: randomBetween(0.45, 0.75),
+                roughness: 2.4,
+                bowing: 1.7
+            });
+            detailCount += 1;
+            if (detailCount > 38) return;
+        }
+        if (detailCount < 4) roughCanvas.line(flagBox.x + 0.18 * flagBox.width, flagBox.y + 0.5 * flagBox.height + jitter(7), flagBox.x + 0.82 * flagBox.width, flagBox.y + 0.5 * flagBox.height + jitter(7), {
+            stroke: softenColor(dominant, 0.2),
+            strokeWidth: 0.65,
+            roughness: 2.4,
+            bowing: 1.8
+        });
+    }
+    function drawSampledFlag(flagEmoji, options) {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const source = rasterizeFlagEmoji(flagEmoji, 560);
+        const segments = collectFlagSegments(source, flagBox);
+        const dominant = getDominantFlagColor(segments) || "#d94444";
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#b9c4c0");
+        roughCanvas.polygon(flag, {
+            stroke: softenColor(dominant, 0.34),
+            strokeWidth: 1.1,
+            fill: dominant,
+            fillStyle: "hachure",
+            hachureAngle: -10,
+            hachureGap: options.hachureGap,
+            fillWeight: options.textureWeight,
             roughness: 2.1,
             bowing: 1.15
         });
@@ -2368,17 +6212,11 @@
                 roughness: 1.8
             });
         });
-        drawFlagImageDetails(source, flagBox);
+        drawFlagImageDetails(source, flagBox, options.detailLimit);
         drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, softenColor(dominant, 0.28));
-        roughCanvas.polygon(makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height), {
-            stroke: "#28332e",
-            strokeWidth: 2,
-            fill: "transparent",
-            roughness: 2.8,
-            bowing: 1.6
-        });
+        drawFlagBorder(flagBox);
     }
-    function drawFlagImageDetails(source, flagBox) {
+    function drawFlagImageDetails(source, flagBox, maxDetails = 180) {
         const { data, bounds } = source;
         const pixels = data.data;
         const contentWidth = Math.max(1, bounds.maxX - bounds.minX);
@@ -2414,7 +6252,7 @@
                 bowing: 1.6
             });
             detailCount += 1;
-            if (detailCount > 180) return;
+            if (detailCount > maxDetails) return;
         }
     }
     function isFlagDetailPixel(pixels, width, height, x, y, distance) {
@@ -2555,12 +6393,10 @@
             bounds: findPixelBounds(imageData)
         };
     }
-    function collectFlagSegments(source, flagBox) {
+    function collectFlagSegments(source, flagBox, columns = 64, rows = 40) {
         const { data, bounds } = source;
         const pixels = data.data;
         const segments = [];
-        const columns = 64;
-        const rows = 40;
         const contentWidth = Math.max(1, bounds.maxX - bounds.minX);
         const contentHeight = Math.max(1, bounds.maxY - bounds.minY);
         for(let row = 0; row < rows; row += 1){
