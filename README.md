@@ -1,5 +1,7 @@
 # Rough Emoji Draw
 
+[English README](./README.en.md)
+
 Rough Emoji Draw 是一个把 Unicode 国旗 emoji 绘制成 Rough.js 手写风格 Canvas 图像的轻量前端库。项目使用 TypeScript 编写核心绘制逻辑，通过 Rslib 同时输出 ESM、CommonJS 与 IIFE 产物；Rough.js 会随库一并打包，安装或引用构建产物即可使用，无需额外引入 CDN。
 
 ## 功能特性
