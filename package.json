@@ -1,0 +1,14 @@
+{
+  "name": "rough-emoji-draw",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rslib build",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@rslib/core": "^0.21.5",
+    "typescript": "^6.0.3"
+  }
+}
