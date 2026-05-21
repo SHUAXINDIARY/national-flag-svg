@@ -3,7 +3,69 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Flag QA</title>
+        <title>
+            Rough Emoji Draw · 国家/地区国旗手绘风格预览
+        </title>
+        <meta
+            name="description"
+            content="Rough Emoji Draw 将 Unicode 国旗 emoji 绘制成 Rough.js 手写风格 Canvas 图像。本页批量预览 240+ 国家/地区旗帜，支持按地区代码或中文名搜索，开源可嵌入任意 HTML 页面。"
+        />
+        <meta
+            name="keywords"
+            content="国旗,国旗绘制,手绘国旗,Canvas,Rough.js,emoji,Unicode 国旗,国家旗帜,地区代码,前端绘图,Rough Emoji Draw"
+        />
+        <meta name="author" content="SHUAXINDIARY" />
+        <meta name="robots" content="index, follow" />
+        <meta name="theme-color" content="#2f6b4f" />
+        <meta name="application-name" content="Rough Emoji Draw" />
+        <link rel="author" href="https://github.com/SHUAXINDIARY" />
+        <link rel="canonical" href="/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="zh_CN" />
+        <meta property="og:site_name" content="Rough Emoji Draw" />
+        <meta
+            property="og:title"
+            content="Rough Emoji Draw · 国家/地区国旗手绘风格预览"
+        />
+        <meta
+            property="og:description"
+            content="将 Unicode 国旗 emoji 绘制成 Rough.js 手写风格 Canvas 图像，批量预览并搜索 240+ 国家/地区旗帜。"
+        />
+        <meta
+            property="og:url"
+            content="https://github.com/SHUAXINDIARY/national-flag-svg"
+        />
+        <meta name="twitter:card" content="summary" />
+        <meta
+            name="twitter:title"
+            content="Rough Emoji Draw · 国家/地区国旗手绘风格预览"
+        />
+        <meta
+            name="twitter:description"
+            content="将 Unicode 国旗 emoji 绘制成 Rough.js 手写风格 Canvas 图像，批量预览并搜索 240+ 国家/地区旗帜。"
+        />
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                "name": "Rough Emoji Draw",
+                "applicationCategory": "DesignApplication",
+                "operatingSystem": "Web",
+                "description": "轻量前端库，将 Unicode 国旗 emoji 绘制成 Rough.js 手写风格 Canvas 图像，暴露 window.RoughEmoji 全局 API。",
+                "url": "https://github.com/SHUAXINDIARY/national-flag-svg",
+                "author": {
+                    "@type": "Person",
+                    "name": "SHUAXINDIARY",
+                    "url": "https://github.com/SHUAXINDIARY"
+                },
+                "programmingLanguage": "TypeScript",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                }
+            }
+        </script>
         <style>
             * {
                 box-sizing: border-box;
@@ -38,10 +100,64 @@
                 margin-bottom: 18px;
             }
 
+            .site-heading {
+                min-width: 0;
+            }
+
             h1 {
                 margin: 0;
                 font-size: 22px;
                 font-weight: 650;
+            }
+
+            .site-tagline {
+                margin: 4px 0 0;
+                font-size: 14px;
+                font-weight: 450;
+                color: #52645d;
+                line-height: 1.45;
+            }
+
+            .intro {
+                margin-bottom: 18px;
+                padding: 14px 16px;
+                border: 1px solid #d9e3db;
+                border-radius: 8px;
+                background: #fbfdfa;
+                font-size: 14px;
+                line-height: 1.6;
+                color: #374151;
+            }
+
+            .intro p {
+                margin: 0;
+            }
+
+            .intro p + p {
+                margin-top: 8px;
+            }
+
+            .intro a {
+                color: #2f6b4f;
+                font-weight: 550;
+                text-decoration: underline;
+                text-underline-offset: 2px;
+            }
+
+            .intro a:hover {
+                color: #245a42;
+            }
+
+            .intro code,
+            .site-footer code {
+                padding: 1px 5px;
+                border-radius: 4px;
+                background: #eef5f0;
+                font-family:
+                    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                    monospace;
+                font-size: 0.92em;
+                color: #1f2933;
             }
 
             .header-actions {
@@ -198,13 +314,47 @@
             .flag-section--empty {
                 display: none;
             }
+
+            .site-footer {
+                margin-top: 28px;
+                padding-top: 18px;
+                border-top: 1px solid #d9e3db;
+                font-size: 13px;
+                line-height: 1.6;
+                color: #52645d;
+            }
+
+            .site-footer p {
+                margin: 0;
+            }
+
+            .site-footer p + p {
+                margin-top: 6px;
+            }
+
+            .site-footer a {
+                color: #2f6b4f;
+                font-weight: 550;
+                text-decoration: none;
+            }
+
+            .site-footer a:hover {
+                text-decoration: underline;
+                text-underline-offset: 2px;
+            }
         </style>
     </head>
 
     <body>
         <main>
             <header>
-                <h1>国家/地区国旗手绘风格 QA</h1>
+                <div class="site-heading">
+                    <h1>Rough Emoji Draw</h1>
+                    <p class="site-tagline">
+                        国家/地区国旗手绘风格预览 · TypeScript · Canvas ·
+                        Rough.js
+                    </p>
+                </div>
                 <div class="header-actions">
                     <a
                         class="repo-link"
@@ -213,7 +363,7 @@
                         rel="noopener noreferrer"
                         aria-label="在新标签页打开 GitHub 仓库"
                     >
-                        查看仓库
+                        GitHub 仓库
                     </a>
                     <a
                         class="author-link"
@@ -224,9 +374,32 @@
                     >
                         联系作者
                     </a>
-                    <div class="status" id="status">Rendering...</div>
+                    <div class="status" id="status" aria-live="polite">
+                        渲染中…
+                    </div>
                 </div>
             </header>
+            <section class="intro" aria-label="项目介绍">
+                <p>
+                    <strong>Rough Emoji Draw</strong>
+                    是一个轻量前端绘图库，把 Unicode 国旗 emoji 绘制成
+                    Rough.js 手写风格 Canvas 图像。常见旗帜使用独立手写模板，其余地区通过
+                    emoji 栅格化与像素采样生成统一风格的 fallback 图像。
+                </p>
+                <p>
+                    页面下方展示全部 ISO 3166-1 地区旗帜效果，可按地区代码（如
+                    CN）或中文名（如 日本）搜索。在任意 HTML 页面加载
+                    <code>dist/rough-emoji.js</code> 后，调用
+                    <code>window.RoughEmoji.draw(canvas, "🇨🇳")</code>
+                    即可嵌入。详见
+                    <a
+                        href="https://github.com/SHUAXINDIARY/national-flag-svg#readme"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >README 文档</a
+                    >。
+                </p>
+            </section>
             <div class="search-bar" role="search">
                 <label class="search-label" for="flag-search">搜索</label>
                 <input
@@ -245,6 +418,29 @@
                 aria-label="重点样本"
             ></section>
             <section class="grid" id="grid" aria-label="全部地区"></section>
+            <footer class="site-footer">
+                <p>
+                    Rough Emoji Draw · 开源国旗手绘 Canvas 库 · 基于
+                    TypeScript、DOM Canvas 与 Rough.js · 暴露
+                    <code>window.RoughEmoji</code> 全局 API
+                </p>
+                <p>
+                    仓库：
+                    <a
+                        href="https://github.com/SHUAXINDIARY/national-flag-svg"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >SHUAXINDIARY/national-flag-svg</a
+                    >
+                    · 作者：
+                    <a
+                        href="https://github.com/SHUAXINDIARY"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >SHUAXINDIARY</a
+                    >
+                </p>
+            </footer>
         </main>
 
         <script>
