@@ -4454,7 +4454,61 @@
         drawFlagBorder(flagBox);
     }
     function drawKrFlag() {
-        drawSampledFlagTemplate(TEMPLATE_FLAGS.kr);
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        const cx = mapFlagX(0.5, 0.5, flagBox);
+        const cy = mapFlagY(0.5, 0.5, flagBox);
+        const radius = 0.18 * flagBox.height;
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(-34 * Math.PI / 180);
+        ctx.beginPath();
+        ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+        ctx.clip();
+        ctx.fillStyle = "#c83c4a";
+        ctx.fillRect(-radius, -radius, 2 * radius, radius);
+        ctx.fillStyle = "#253f78";
+        ctx.fillRect(-radius, 0, 2 * radius, radius);
+        ctx.beginPath();
+        ctx.arc(-radius / 2, 0, radius / 2, 0, 2 * Math.PI);
+        ctx.fillStyle = "#253f78";
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(radius / 2, 0, radius / 2, 0, 2 * Math.PI);
+        ctx.fillStyle = "#c83c4a";
+        ctx.fill();
+        ctx.restore();
+        roughCanvas.circle(cx, cy, 2 * radius, {
+            stroke: "#28332e",
+            strokeWidth: 1.1,
+            fill: "transparent",
+            roughness: 2.1,
+            bowing: 1.1
+        });
+        drawKoreanTrigram(flagBox, 0.28, 0.27, -34, [
+            true,
+            true,
+            true
+        ]);
+        drawKoreanTrigram(flagBox, 0.72, 0.27, 34, [
+            false,
+            true,
+            false
+        ]);
+        drawKoreanTrigram(flagBox, 0.28, 0.73, 34, [
+            true,
+            false,
+            true
+        ]);
+        drawKoreanTrigram(flagBox, 0.72, 0.73, -34, [
+            false,
+            false,
+            false
+        ]);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#cbd8ce");
+        drawFlagBorder(flagBox);
     }
     function drawKwFlag() {
         const flagBox = makeStandardFlagBox();
@@ -6067,6 +6121,53 @@
             strokeWidth: 1,
             roughness: 2.1,
             bowing: 1.4
+        });
+    }
+    function drawKoreanTrigram(flagBox, u, v, rotationDegrees, rows) {
+        const cx = mapFlagX(u, v, flagBox);
+        const cy = mapFlagY(u, v, flagBox);
+        const rotation = rotationDegrees * Math.PI / 180;
+        const cos = Math.cos(rotation);
+        const sin = Math.sin(rotation);
+        const lineLength = 0.17 * flagBox.width;
+        const rowGap = 0.044 * flagBox.height;
+        const breakGap = 0.032 * flagBox.width;
+        const toCanvasPoint = (localX, localY)=>[
+                cx + localX * cos - localY * sin,
+                cy + localX * sin + localY * cos
+            ];
+        rows.forEach((isSolid, index)=>{
+            const y = (index - 1) * rowGap;
+            if (isSolid) {
+                const [x1, y1] = toCanvasPoint(-lineLength / 2, y);
+                const [x2, y2] = toCanvasPoint(lineLength / 2, y);
+                roughCanvas.line(x1, y1, x2, y2, {
+                    stroke: "#262d2b",
+                    strokeWidth: 5.2,
+                    roughness: 2.1,
+                    bowing: 1.45
+                });
+                return;
+            }
+            [
+                [
+                    -lineLength / 2,
+                    -breakGap
+                ],
+                [
+                    breakGap,
+                    lineLength / 2
+                ]
+            ].forEach(([startX, endX])=>{
+                const [x1, y1] = toCanvasPoint(startX, y);
+                const [x2, y2] = toCanvasPoint(endX, y);
+                roughCanvas.line(x1, y1, x2, y2, {
+                    stroke: "#262d2b",
+                    strokeWidth: 5.2,
+                    roughness: 2.1,
+                    bowing: 1.45
+                });
+            });
         });
     }
     function drawSampledFlagTemplate(flagEmoji) {
