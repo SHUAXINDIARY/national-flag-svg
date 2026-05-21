@@ -11,10 +11,12 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "rslib build",
+    "dev": "serve . -l 3000",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@rslib/core": "^0.21.5",
+    "serve": "^14.2.6",
     "typescript": "^6.0.3"
   },
   "dependencies": {

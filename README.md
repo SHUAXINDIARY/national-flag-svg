@@ -42,7 +42,15 @@ pnpm run typecheck
 pnpm run build
 ```
 
-构建完成后会生成 `dist/rough-emoji.js`。在浏览器中打开 `flag-qa.html`，即可查看批量国旗绘制结果。
+构建完成后会生成 `dist/rough-emoji.js`。
+
+本地预览 QA 页面（不要用 `file://` 直接打开 HTML，浏览器会拦截本地 JS）：
+
+```bash
+pnpm run dev
+```
+
+然后在浏览器访问 [http://localhost:3000/flag-qa.html](http://localhost:3000/flag-qa.html)。
 
 ## 浏览器使用
 

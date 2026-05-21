@@ -52,5 +52,5 @@ alwaysApply: true
 ## 验证与交付
 
 - 修改 TypeScript 或构建配置后优先运行 `pnpm run typecheck`；影响产物或 HTML 引用时运行 `pnpm run build`。
-- 修改绘制行为后，用 `rough-emoji.html` 检查单个输入，用 `flag-qa.html` 检查批量旗帜效果。
+- 修改绘制行为后，用 `pnpm run dev` 启动本地静态服务，通过 `http://localhost:3000/flag-qa.html` 检查批量旗帜效果（勿用 `file://` 打开）。
 - 交付前使用 `ReadLints` 检查本次修改过的文件；如果无法运行某项验证，需要在回复中说明。

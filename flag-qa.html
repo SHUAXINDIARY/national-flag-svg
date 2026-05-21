@@ -105,8 +105,10 @@
     <section class="grid" id="grid"></section>
   </main>
 
-  <script src="./dist/rough-emoji.js"></script>
   <script>
+    const FILE_PROTOCOL_HINT =
+      "无法通过 file:// 加载本地脚本。请先运行 pnpm run dev，再打开 http://localhost:3000/flag-qa.html";
+
     const regionCodes = [
       "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW",
       "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN",
@@ -147,19 +149,6 @@
     }
 
     const sampleCodes = ["CN", "JP", "US", "AU", "TH", "FR", "IT", "ES", "VA", "KR"];
-    const sampleCodeSet = new Set(sampleCodes);
-    const samples = document.querySelector("#samples");
-    const grid = document.querySelector("#grid");
-    const status = document.querySelector("#status");
-
-    sampleCodes.forEach((code) => renderFlagCard(samples, code));
-    regionCodes.forEach((code) => {
-      if (sampleCodeSet.has(code)) {
-        return;
-      }
-
-      renderFlagCard(grid, code);
-    });
 
     function renderFlagCard(parent, code) {
       const item = document.createElement("article");
@@ -181,7 +170,40 @@
       window.RoughEmoji.draw(canvas, emoji);
     }
 
-    status.textContent = `${regionCodes.length} flags rendered with one flag style`;
+    function renderAllFlags() {
+      const sampleCodeSet = new Set(sampleCodes);
+      const samples = document.querySelector("#samples");
+      const grid = document.querySelector("#grid");
+      const status = document.querySelector("#status");
+
+      sampleCodes.forEach((code) => renderFlagCard(samples, code));
+      regionCodes.forEach((code) => {
+        if (sampleCodeSet.has(code)) {
+          return;
+        }
+
+        renderFlagCard(grid, code);
+      });
+
+      status.textContent = `${regionCodes.length} flags rendered with one flag style`;
+    }
+
+    function loadRoughEmojiAndRender() {
+      const script = document.createElement("script");
+      script.src = "./dist/rough-emoji.js";
+      script.onload = renderAllFlags;
+      script.onerror = () => {
+        document.querySelector("#status").textContent =
+          "加载 dist/rough-emoji.js 失败，请先运行 pnpm run build";
+      };
+      document.head.append(script);
+    }
+
+    if (location.protocol === "file:") {
+      document.querySelector("#status").textContent = FILE_PROTOCOL_HINT;
+    } else {
+      loadRoughEmojiAndRender();
+    }
   </script>
 </body>
 
