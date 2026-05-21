@@ -1,9 +1,12 @@
+/** Rough.js 绘制参数的最小类型集合，只约束本文件实际传入的标量配置。 */
 interface RoughOptions {
   [key: string]: string | number | boolean | undefined;
 }
 
+/** 多边形点位。部分数组由 reduce/forEach 推导而来，所以保留为可变长度 number[]。 */
 type Point = number[];
 
+/** 页面通过 CDN 注入的 rough.canvas 实例，只声明当前绘制流程用到的方法。 */
 interface RoughCanvasLike {
   polygon(points: Point[], options?: RoughOptions): void;
   rectangle(x: number, y: number, width: number, height: number, options?: RoughOptions): void;
@@ -11,29 +14,41 @@ interface RoughCanvasLike {
   line(x1: number, y1: number, x2: number, y2: number, options?: RoughOptions): void;
 }
 
+/** 暴露给两个 HTML 页面使用的全局 API。 */
 interface RoughEmojiApi {
   draw(canvasElement: HTMLCanvasElement, value: unknown): void;
   isFlagEmoji(value: string): boolean;
   resolveFlag(value: unknown): string;
 }
 
+/** CDN 版 roughjs 提供的全局入口，Rslib 构建时不打包 roughjs。 */
 declare const rough: {
   canvas(canvasElement: HTMLCanvasElement): RoughCanvasLike;
 };
 
+/** 单页绘制入口的画布；QA 页不存在该节点时只暴露全局 API。 */
 const canvas = document.querySelector<HTMLCanvasElement>("#rough-canvas");
+/** 单页绘制入口的表单，用于提交用户输入的国旗。 */
 const form = document.querySelector<HTMLFormElement>("#emoji-form");
+/** 单页绘制入口的输入框，值会被 resolveFlag 校验后绘制。 */
 const input = document.querySelector<HTMLInputElement>("#emoji-input");
+/** 单页绘制入口的下载按钮，把当前画布导出成 PNG。 */
 const downloadButton = document.querySelector<HTMLButtonElement>("#download-button");
+/** 当前正在绘制的 2D 上下文，由 withCanvas 在每次绘制前切换。 */
 let ctx: CanvasRenderingContext2D;
+/** 当前正在绘制的 Rough.js 上下文，与 ctx 生命周期保持一致。 */
 let roughCanvas: RoughCanvasLike;
+/** 当前画布尺寸，绘制函数都按正方形画布坐标系工作。 */
 let size = 0;
+/** 离屏 emoji 栅格化时使用的像素倍率，保证高分屏采样足够细。 */
 const pixelRatio = window.devicePixelRatio || 1;
+/** 全局视觉色板：纸张、边框和投影色在多个旗帜绘制函数中复用。 */
 const palette = {
   paper: "#fbfdfa",
   frame: "#d9e3db",
   shadow: "rgba(36, 49, 44, 0.08)",
 };
+/** 页面和 QA 工具共享的绘制门面：输入 emoji，输出到指定 canvas。 */
 const RoughEmoji: RoughEmojiApi = {
   draw(canvasElement, value) {
     withCanvas(canvasElement, () => drawFlag(resolveFlag(value)));
@@ -42,9 +57,11 @@ const RoughEmoji: RoughEmojiApi = {
   resolveFlag,
 };
 
+/** 给 IIFE 产物补充全局属性类型，保持 HTML 内联脚本可用 window.RoughEmoji。 */
 const browserWindow = window as Window & Partial<{ RoughEmoji: RoughEmojiApi }>;
 browserWindow.RoughEmoji = RoughEmoji;
 
+/** 如果当前页面包含交互表单，就自动完成首次绘制和表单事件绑定。 */
 if (canvas && form && input && downloadButton) {
   withCanvas(canvas, () => {
     const params = new URLSearchParams(window.location.search);
@@ -68,6 +85,7 @@ if (canvas && form && input && downloadButton) {
   });
 }
 
+/** 临时切换全局绘制上下文，让同一套绘制函数可以服务单页画布和 QA 多画布。 */
 function withCanvas(canvasElement, callback) {
   const previous = { ctx, roughCanvas, size };
 
@@ -80,6 +98,7 @@ function withCanvas(canvasElement, callback) {
   size = previous.size;
 }
 
+/** 绘制总入口：先铺纸张背景，再按已知旗帜走手写模板，未知旗帜走像素采样流程。 */
 function drawFlag(flag) {
   clearCanvas();
   drawPaper();
@@ -131,12 +150,14 @@ function drawFlag(flag) {
   drawGenericFlag(flag);
 }
 
+/** 把任意输入规范化为可绘制的国旗 emoji；非法输入回退到中国国旗。 */
 function resolveFlag(value) {
   const input = String(value || "").trim();
 
   return isFlagEmoji(input) ? input : "🇨🇳";
 }
 
+/** 判断字符串是否由两个区域指示符组成，这是 Unicode 国旗 emoji 的编码形式。 */
 function isFlagEmoji(value) {
   const codePoints = [...value].map((char) => char.codePointAt(0));
   return (
@@ -145,10 +166,12 @@ function isFlagEmoji(value) {
   );
 }
 
+/** 清空当前画布，为下一次完整重绘做准备。 */
 function clearCanvas() {
   ctx.clearRect(0, 0, size, size);
 }
 
+/** 绘制统一纸张底色和粗糙边框，给所有旗帜提供一致的手绘载体。 */
 function drawPaper() {
   ctx.fillStyle = palette.paper;
   ctx.fillRect(0, 0, size, size);
@@ -165,6 +188,7 @@ function drawPaper() {
   });
 }
 
+/** 中国国旗模板：红色旗面、布纹、五颗手绘五角星和最终边框。 */
 function drawChinaFlag() {
   const flag = makeSketchRect(118, 174, 486, 342);
 
@@ -205,6 +229,7 @@ function drawChinaFlag() {
   });
 }
 
+/** 日本国旗模板：浅色旗面加中心红日，并叠加纸纹和边框。 */
 function drawJapanFlag() {
   const flag = makeSketchRect(128, 172, 464, 344);
 
@@ -250,6 +275,7 @@ function drawJapanFlag() {
   });
 }
 
+/** 美国国旗模板：按标准格子画 13 道条纹、蓝色 canton 和 50 颗星。 */
 function drawUnitedStatesFlag() {
   const flagBox = {
     x: 118,
@@ -296,6 +322,7 @@ function drawUnitedStatesFlag() {
   });
 }
 
+/** 澳大利亚国旗模板：蓝底、左上联合旗和南十字星区域。 */
 function drawAustraliaFlag() {
   const flagBox = makeStandardFlagBox();
   const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
@@ -328,6 +355,7 @@ function drawAustraliaFlag() {
   drawFlagBorder(flagBox);
 }
 
+/** 泰国国旗模板：用归一化纵向比例绘制红白蓝白红五条横带。 */
 function drawThailandFlag() {
   const flagBox = makeStandardFlagBox();
   const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
@@ -343,6 +371,7 @@ function drawThailandFlag() {
   drawFlagBorder(flagBox);
 }
 
+/** 法国国旗模板：用三等分竖带绘制蓝白红三色旗。 */
 function drawFranceFlag() {
   const flagBox = makeStandardFlagBox();
   const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
@@ -356,6 +385,7 @@ function drawFranceFlag() {
   drawFlagBorder(flagBox);
 }
 
+/** 意大利国旗模板：用三等分竖带绘制绿白红三色旗。 */
 function drawItalyFlag() {
   const flagBox = makeStandardFlagBox();
   const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
@@ -369,6 +399,7 @@ function drawItalyFlag() {
   drawFlagBorder(flagBox);
 }
 
+/** 西班牙国旗模板：红黄红横带，并在左侧绘制简化徽章。 */
 function drawSpainFlag() {
   const flagBox = makeStandardFlagBox();
   const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
@@ -383,6 +414,7 @@ function drawSpainFlag() {
   drawFlagBorder(flagBox);
 }
 
+/** 梵蒂冈国旗模板：黄白双竖带，并绘制简化钥匙与冠饰。 */
 function drawVaticanFlag() {
   const flagBox = makeStandardFlagBox();
   const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
@@ -396,6 +428,7 @@ function drawVaticanFlag() {
   drawFlagBorder(flagBox);
 }
 
+/** 返回大多数旗帜共用的画布内旗面矩形，后续归一化坐标都会映射到该区域。 */
 function makeStandardFlagBox() {
   return {
     x: 118,
@@ -405,6 +438,7 @@ function makeStandardFlagBox() {
   };
 }
 
+/** 根据旗面轮廓偏移一层半透明多边形，形成手绘纸面上的轻微投影。 */
 function drawFlagShadow(flag) {
   roughCanvas.polygon(offsetPoints(flag, 8, 10), {
     stroke: "transparent",
@@ -415,6 +449,7 @@ function drawFlagShadow(flag) {
   });
 }
 
+/** 绘制一个纯色粗糙旗面，作为具体图案、条带和徽章的底层。 */
 function drawBlankFlag(flag, fill, stroke) {
   roughCanvas.polygon(flag, {
     stroke,
@@ -426,6 +461,7 @@ function drawBlankFlag(flag, fill, stroke) {
   });
 }
 
+/** 用重新抖动的矩形轮廓描边，让旗帜外框保持自然不完全重合。 */
 function drawFlagBorder(flagBox) {
   roughCanvas.polygon(makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height), {
     stroke: "#28332e",
@@ -436,6 +472,7 @@ function drawFlagBorder(flagBox) {
   });
 }
 
+/** 在给定旗面左上区域绘制简化联合旗，供澳大利亚等旗帜复用。 */
 function drawUnionJackCanton(flagBox) {
   const canton = {
     x: flagBox.x,
@@ -455,6 +492,7 @@ function drawUnionJackCanton(flagBox) {
   drawFlagBand(canton, 0, 0.44, 1, 0.56, "#c83c4a", "#8f2633");
 }
 
+/** 用归一化坐标在 canton 内画对角线，负责联合旗的斜十字部分。 */
 function drawCantonLine(flagBox, u0, v0, u1, v1, stroke, strokeWidth) {
   roughCanvas.line(mapFlagX(u0, v0, flagBox), mapFlagY(u0, v0, flagBox), mapFlagX(u1, v1, flagBox), mapFlagY(u1, v1, flagBox), {
     stroke,
@@ -464,6 +502,7 @@ function drawCantonLine(flagBox, u0, v0, u1, v1, stroke, strokeWidth) {
   });
 }
 
+/** 绘制西班牙旗左侧简化徽章：盾形、冠饰和少量手绘线条。 */
 function drawSpainEmblem(flagBox) {
   const cx = mapFlagX(0.31, 0.5, flagBox);
   const cy = mapFlagY(0.5, 0.5, flagBox);
@@ -515,6 +554,7 @@ function drawSpainEmblem(flagBox) {
   });
 }
 
+/** 绘制梵蒂冈旗简化徽章：交叉钥匙、圆形装饰和红色横线。 */
 function drawVaticanEmblem(flagBox) {
   const cx = mapFlagX(0.74, 0.53, flagBox);
   const cy = mapFlagY(0.53, 0.53, flagBox);
@@ -579,6 +619,7 @@ function drawVaticanEmblem(flagBox) {
   });
 }
 
+/** 把归一化矩形区域转换为旗面多边形，先铺纯色再叠加 hachure 纹理。 */
 function drawFlagBand(flagBox, u0, v0, u1, v1, fill, stroke) {
   roughCanvas.polygon(makeFlagCellOutline(u0, v0, u1, v1, flagBox), {
     stroke,
@@ -601,6 +642,7 @@ function drawFlagBand(flagBox, u0, v0, u1, v1, fill, stroke) {
   });
 }
 
+/** 在美国国旗 canton 的归一化范围内按 6/5 交错排列绘制星星。 */
 function drawUSStars(flagBox) {
   const startX = 0.055;
   const endX = 0.395;
@@ -621,6 +663,12 @@ function drawUSStars(flagBox) {
   }
 }
 
+/**
+ * 通用国旗绘制流程：
+ * 1. 先把 emoji 画到离屏 canvas 取得像素；
+ * 2. 把有效像素按网格采样并合并成颜色段；
+ * 3. 将颜色段映射回旗面坐标，叠加轮廓、细节点、布纹和边框。
+ */
 function drawGenericFlag(flagEmoji) {
   const flagBox = {
     x: 118,
@@ -699,6 +747,10 @@ function drawGenericFlag(flagEmoji) {
   });
 }
 
+/**
+ * 从栅格图里寻找边缘/高对比细节，把它们转成旗面上的小圆点和短线。
+ * 这些细节弥补颜色段过于块状的问题，尤其适合徽章、十字和星月等小图案。
+ */
 function drawFlagImageDetails(source, flagBox) {
   const { data, bounds } = source;
   const pixels = data.data;
@@ -758,6 +810,7 @@ function drawFlagImageDetails(source, flagBox) {
   }
 }
 
+/** 比较中心像素与周围像素的 alpha/颜色差，判断该点是否处在图案边缘或细节处。 */
 function isFlagDetailPixel(pixels, width, height, x, y, distance) {
   const index = (y * width + x) * 4;
   const centerAlpha = pixels[index + 3];
@@ -789,6 +842,7 @@ function isFlagDetailPixel(pixels, width, height, x, y, distance) {
   });
 }
 
+/** 把标准矩形拆成多段边线并加入随机扰动，生成 Rough.js 可用的手绘轮廓点。 */
 function makeSketchRect(x, y, width, height) {
   const steps = 6;
   const edgeJitter = 5.2;
@@ -811,6 +865,7 @@ function makeSketchRect(x, y, width, height) {
   return points;
 }
 
+/** 在旗面内部绘制纵横短线，模拟布料折痕和手绘笔触。 */
 function drawFabricStrokes(x, y, width, height, color) {
   for (let i = 0; i < 5; i += 1) {
     const px = x + (width * (i + 0.6)) / 7 + jitter(10);
@@ -833,6 +888,7 @@ function drawFabricStrokes(x, y, width, height, color) {
   }
 }
 
+/** 使用默认黄色配色绘制手绘五角星。 */
 function drawSketchStar(cx, cy, radius, rotationDegrees) {
   drawSketchStarWithColors(cx, cy, radius, rotationDegrees, {
     stroke: "#b68b12",
@@ -841,6 +897,7 @@ function drawSketchStar(cx, cy, radius, rotationDegrees) {
   });
 }
 
+/** 计算五角星外/内顶点，再用纯色和 hachure 两层多边形形成粗糙质感。 */
 function drawSketchStarWithColors(cx, cy, radius, rotationDegrees, colors) {
   const points = [];
   const rotation = (rotationDegrees * Math.PI) / 180 - Math.PI / 2;
@@ -875,6 +932,10 @@ function drawSketchStarWithColors(cx, cy, radius, rotationDegrees, colors) {
   });
 }
 
+/**
+ * 将浏览器原生 emoji 字体渲染到离屏 canvas。
+ * 输出 ImageData 和非透明像素边界，供后续网格采样只关注旗帜内容区域。
+ */
 function rasterizeFlagEmoji(flagEmoji, offscreenSize) {
   const offscreen = document.createElement("canvas");
   offscreen.width = offscreenSize * pixelRatio;
@@ -894,6 +955,10 @@ function rasterizeFlagEmoji(flagEmoji, offscreenSize) {
   return { data: imageData, bounds: findPixelBounds(imageData) };
 }
 
+/**
+ * 把栅格化后的旗帜切成 64x40 网格并按行扫描。
+ * 相邻且颜色 bucket 相同的格子会合并成一个 segment，后续直接绘制为粗糙多边形。
+ */
 function collectFlagSegments(source, flagBox) {
   const { data, bounds } = source;
   const pixels = data.data;
@@ -951,6 +1016,10 @@ function collectFlagSegments(source, flagBox) {
   return segments;
 }
 
+/**
+ * 对一个归一化网格单元取 5 个采样点，平均 RGB/alpha 得到该单元的代表色。
+ * 返回 null 表示该格子基本透明，不参与旗面分段。
+ */
 function sampleFlagCell(pixels, width, bounds, contentWidth, contentHeight, u0, v0, u1, v1) {
   const points = [
     [(u0 + u1) / 2, (v0 + v1) / 2],
@@ -1002,6 +1071,7 @@ function sampleFlagCell(pixels, width, bounds, contentWidth, contentHeight, u0, 
   };
 }
 
+/** 将系统 emoji 渲染时常见的高亮灰白色归一成纸白，减少无意义灰块。 */
 function normalizeFlagMetrics(metrics) {
   const isSystemHighlight = metrics.saturation < 28 && metrics.brightness > 110;
 
@@ -1018,6 +1088,7 @@ function normalizeFlagMetrics(metrics) {
   return metrics;
 }
 
+/** 将颜色量化到较粗的 bucket，让相近颜色能在同一行内合并为连续色段。 */
 function getFlagSegmentBucket(metrics, isLightNeutral) {
   if (isLightNeutral) {
     return "light";
@@ -1028,6 +1099,7 @@ function getFlagSegmentBucket(metrics, isLightNeutral) {
   }`;
 }
 
+/** 将扫描行中的连续 run 转成可绘制 segment：颜色、面积、纹理标记和旗面轮廓。 */
 function createFlagSegment(run, row, columns, rows, flagBox) {
   const metrics = averageMetrics(run.cells);
   const isLightNeutral = run.cells.filter((cell) => cell.isLightNeutral).length > run.cells.length * 0.58;
@@ -1046,6 +1118,7 @@ function createFlagSegment(run, row, columns, rows, flagBox) {
   };
 }
 
+/** 对一组网格单元求平均颜色指标，用作合并后 segment 的最终颜色。 */
 function averageMetrics(cells) {
   const totals = cells.reduce(
     (acc, cell) => {
@@ -1072,6 +1145,7 @@ function averageMetrics(cells) {
   };
 }
 
+/** 统计非浅色 segment 的主色，用于通用旗面的底纹和布纹颜色。 */
 function getDominantFlagColor(cells) {
   const groups = new Map();
 
@@ -1102,6 +1176,7 @@ function getDominantFlagColor(cells) {
   )}, ${Math.round(dominant.blue / dominant.count)})`;
 }
 
+/** 将归一化网格边界映射到画布旗面区域，并加轻微重叠/抖动避免缝隙。 */
 function makeFlagCellOutline(u0, v0, u1, v1, flagBox) {
   const overlapU = 0.003;
   const overlapV = 0.004;
@@ -1122,14 +1197,17 @@ function makeFlagCellOutline(u0, v0, u1, v1, flagBox) {
   ]);
 }
 
+/** 将旗面归一化横坐标 u 映射到画布 x 坐标。 */
 function mapFlagX(u, v, flagBox) {
   return flagBox.x + flagBox.width * u;
 }
 
+/** 将旗面归一化纵坐标 v 映射到画布 y 坐标。 */
 function mapFlagY(u, v, flagBox) {
   return flagBox.y + flagBox.height * v;
 }
 
+/** 扫描 ImageData，找出 alpha 足够高的最小包围盒，去掉 emoji 周围透明留白。 */
 function findPixelBounds(imageData) {
   const { data, width, height } = imageData;
   const bounds = {
@@ -1159,6 +1237,7 @@ function findPixelBounds(imageData) {
   return bounds;
 }
 
+/** 从 ImageData 像素数组读取 RGB，并派生亮度与饱和度差值。 */
 function getColorMetrics(pixels, index) {
   const red = pixels[index];
   const green = pixels[index + 1];
@@ -1175,10 +1254,12 @@ function getColorMetrics(pixels, index) {
   };
 }
 
+/** 平移一组点位，常用于从旗面轮廓生成投影轮廓。 */
 function offsetPoints(points, x, y) {
   return points.map((point) => [point[0] + x, point[1] + y]);
 }
 
+/** 将 rgb/rgba 字符串替换成指定透明度，便于复用同一颜色的弱描边版本。 */
 function softenColor(color, alpha) {
   const channels = color.match(/rgba?\(([^)]+)\)/);
 
@@ -1189,10 +1270,12 @@ function softenColor(color, alpha) {
   return `rgba(${channels[1].split(",").slice(0, 3).join(",")}, ${alpha})`;
 }
 
+/** 在区间内生成随机数，是所有手绘扰动的基础。 */
 function randomBetween(min, max) {
   return min + Math.random() * (max - min);
 }
 
+/** 生成正负范围内的随机偏移，让边缘、点位和线条产生手绘不稳定感。 */
 function jitter(amount) {
   return randomBetween(-amount, amount);
 }
