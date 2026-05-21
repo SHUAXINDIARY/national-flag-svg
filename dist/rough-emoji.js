@@ -1,17 +1,37 @@
 (()=>{
-    const canvas = document.querySelector("#rough-canvas");
-    const form = document.querySelector("#emoji-form");
-    const input = document.querySelector("#emoji-input");
-    const downloadButton = document.querySelector("#download-button");
-    let ctx;
-    let roughCanvas;
-    let size = 0;
-    const pixelRatio = window.devicePixelRatio || 1;
-    const palette = {
+    const ELEMENT_SELECTORS = {
+        canvas: "#rough-canvas",
+        form: "#emoji-form",
+        input: "#emoji-input",
+        downloadButton: "#download-button"
+    };
+    const DEFAULT_FLAG = "🇨🇳";
+    const DOWNLOAD_FILE_PREFIX = "rough-flag";
+    const FLAG_PROMPT_MESSAGE = "请输入要绘制的国旗";
+    const TEMPLATE_FLAGS = {
+        china: "🇨🇳",
+        japan: "🇯🇵",
+        unitedStates: "🇺🇸",
+        australia: "🇦🇺",
+        thailand: "🇹🇭",
+        france: "🇫🇷",
+        italy: "🇮🇹",
+        spain: "🇪🇸",
+        vatican: "🇻🇦"
+    };
+    const DEVICE_PIXEL_RATIO = window.devicePixelRatio || 1;
+    const PALETTE = {
         paper: "#fbfdfa",
         frame: "#d9e3db",
         shadow: "rgba(36, 49, 44, 0.08)"
     };
+    const canvas = document.querySelector(ELEMENT_SELECTORS.canvas);
+    const rough_emoji_form = document.querySelector(ELEMENT_SELECTORS.form);
+    const rough_emoji_input = document.querySelector(ELEMENT_SELECTORS.input);
+    const downloadButton = document.querySelector(ELEMENT_SELECTORS.downloadButton);
+    let ctx;
+    let roughCanvas;
+    let size = 0;
     const RoughEmoji = {
         draw (canvasElement, value) {
             withCanvas(canvasElement, ()=>drawFlag(resolveFlag(value)));
@@ -21,18 +41,18 @@
     };
     const browserWindow = window;
     browserWindow.RoughEmoji = RoughEmoji;
-    if (canvas && form && input && downloadButton) withCanvas(canvas, ()=>{
+    if (canvas && rough_emoji_form && rough_emoji_input && downloadButton) withCanvas(canvas, ()=>{
         const params = new URLSearchParams(window.location.search);
-        const initialFlag = params.get("flag") || window.prompt("请输入要绘制的国旗", "🇨🇳") || "🇨🇳";
-        input.value = initialFlag;
+        const initialFlag = params.get("flag") || window.prompt(FLAG_PROMPT_MESSAGE, DEFAULT_FLAG) || DEFAULT_FLAG;
+        rough_emoji_input.value = initialFlag;
         drawFlag(resolveFlag(initialFlag));
-        form.addEventListener("submit", (event)=>{
+        rough_emoji_form.addEventListener("submit", (event)=>{
             event.preventDefault();
-            drawFlag(resolveFlag(input.value));
+            drawFlag(resolveFlag(rough_emoji_input.value));
         });
         downloadButton.addEventListener("click", ()=>{
             const link = document.createElement("a");
-            link.download = `rough-flag-${resolveFlag(input.value)}.png`;
+            link.download = `${DOWNLOAD_FILE_PREFIX}-${resolveFlag(rough_emoji_input.value)}.png`;
             link.href = canvas.toDataURL("image/png");
             link.click();
         });
@@ -56,39 +76,39 @@
     function drawFlag(flag) {
         clearCanvas();
         drawPaper();
-        if ("🇨🇳" === flag) return void drawChinaFlag();
-        if ("🇯🇵" === flag) return void drawJapanFlag();
-        if ("🇺🇸" === flag) return void drawUnitedStatesFlag();
-        if ("🇦🇺" === flag) return void drawAustraliaFlag();
-        if ("🇹🇭" === flag) return void drawThailandFlag();
-        if ("🇫🇷" === flag) return void drawFranceFlag();
-        if ("🇮🇹" === flag) return void drawItalyFlag();
-        if ("🇪🇸" === flag) return void drawSpainFlag();
-        if ("🇻🇦" === flag) return void drawVaticanFlag();
+        if (flag === TEMPLATE_FLAGS.china) return void drawChinaFlag();
+        if (flag === TEMPLATE_FLAGS.japan) return void drawJapanFlag();
+        if (flag === TEMPLATE_FLAGS.unitedStates) return void drawUnitedStatesFlag();
+        if (flag === TEMPLATE_FLAGS.australia) return void drawAustraliaFlag();
+        if (flag === TEMPLATE_FLAGS.thailand) return void drawThailandFlag();
+        if (flag === TEMPLATE_FLAGS.france) return void drawFranceFlag();
+        if (flag === TEMPLATE_FLAGS.italy) return void drawItalyFlag();
+        if (flag === TEMPLATE_FLAGS.spain) return void drawSpainFlag();
+        if (flag === TEMPLATE_FLAGS.vatican) return void drawVaticanFlag();
         drawGenericFlag(flag);
     }
     function resolveFlag(value) {
         const input = String(value || "").trim();
-        return isFlagEmoji(input) ? input : "🇨🇳";
+        return isFlagEmoji(input) ? input : DEFAULT_FLAG;
     }
     function isFlagEmoji(value) {
         const codePoints = [
             ...value
         ].map((char)=>char.codePointAt(0));
-        return 2 === codePoints.length && codePoints.every((codePoint)=>codePoint >= 0x1f1e6 && codePoint <= 0x1f1ff);
+        return 2 === codePoints.length && codePoints.every((codePoint)=>codePoint >= 127462 && codePoint <= 127487);
     }
     function clearCanvas() {
         ctx.clearRect(0, 0, size, size);
     }
     function drawPaper() {
-        ctx.fillStyle = palette.paper;
+        ctx.fillStyle = PALETTE.paper;
         ctx.fillRect(0, 0, size, size);
         roughCanvas.rectangle(46, 46, size - 92, size - 92, {
             roughness: 1.4,
             bowing: 0.8,
-            stroke: palette.frame,
+            stroke: PALETTE.frame,
             strokeWidth: 1.2,
-            fill: palette.paper,
+            fill: PALETTE.paper,
             fillStyle: "hachure",
             hachureGap: 24,
             fillWeight: 0.28
@@ -179,7 +199,7 @@
         const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
         roughCanvas.polygon(offsetPoints(flag, 8, 10), {
             stroke: "transparent",
-            fill: palette.shadow,
+            fill: PALETTE.shadow,
             fillStyle: "solid",
             roughness: 2.2,
             bowing: 1.2
@@ -326,7 +346,7 @@
     function drawFlagShadow(flag) {
         roughCanvas.polygon(offsetPoints(flag, 8, 10), {
             stroke: "transparent",
-            fill: palette.shadow,
+            fill: PALETTE.shadow,
             fillStyle: "solid",
             roughness: 2.2,
             bowing: 1.2
@@ -548,7 +568,7 @@
         const shadow = offsetPoints(flag, 8, 10);
         roughCanvas.polygon(shadow, {
             stroke: "transparent",
-            fill: palette.shadow,
+            fill: PALETTE.shadow,
             fillStyle: "solid",
             roughness: 2.2,
             bowing: 1.2
@@ -762,12 +782,12 @@
     }
     function rasterizeFlagEmoji(flagEmoji, offscreenSize) {
         const offscreen = document.createElement("canvas");
-        offscreen.width = offscreenSize * pixelRatio;
-        offscreen.height = offscreenSize * pixelRatio;
+        offscreen.width = offscreenSize * DEVICE_PIXEL_RATIO;
+        offscreen.height = offscreenSize * DEVICE_PIXEL_RATIO;
         const offscreenCtx = offscreen.getContext("2d", {
             willReadFrequently: true
         });
-        offscreenCtx.scale(pixelRatio, pixelRatio);
+        offscreenCtx.scale(DEVICE_PIXEL_RATIO, DEVICE_PIXEL_RATIO);
         offscreenCtx.clearRect(0, 0, offscreenSize, offscreenSize);
         offscreenCtx.textAlign = "center";
         offscreenCtx.textBaseline = "middle";

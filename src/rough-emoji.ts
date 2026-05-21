@@ -1,53 +1,30 @@
-/** Rough.js 绘制参数的最小类型集合，只约束本文件实际传入的标量配置。 */
-interface RoughOptions {
-  [key: string]: string | number | boolean | undefined;
-}
-
-/** 多边形点位。部分数组由 reduce/forEach 推导而来，所以保留为可变长度 number[]。 */
-type Point = number[];
-
-/** 页面通过 CDN 注入的 rough.canvas 实例，只声明当前绘制流程用到的方法。 */
-interface RoughCanvasLike {
-  polygon(points: Point[], options?: RoughOptions): void;
-  rectangle(x: number, y: number, width: number, height: number, options?: RoughOptions): void;
-  circle(x: number, y: number, diameter: number, options?: RoughOptions): void;
-  line(x1: number, y1: number, x2: number, y2: number, options?: RoughOptions): void;
-}
-
-/** 暴露给两个 HTML 页面使用的全局 API。 */
-interface RoughEmojiApi {
-  draw(canvasElement: HTMLCanvasElement, value: unknown): void;
-  isFlagEmoji(value: string): boolean;
-  resolveFlag(value: unknown): string;
-}
-
-/** CDN 版 roughjs 提供的全局入口，Rslib 构建时不打包 roughjs。 */
-declare const rough: {
-  canvas(canvasElement: HTMLCanvasElement): RoughCanvasLike;
-};
+import {
+  DEFAULT_FLAG,
+  DEVICE_PIXEL_RATIO,
+  DOWNLOAD_FILE_PREFIX,
+  ELEMENT_SELECTORS,
+  FLAG_PROMPT_MESSAGE,
+  PALETTE,
+  REGION_INDICATOR_MAX_CODE_POINT,
+  REGION_INDICATOR_MIN_CODE_POINT,
+  TEMPLATE_FLAGS,
+} from "./constant";
+import type { RoughCanvasLike, RoughEmojiApi } from "./type";
 
 /** 单页绘制入口的画布；QA 页不存在该节点时只暴露全局 API。 */
-const canvas = document.querySelector<HTMLCanvasElement>("#rough-canvas");
+const canvas = document.querySelector<HTMLCanvasElement>(ELEMENT_SELECTORS.canvas);
 /** 单页绘制入口的表单，用于提交用户输入的国旗。 */
-const form = document.querySelector<HTMLFormElement>("#emoji-form");
+const form = document.querySelector<HTMLFormElement>(ELEMENT_SELECTORS.form);
 /** 单页绘制入口的输入框，值会被 resolveFlag 校验后绘制。 */
-const input = document.querySelector<HTMLInputElement>("#emoji-input");
+const input = document.querySelector<HTMLInputElement>(ELEMENT_SELECTORS.input);
 /** 单页绘制入口的下载按钮，把当前画布导出成 PNG。 */
-const downloadButton = document.querySelector<HTMLButtonElement>("#download-button");
+const downloadButton = document.querySelector<HTMLButtonElement>(ELEMENT_SELECTORS.downloadButton);
 /** 当前正在绘制的 2D 上下文，由 withCanvas 在每次绘制前切换。 */
 let ctx: CanvasRenderingContext2D;
 /** 当前正在绘制的 Rough.js 上下文，与 ctx 生命周期保持一致。 */
 let roughCanvas: RoughCanvasLike;
 /** 当前画布尺寸，绘制函数都按正方形画布坐标系工作。 */
 let size = 0;
-/** 离屏 emoji 栅格化时使用的像素倍率，保证高分屏采样足够细。 */
-const pixelRatio = window.devicePixelRatio || 1;
-/** 全局视觉色板：纸张、边框和投影色在多个旗帜绘制函数中复用。 */
-const palette = {
-  paper: "#fbfdfa",
-  frame: "#d9e3db",
-  shadow: "rgba(36, 49, 44, 0.08)",
-};
 /** 页面和 QA 工具共享的绘制门面：输入 emoji，输出到指定 canvas。 */
 const RoughEmoji: RoughEmojiApi = {
   draw(canvasElement, value) {
@@ -66,7 +43,7 @@ if (canvas && form && input && downloadButton) {
   withCanvas(canvas, () => {
     const params = new URLSearchParams(window.location.search);
     const initialFlag =
-      params.get("flag") || window.prompt("请输入要绘制的国旗", "🇨🇳") || "🇨🇳";
+      params.get("flag") || window.prompt(FLAG_PROMPT_MESSAGE, DEFAULT_FLAG) || DEFAULT_FLAG;
 
     input.value = initialFlag;
     drawFlag(resolveFlag(initialFlag));
@@ -78,7 +55,7 @@ if (canvas && form && input && downloadButton) {
 
     downloadButton.addEventListener("click", () => {
       const link = document.createElement("a");
-      link.download = `rough-flag-${resolveFlag(input.value)}.png`;
+      link.download = `${DOWNLOAD_FILE_PREFIX}-${resolveFlag(input.value)}.png`;
       link.href = canvas.toDataURL("image/png");
       link.click();
     });
@@ -102,47 +79,47 @@ function withCanvas(canvasElement, callback) {
 function drawFlag(flag) {
   clearCanvas();
   drawPaper();
-  if (flag === "🇨🇳") {
+  if (flag === TEMPLATE_FLAGS.china) {
     drawChinaFlag();
     return;
   }
 
-  if (flag === "🇯🇵") {
+  if (flag === TEMPLATE_FLAGS.japan) {
     drawJapanFlag();
     return;
   }
 
-  if (flag === "🇺🇸") {
+  if (flag === TEMPLATE_FLAGS.unitedStates) {
     drawUnitedStatesFlag();
     return;
   }
 
-  if (flag === "🇦🇺") {
+  if (flag === TEMPLATE_FLAGS.australia) {
     drawAustraliaFlag();
     return;
   }
 
-  if (flag === "🇹🇭") {
+  if (flag === TEMPLATE_FLAGS.thailand) {
     drawThailandFlag();
     return;
   }
 
-  if (flag === "🇫🇷") {
+  if (flag === TEMPLATE_FLAGS.france) {
     drawFranceFlag();
     return;
   }
 
-  if (flag === "🇮🇹") {
+  if (flag === TEMPLATE_FLAGS.italy) {
     drawItalyFlag();
     return;
   }
 
-  if (flag === "🇪🇸") {
+  if (flag === TEMPLATE_FLAGS.spain) {
     drawSpainFlag();
     return;
   }
 
-  if (flag === "🇻🇦") {
+  if (flag === TEMPLATE_FLAGS.vatican) {
     drawVaticanFlag();
     return;
   }
@@ -154,7 +131,7 @@ function drawFlag(flag) {
 function resolveFlag(value) {
   const input = String(value || "").trim();
 
-  return isFlagEmoji(input) ? input : "🇨🇳";
+  return isFlagEmoji(input) ? input : DEFAULT_FLAG;
 }
 
 /** 判断字符串是否由两个区域指示符组成，这是 Unicode 国旗 emoji 的编码形式。 */
@@ -162,7 +139,11 @@ function isFlagEmoji(value) {
   const codePoints = [...value].map((char) => char.codePointAt(0));
   return (
     codePoints.length === 2 &&
-    codePoints.every((codePoint) => codePoint >= 0x1f1e6 && codePoint <= 0x1f1ff)
+    codePoints.every(
+      (codePoint) =>
+        codePoint >= REGION_INDICATOR_MIN_CODE_POINT &&
+        codePoint <= REGION_INDICATOR_MAX_CODE_POINT,
+    )
   );
 }
 
@@ -173,15 +154,15 @@ function clearCanvas() {
 
 /** 绘制统一纸张底色和粗糙边框，给所有旗帜提供一致的手绘载体。 */
 function drawPaper() {
-  ctx.fillStyle = palette.paper;
+  ctx.fillStyle = PALETTE.paper;
   ctx.fillRect(0, 0, size, size);
 
   roughCanvas.rectangle(46, 46, size - 92, size - 92, {
     roughness: 1.4,
     bowing: 0.8,
-    stroke: palette.frame,
+    stroke: PALETTE.frame,
     strokeWidth: 1.2,
-    fill: palette.paper,
+    fill: PALETTE.paper,
     fillStyle: "hachure",
     hachureGap: 24,
     fillWeight: 0.28,
@@ -286,7 +267,7 @@ function drawUnitedStatesFlag() {
   const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
   roughCanvas.polygon(offsetPoints(flag, 8, 10), {
     stroke: "transparent",
-    fill: palette.shadow,
+    fill: PALETTE.shadow,
     fillStyle: "solid",
     roughness: 2.2,
     bowing: 1.2,
@@ -442,7 +423,7 @@ function makeStandardFlagBox() {
 function drawFlagShadow(flag) {
   roughCanvas.polygon(offsetPoints(flag, 8, 10), {
     stroke: "transparent",
-    fill: palette.shadow,
+    fill: PALETTE.shadow,
     fillStyle: "solid",
     roughness: 2.2,
     bowing: 1.2,
@@ -684,7 +665,7 @@ function drawGenericFlag(flagEmoji) {
 
   roughCanvas.polygon(shadow, {
     stroke: "transparent",
-    fill: palette.shadow,
+    fill: PALETTE.shadow,
     fillStyle: "solid",
     roughness: 2.2,
     bowing: 1.2,
@@ -938,13 +919,13 @@ function drawSketchStarWithColors(cx, cy, radius, rotationDegrees, colors) {
  */
 function rasterizeFlagEmoji(flagEmoji, offscreenSize) {
   const offscreen = document.createElement("canvas");
-  offscreen.width = offscreenSize * pixelRatio;
-  offscreen.height = offscreenSize * pixelRatio;
+  offscreen.width = offscreenSize * DEVICE_PIXEL_RATIO;
+  offscreen.height = offscreenSize * DEVICE_PIXEL_RATIO;
 
   const offscreenCtx = offscreen.getContext("2d", {
     willReadFrequently: true,
   });
-  offscreenCtx.scale(pixelRatio, pixelRatio);
+  offscreenCtx.scale(DEVICE_PIXEL_RATIO, DEVICE_PIXEL_RATIO);
   offscreenCtx.clearRect(0, 0, offscreenSize, offscreenSize);
   offscreenCtx.textAlign = "center";
   offscreenCtx.textBaseline = "middle";
