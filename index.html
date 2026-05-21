@@ -8,11 +8,11 @@
         </title>
         <meta
             name="description"
-            content="Rough Emoji Draw 将 Unicode 国旗 emoji 绘制成 Rough.js 手写风格 Canvas 图像。本页批量预览 240+ 国家/地区旗帜，支持按地区代码或中文名搜索，开源可嵌入任意 HTML 页面。"
+            content="Rough Emoji Draw 将 Unicode 国旗 emoji 绘制成 Rough.js 手写风格 Canvas 图像。npm 包 rough-emoji-draw，本页批量预览 240+ 国家/地区旗帜，支持按地区代码或中文名搜索。"
         />
         <meta
             name="keywords"
-            content="国旗,国旗绘制,手绘国旗,Canvas,Rough.js,emoji,Unicode 国旗,国家旗帜,地区代码,前端绘图,Rough Emoji Draw"
+            content="国旗,国旗绘制,手绘国旗,Canvas,Rough.js,emoji,Unicode 国旗,国家旗帜,地区代码,前端绘图,Rough Emoji Draw,rough-emoji-draw,npm"
         />
         <meta name="author" content="SHUAXINDIARY" />
         <meta name="robots" content="index, follow" />
@@ -51,8 +51,14 @@
                 "name": "Rough Emoji Draw",
                 "applicationCategory": "DesignApplication",
                 "operatingSystem": "Web",
-                "description": "轻量前端库，将 Unicode 国旗 emoji 绘制成 Rough.js 手写风格 Canvas 图像，暴露 window.RoughEmoji 全局 API。",
+                "description": "轻量前端库，将 Unicode 国旗 emoji 绘制成 Rough.js 手写风格 Canvas 图像，支持 npm 安装与 window.RoughEmoji 全局 API。",
+                "softwareVersion": "0.2.0",
                 "url": "https://github.com/SHUAXINDIARY/national-flag-svg",
+                "downloadUrl": "https://www.npmjs.com/package/rough-emoji-draw",
+                "sameAs": [
+                    "https://www.npmjs.com/package/rough-emoji-draw",
+                    "https://github.com/SHUAXINDIARY/national-flag-svg"
+                ],
                 "author": {
                     "@type": "Person",
                     "name": "SHUAXINDIARY",
@@ -190,7 +196,8 @@
                 outline-offset: 2px;
             }
 
-            .author-link {
+            .author-link,
+            .secondary-link {
                 display: inline-flex;
                 align-items: center;
                 padding: 7px 14px;
@@ -204,12 +211,14 @@
                 white-space: nowrap;
             }
 
-            .author-link:hover {
+            .author-link:hover,
+            .secondary-link:hover {
                 border-color: #2f6b4f;
                 background: #eef5f0;
             }
 
-            .author-link:focus-visible {
+            .author-link:focus-visible,
+            .secondary-link:focus-visible {
                 outline: 2px solid #2f6b4f;
                 outline-offset: 2px;
             }
@@ -358,21 +367,39 @@
                 <div class="header-actions">
                     <a
                         class="repo-link"
+                        href="https://www.npmjs.com/package/rough-emoji-draw"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="在新标签页打开 npm 包页面"
+                    >
+                        npm 包
+                    </a>
+                    <a
+                        class="secondary-link"
                         href="https://github.com/SHUAXINDIARY/national-flag-svg"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="在新标签页打开 GitHub 仓库"
                     >
-                        GitHub 仓库
+                        GitHub
                     </a>
                     <a
-                        class="author-link"
+                        class="secondary-link"
+                        href="https://github.com/SHUAXINDIARY/national-flag-svg/blob/main/README.en.md"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="在新标签页打开英文 README"
+                    >
+                        English
+                    </a>
+                    <a
+                        class="secondary-link"
                         href="https://github.com/SHUAXINDIARY"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="在新标签页打开作者 GitHub 主页"
                     >
-                        联系作者
+                        作者
                     </a>
                     <div class="status" id="status" aria-live="polite">
                         渲染中…
@@ -382,21 +409,36 @@
             <section class="intro" aria-label="项目介绍">
                 <p>
                     <strong>Rough Emoji Draw</strong>
-                    是一个轻量前端绘图库，把 Unicode 国旗 emoji 绘制成
-                    Rough.js 手写风格 Canvas 图像。常见旗帜使用独立手写模板，其余地区通过
-                    emoji 栅格化与像素采样生成统一风格的 fallback 图像。
+                    （<code>rough-emoji-draw</code>）是一个轻量前端绘图库，把
+                    Unicode 国旗 emoji 绘制成 Rough.js 手写风格 Canvas
+                    图像。常见旗帜使用独立手写模板，其余地区通过 emoji
+                    栅格化与像素采样生成统一风格的 fallback 图像。
                 </p>
                 <p>
-                    页面下方展示全部 ISO 3166-1 地区旗帜效果，可按地区代码（如
-                    CN）或中文名（如 日本）搜索。在任意 HTML 页面加载
-                    <code>dist/rough-emoji.js</code> 后，调用
-                    <code>window.RoughEmoji.draw(canvas, "🇨🇳")</code>
-                    即可嵌入。详见
+                    本页展示全部 ISO 3166-1 地区旗帜效果，可按地区代码（如
+                    CN）或中文名（如 日本）搜索过滤。
+                </p>
+                <p>
+                    安装：
+                    <code>npm install rough-emoji-draw</code>，在项目中
+                    <code>import { RoughEmoji } from "rough-emoji-draw"</code>；或在
+                    HTML 中通过
+                    <code>&lt;script src="https://unpkg.com/rough-emoji-draw/browser"&gt;&lt;/script&gt;</code>
+                    加载后调用
+                    <code>window.RoughEmoji.draw(canvas, "🇨🇳")</code>。本地开发可引用
+                    <code>dist/rough-emoji.js</code>。详见
                     <a
                         href="https://github.com/SHUAXINDIARY/national-flag-svg#readme"
                         target="_blank"
                         rel="noopener noreferrer"
-                        >README 文档</a
+                        >中文 README</a
+                    >
+                    与
+                    <a
+                        href="https://github.com/SHUAXINDIARY/national-flag-svg/blob/main/README.en.md"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >English README</a
                     >。
                 </p>
             </section>
@@ -420,12 +462,19 @@
             <section class="grid" id="grid" aria-label="全部地区"></section>
             <footer class="site-footer">
                 <p>
-                    Rough Emoji Draw · 开源国旗手绘 Canvas 库 · 基于
-                    TypeScript、DOM Canvas 与 Rough.js · 暴露
-                    <code>window.RoughEmoji</code> 全局 API
+                    Rough Emoji Draw · npm 包
+                    <code>rough-emoji-draw@0.2.0</code> · 基于 TypeScript、DOM
+                    Canvas 与 Rough.js · 支持 ESM / CJS / IIFE
                 </p>
                 <p>
-                    仓库：
+                    npm：
+                    <a
+                        href="https://www.npmjs.com/package/rough-emoji-draw"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >rough-emoji-draw</a
+                    >
+                    · 仓库：
                     <a
                         href="https://github.com/SHUAXINDIARY/national-flag-svg"
                         target="_blank"
