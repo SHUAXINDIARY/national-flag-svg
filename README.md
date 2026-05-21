@@ -17,24 +17,29 @@ Rough Emoji Draw 是一个把国旗 emoji 绘制成手写风格 Canvas 图像的
 - Rough.js
 - Rslib
 
+## 环境要求
+
+- Node.js 20 及以上（可用 `.nvmrc`：`nvm use`）
+- [pnpm](https://pnpm.io/) 9 及以上（推荐通过 Corepack：`corepack enable`）
+
 ## 快速开始
 
 安装依赖：
 
 ```bash
-npm install
+pnpm install
 ```
 
 执行类型检查：
 
 ```bash
-npm run typecheck
+pnpm run typecheck
 ```
 
 构建浏览器产物：
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 构建完成后会生成 `dist/rough-emoji.js`。在浏览器中打开 `flag-qa.html`，即可查看批量国旗绘制结果。
@@ -88,5 +93,5 @@ npm run build
 
 - 新增旗帜优先在 `src/rough-emoji.ts` 中补充独立绘制函数，并在 `drawFlag` 分支中接入。
 - 绘制函数按正方形画布坐标系工作，新增坐标建议基于当前 `size` 或已有旗帜区域变量推导。
-- 修改绘制效果后，先运行 `npm run typecheck`，再运行 `npm run build` 并打开 `flag-qa.html` 进行视觉检查。
+- 修改绘制效果后，先运行 `pnpm run typecheck`，再运行 `pnpm run build` 并打开 `flag-qa.html` 进行视觉检查。
 - `dist/` 为构建产物，通常不作为源码维护对象；只有需要同步可直接打开的浏览器产物时才更新。

@@ -46,11 +46,11 @@ alwaysApply: true
 ## Rslib 与构建
 
 - 修改入口、输出格式、全局暴露方式、依赖打包或资源处理时，先确认 `rslib.config.ts` 与 HTML 页面引用路径仍一致。
-- 当前项目使用 `npm` 生态和 `package-lock.json`；新增依赖必须通过包管理器安装，避免手写版本号。
+- 当前项目使用 `pnpm`（`pnpm-lock.yaml`）与 Node.js 20+；新增依赖必须通过 `pnpm add` 安装，避免手写版本号。
 - 不要提交无关格式化、缓存、临时脚本或一次性调试文件。
 
 ## 验证与交付
 
-- 修改 TypeScript 或构建配置后优先运行 `npm run typecheck`；影响产物或 HTML 引用时运行 `npm run build`。
+- 修改 TypeScript 或构建配置后优先运行 `pnpm run typecheck`；影响产物或 HTML 引用时运行 `pnpm run build`。
 - 修改绘制行为后，用 `rough-emoji.html` 检查单个输入，用 `flag-qa.html` 检查批量旗帜效果。
 - 交付前使用 `ReadLints` 检查本次修改过的文件；如果无法运行某项验证，需要在回复中说明。
