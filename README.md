@@ -1,6 +1,6 @@
 # Rough Emoji Draw
 
-Rough Emoji Draw 是一个把国旗 emoji 绘制成手写风格 Canvas 图像的轻量前端项目。项目使用 TypeScript 编写核心绘制逻辑，通过 Rslib 打包为浏览器可直接加载的 IIFE 产物，并依赖 Rough.js 提供粗糙线条、填充和边框效果。
+Rough Emoji Draw 是一个把国旗 emoji 绘制成手写风格 Canvas 图像的轻量前端项目。项目使用 TypeScript 编写核心绘制逻辑，通过 Rslib 打包为浏览器可直接加载的 IIFE 产物，并在源码中引入 Rough.js 提供粗糙线条、填充和边框效果。
 
 ## 功能特性
 
@@ -14,7 +14,7 @@ Rough Emoji Draw 是一个把国旗 emoji 绘制成手写风格 Canvas 图像的
 
 - TypeScript
 - DOM Canvas
-- Rough.js CDN
+- Rough.js
 - Rslib
 
 ## 快速开始
@@ -41,10 +41,9 @@ npm run build
 
 ## 浏览器使用
 
-页面需要先加载 Rough.js，再加载本项目构建产物：
+页面只需要加载本项目构建产物，Rough.js 会由 Rslib 打包进 `dist/rough-emoji.js`：
 
 ```html
-<script src="https://unpkg.com/roughjs@4.6.6/bundled/rough.js"></script>
 <script src="./dist/rough-emoji.js"></script>
 ```
 

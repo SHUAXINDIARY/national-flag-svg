@@ -68,3 +68,34 @@
 - `src/rough-emoji.ts`：移除本地类型声明，改用 type-only import。
 - `dist/rough-emoji.js`：运行构建后同步确认浏览器产物。
 - `taskRecord.md`：追加本次类型拆分任务记录。
+
+## 2026-05-21 Rough.js 依赖内置
+
+### 日期
+
+2026-05-21
+
+### 任务目的
+
+去除 `flag-qa.html` 对外部 Rough.js CDN 的依赖，改为在项目内安装并由 `src/rough-emoji.ts` 直接引入 Rough.js。
+
+### 完成过程
+
+1. 使用 `npm install roughjs` 确认项目依赖中包含 Rough.js。
+2. 更新 `src/rough-emoji.ts`，从 `roughjs` 模块导入 `rough`，不再依赖浏览器全局注入。
+3. 清理 `src/type.d.ts` 中 CDN 全局 `rough` 声明，只保留当前绘制流程使用的 RoughCanvas 最小类型。
+4. 移除 `flag-qa.html` 中的 Rough.js 外部 CDN script，仅保留 `dist/rough-emoji.js`。
+5. 更新 `README.md` 和 `.cursor/rules/project-rules.mdc` 中关于 Rough.js 引入方式的说明。
+6. 运行 `npm run typecheck` 和 `npm run build` 验证依赖内置后的类型检查与构建结果。
+
+### 修改具体文件
+
+- `package.json`：新增 `roughjs` 运行时依赖。
+- `package-lock.json`：同步 npm 依赖锁定信息。
+- `src/rough-emoji.ts`：改为从 `roughjs` 模块导入 `rough`。
+- `src/type.d.ts`：移除 CDN 全局 `rough` 声明。
+- `flag-qa.html`：移除 Rough.js 外部 CDN script。
+- `README.md`：更新浏览器使用方式，说明 Rough.js 已打包进产物。
+- `.cursor/rules/project-rules.mdc`：同步项目规则中的 Rough.js 引入方式。
+- `dist/rough-emoji.js`：运行构建后同步更新浏览器产物。
+- `taskRecord.md`：追加本次 Rough.js 依赖内置任务记录。

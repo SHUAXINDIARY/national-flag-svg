@@ -10,5 +10,8 @@
   "devDependencies": {
     "@rslib/core": "^0.21.5",
     "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "roughjs": "^4.6.6"
   }
 }

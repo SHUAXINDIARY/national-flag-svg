@@ -7,7 +7,7 @@ export interface RoughOptions {
 /** 多边形点位。部分数组由 reduce/forEach 推导而来，所以保留为可变长度 number[]。 */
 export type Point = number[];
 
-/** 页面通过 CDN 注入的 rough.canvas 实例，只声明当前绘制流程用到的方法。 */
+/** rough.canvas 创建的绘制实例，只声明当前绘制流程用到的方法。 */
 export interface RoughCanvasLike {
   /** 绘制多边形轮廓或填充区域，points 使用画布坐标点位。 */
   polygon(points: Point[], options?: RoughOptions): void;
@@ -34,13 +34,3 @@ export interface RoughEmojiApi {
   resolveFlag(value: unknown): string;
 }
 
-/** CDN 版 Rough.js 提供的全局入口，Rslib 构建时不打包 Rough.js。 */
-export interface RoughGlobal {
-  /** 基于目标 canvas 创建 Rough.js 绘制上下文。 */
-  canvas(canvasElement: HTMLCanvasElement): RoughCanvasLike;
-}
-
-declare global {
-  /** HTML 页面通过 CDN 注入的 Rough.js 全局对象。 */
-  const rough: RoughGlobal;
-}

@@ -1,3 +1,4 @@
+import rough from "roughjs";
 import {
   DEFAULT_FLAG,
   DEVICE_PIXEL_RATIO,
@@ -63,7 +64,7 @@ if (canvas && form && input && downloadButton) {
 }
 
 /** 临时切换全局绘制上下文，让同一套绘制函数可以服务单页画布和 QA 多画布。 */
-function withCanvas(canvasElement, callback) {
+function withCanvas(canvasElement: HTMLCanvasElement, callback: () => void) {
   const previous = { ctx, roughCanvas, size };
 
   ctx = canvasElement.getContext("2d", { willReadFrequently: true });
