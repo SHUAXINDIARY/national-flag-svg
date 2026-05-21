@@ -12,36 +12,6 @@
     frame: "#d9e3db",
     shadow: "rgba(36, 49, 44, 0.08)",
   };
-  const namedFlags = new Map([
-    ["中国", "🇨🇳"],
-    ["中国国旗", "🇨🇳"],
-    ["中华人民共和国", "🇨🇳"],
-    ["日本", "🇯🇵"],
-    ["日本国旗", "🇯🇵"],
-    ["美国", "🇺🇸"],
-    ["美国国旗", "🇺🇸"],
-    ["英国", "🇬🇧"],
-    ["英国国旗", "🇬🇧"],
-    ["法国", "🇫🇷"],
-    ["法国国旗", "🇫🇷"],
-    ["泰国", "🇹🇭"],
-    ["泰国国旗", "🇹🇭"],
-    ["德国", "🇩🇪"],
-    ["德国国旗", "🇩🇪"],
-    ["韩国", "🇰🇷"],
-    ["韩国国旗", "🇰🇷"],
-    ["意大利", "🇮🇹"],
-    ["加拿大", "🇨🇦"],
-    ["澳大利亚", "🇦🇺"],
-    ["俄罗斯", "🇷🇺"],
-    ["西班牙", "🇪🇸"],
-    ["西班牙国旗", "🇪🇸"],
-    ["梵蒂冈", "🇻🇦"],
-    ["梵蒂冈国旗", "🇻🇦"],
-    ["巴西", "🇧🇷"],
-    ["印度", "🇮🇳"],
-  ]);
-
   window.RoughEmoji = {
     draw(canvasElement, value) {
       withCanvas(canvasElement, () => drawFlag(resolveFlag(value)));
@@ -103,6 +73,11 @@
       return;
     }
 
+    if (flag === "🇦🇺") {
+      drawAustraliaFlag();
+      return;
+    }
+
     if (flag === "🇹🇭") {
       drawThailandFlag();
       return;
@@ -110,6 +85,11 @@
 
     if (flag === "🇫🇷") {
       drawFranceFlag();
+      return;
+    }
+
+    if (flag === "🇮🇹") {
+      drawItalyFlag();
       return;
     }
 
@@ -128,9 +108,8 @@
 
   function resolveFlag(value) {
     const input = String(value || "").trim();
-    const flag = namedFlags.get(input) || input;
 
-    return isFlagEmoji(flag) ? flag : "🇨🇳";
+    return isFlagEmoji(input) ? input : "🇨🇳";
   }
 
   function isFlagEmoji(value) {
@@ -292,6 +271,38 @@
     });
   }
 
+  function drawAustraliaFlag() {
+    const flagBox = makeStandardFlagBox();
+    const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+    drawFlagShadow(flag);
+    drawBlankFlag(flag, "#243f78", "#1b2c56");
+    drawFlagBand(flagBox, 0, 0, 1, 1, "#243f78", "#1b2c56");
+    drawUnionJackCanton(flagBox);
+    drawSketchStarWithColors(mapFlagX(0.24, 0.72, flagBox), mapFlagY(0.24, 0.72, flagBox), 24, -18, {
+      stroke: "#c7d1cc",
+      fill: "#fbfdfa",
+      hatch: "rgba(251, 253, 250, 0.72)",
+    });
+
+    [
+      [0.74, 0.28, 13, 4],
+      [0.84, 0.44, 11, -12],
+      [0.72, 0.58, 13, 10],
+      [0.62, 0.45, 12, -8],
+      [0.78, 0.72, 8, 18],
+    ].forEach(([u, v, radius, rotation]) => {
+      drawSketchStarWithColors(mapFlagX(u, v, flagBox), mapFlagY(u, v, flagBox), radius, rotation, {
+        stroke: "#c7d1cc",
+        fill: "#fbfdfa",
+        hatch: "rgba(251, 253, 250, 0.68)",
+      });
+    });
+
+    drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#1a315e");
+    drawFlagBorder(flagBox);
+  }
+
   function drawThailandFlag() {
     const flagBox = makeStandardFlagBox();
     const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
@@ -317,6 +328,19 @@
     drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#fbfdfa", "#c7d1cc");
     drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#cf3d45", "#912936");
     drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#8b334e");
+    drawFlagBorder(flagBox);
+  }
+
+  function drawItalyFlag() {
+    const flagBox = makeStandardFlagBox();
+    const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+
+    drawFlagShadow(flag);
+    drawBlankFlag(flag, "#fbfdfa", "#c7d1cc");
+    drawFlagBand(flagBox, 0, 0, 1 / 3, 1, "#2f8e5c", "#1f6540");
+    drawFlagBand(flagBox, 1 / 3, 0, 2 / 3, 1, "#fbfdfa", "#c7d1cc");
+    drawFlagBand(flagBox, 2 / 3, 0, 1, 1, "#c83c4a", "#8f2633");
+    drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#6f6848");
     drawFlagBorder(flagBox);
   }
 
@@ -383,6 +407,34 @@
       strokeWidth: 2,
       fill: "transparent",
       roughness: 2.8,
+      bowing: 1.6,
+    });
+  }
+
+  function drawUnionJackCanton(flagBox) {
+    const canton = {
+      x: flagBox.x,
+      y: flagBox.y,
+      width: flagBox.width * 0.5,
+      height: flagBox.height * 0.5,
+    };
+
+    drawFlagBand(canton, 0, 0, 1, 1, "#314d7c", "#20375e");
+    drawCantonLine(canton, 0, 0, 1, 1, "#fbfdfa", 13);
+    drawCantonLine(canton, 1, 0, 0, 1, "#fbfdfa", 13);
+    drawCantonLine(canton, 0, 0, 1, 1, "#c83c4a", 5);
+    drawCantonLine(canton, 1, 0, 0, 1, "#c83c4a", 5);
+    drawFlagBand(canton, 0.42, 0, 0.58, 1, "#fbfdfa", "#c7d1cc");
+    drawFlagBand(canton, 0, 0.38, 1, 0.62, "#fbfdfa", "#c7d1cc");
+    drawFlagBand(canton, 0.46, 0, 0.54, 1, "#c83c4a", "#8f2633");
+    drawFlagBand(canton, 0, 0.44, 1, 0.56, "#c83c4a", "#8f2633");
+  }
+
+  function drawCantonLine(flagBox, u0, v0, u1, v1, stroke, strokeWidth) {
+    roughCanvas.line(mapFlagX(u0, v0, flagBox), mapFlagY(u0, v0, flagBox), mapFlagX(u1, v1, flagBox), mapFlagY(u1, v1, flagBox), {
+      stroke,
+      strokeWidth,
+      roughness: 2.4,
       bowing: 1.6,
     });
   }
@@ -757,6 +809,14 @@
   }
 
   function drawSketchStar(cx, cy, radius, rotationDegrees) {
+    drawSketchStarWithColors(cx, cy, radius, rotationDegrees, {
+      stroke: "#b68b12",
+      fill: "#ffd84c",
+      hatch: "#ffec62",
+    });
+  }
+
+  function drawSketchStarWithColors(cx, cy, radius, rotationDegrees, colors) {
     const points = [];
     const rotation = (rotationDegrees * Math.PI) / 180 - Math.PI / 2;
 
@@ -770,18 +830,18 @@
     }
 
     roughCanvas.polygon(points, {
-      stroke: "#b68b12",
+      stroke: colors.stroke,
       strokeWidth: Math.max(1.2, radius * 0.08),
-      fill: "#ffd84c",
+      fill: colors.fill,
       fillStyle: "solid",
       roughness: 2.3,
       bowing: 1.2,
     });
 
     roughCanvas.polygon(points, {
-      stroke: "#f4c62a",
+      stroke: colors.hatch,
       strokeWidth: Math.max(0.8, radius * 0.04),
-      fill: "#ffec62",
+      fill: colors.fill,
       fillStyle: "hachure",
       hachureAngle: -22,
       hachureGap: Math.max(6, radius * 0.22),
