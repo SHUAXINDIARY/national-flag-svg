@@ -80,6 +80,14 @@
         font-size: 13px;
       }
 
+      .name {
+        min-width: 0;
+        color: #52645d;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
       .emoji {
         font-size: 18px;
       }
@@ -125,6 +133,15 @@
           .join("");
       }
 
+      const regionNames = new Intl.DisplayNames(["zh-CN"], { type: "region" });
+      const regionNameFallbacks = {
+        XK: "科索沃",
+      };
+
+      function regionNameFromCode(code) {
+        return regionNameFallbacks[code] || regionNames.of(code) || code;
+      }
+
       const sampleCodes = ["CN", "JP", "US", "GB", "FR", "DE", "KR", "BR", "IN", "CA", "AU", "ZA"];
       const samples = document.querySelector("#samples");
       const grid = document.querySelector("#grid");
@@ -146,7 +163,9 @@
         const label = document.createElement("div");
         label.className = "label";
         const emoji = flagFromCode(code);
-        label.innerHTML = `<span>${code}</span><span class="emoji">${emoji}</span>`;
+        label.innerHTML = `<span>${code}</span><span class="name" title="${regionNameFromCode(code)}">${regionNameFromCode(
+          code,
+        )}</span><span class="emoji">${emoji}</span>`;
 
         item.append(canvas, label);
         parent.append(item);
