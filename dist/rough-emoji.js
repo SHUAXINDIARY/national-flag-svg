@@ -241,6 +241,7 @@
         ua: "🇺🇦",
         ug: "🇺🇬",
         um: "🇺🇲",
+        un: "🇺🇳",
         unitedStates: "🇺🇸",
         uy: "🇺🇾",
         uz: "🇺🇿",
@@ -2343,6 +2344,7 @@
             [TEMPLATE_FLAGS.ua]: drawUaFlag,
             [TEMPLATE_FLAGS.ug]: drawUgFlag,
             [TEMPLATE_FLAGS.um]: drawUmFlag,
+            [TEMPLATE_FLAGS.un]: drawUnFlag,
             [TEMPLATE_FLAGS.uy]: drawUyFlag,
             [TEMPLATE_FLAGS.uz]: drawUzFlag,
             [TEMPLATE_FLAGS.vc]: drawVcFlag,
@@ -7685,6 +7687,15 @@
         drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#705b4a");
         drawFlagBorder(flagBox);
     }
+    function drawUnFlag() {
+        const flagBox = makeStandardFlagBox();
+        const flag = makeSketchRect(flagBox.x, flagBox.y, flagBox.width, flagBox.height);
+        drawFlagShadow(flag);
+        drawBlankFlag(flag, "#5b9bd5", "#3a76a8");
+        drawUnEmblem(flagBox);
+        drawFabricStrokes(flagBox.x + 14, flagBox.y + 22, flagBox.width - 36, flagBox.height - 50, "#3d7aad");
+        drawFlagBorder(flagBox);
+    }
     function drawUmFlag() {
         drawUnitedStatesFlag();
     }
@@ -8179,6 +8190,54 @@
             roughness: 2.4,
             bowing: 1.6
         });
+    }
+    function drawUnEmblem(flagBox) {
+        const cx = mapFlagX(0.5, 0.52, flagBox);
+        const cy = mapFlagY(0.52, 0.52, flagBox);
+        const globeDiameter = 0.22 * flagBox.width;
+        const globeRadius = globeDiameter / 2;
+        const emblemStroke = "#fbfdfa";
+        const meridianStroke = "#e3eff8";
+        const lineStyle = {
+            stroke: meridianStroke,
+            strokeWidth: 1,
+            roughness: 2.1,
+            bowing: 1.3
+        };
+        render_context_roughCanvas.circle(cx, cy, globeDiameter, {
+            stroke: emblemStroke,
+            strokeWidth: 1.2,
+            fill: emblemStroke,
+            fillStyle: "solid",
+            roughness: 2.1,
+            bowing: 1.2
+        });
+        render_context_roughCanvas.line(cx, cy - globeRadius, cx, cy + globeRadius, lineStyle);
+        render_context_roughCanvas.line(cx - globeRadius, cy, cx + globeRadius, cy, lineStyle);
+        render_context_roughCanvas.line(cx - 0.72 * globeRadius, cy - 0.38 * globeRadius, cx + 0.72 * globeRadius, cy + 0.38 * globeRadius, lineStyle);
+        render_context_roughCanvas.line(cx - 0.72 * globeRadius, cy + 0.38 * globeRadius, cx + 0.72 * globeRadius, cy - 0.38 * globeRadius, lineStyle);
+        const wreathRadius = 1.48 * globeRadius;
+        const wreathYOffset = 0.1 * globeRadius;
+        drawUnWreathArc(cx, cy + wreathYOffset, wreathRadius, 5 * Math.PI / 6, Math.PI / 2, emblemStroke);
+        drawUnWreathArc(cx, cy + wreathYOffset, wreathRadius, Math.PI / 6, Math.PI / 2, emblemStroke);
+    }
+    function drawUnWreathArc(cx, cy, radius, startRad, endRad, stroke) {
+        const steps = 11;
+        let previousX = cx + Math.cos(startRad) * radius;
+        let previousY = cy + Math.sin(startRad) * radius;
+        for(let step = 1; step <= steps; step += 1){
+            const angle = startRad + (endRad - startRad) * step / steps;
+            const nextX = cx + Math.cos(angle) * radius + jitter(0.8);
+            const nextY = cy + Math.sin(angle) * radius + jitter(0.8);
+            render_context_roughCanvas.line(previousX, previousY, nextX, nextY, {
+                stroke,
+                strokeWidth: 2.1,
+                roughness: 2.4,
+                bowing: 1.6
+            });
+            previousX = nextX;
+            previousY = nextY;
+        }
     }
     function drawSpainEmblem(flagBox) {
         const cx = mapFlagX(0.31, 0.5, flagBox);

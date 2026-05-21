@@ -262,6 +262,7 @@ class RoughEmojiRenderer {
         [TEMPLATE_FLAGS.ua]: drawUaFlag,
         [TEMPLATE_FLAGS.ug]: drawUgFlag,
         [TEMPLATE_FLAGS.um]: drawUmFlag,
+        [TEMPLATE_FLAGS.un]: drawUnFlag,
         [TEMPLATE_FLAGS.uy]: drawUyFlag,
         [TEMPLATE_FLAGS.uz]: drawUzFlag,
         [TEMPLATE_FLAGS.vc]: drawVcFlag,
@@ -8959,6 +8960,29 @@ function drawUgFlag() {
     drawFlagBorder(flagBox);
 }
 
+/** UN 国旗专门模板：联合国蓝底与简化白色地球、橄榄枝徽记。 */
+function drawUnFlag() {
+    const flagBox = makeStandardFlagBox();
+    const flag = makeSketchRect(
+        flagBox.x,
+        flagBox.y,
+        flagBox.width,
+        flagBox.height,
+    );
+
+    drawFlagShadow(flag);
+    drawBlankFlag(flag, "#5b9bd5", "#3a76a8");
+    drawUnEmblem(flagBox);
+    drawFabricStrokes(
+        flagBox.x + 14,
+        flagBox.y + 22,
+        flagBox.width - 36,
+        flagBox.height - 50,
+        "#3d7aad",
+    );
+    drawFlagBorder(flagBox);
+}
+
 /** UM 国旗专门模板：美国本土外小岛屿沿用美国国旗。 */
 function drawUmFlag() {
     drawUnitedStatesFlag();
@@ -9759,6 +9783,88 @@ function drawCantonLine(flagBox, u0, v0, u1, v1, stroke, strokeWidth) {
             bowing: 1.6,
         },
     );
+}
+
+/** 绘制联合国旗简化徽记：白色地球经纬线与两侧橄榄枝弧线。 */
+function drawUnEmblem(flagBox) {
+    const cx = mapFlagX(0.5, 0.52, flagBox);
+    const cy = mapFlagY(0.52, 0.52, flagBox);
+    const globeDiameter = flagBox.width * 0.22;
+    const globeRadius = globeDiameter / 2;
+    const emblemStroke = "#fbfdfa";
+    const meridianStroke = "#e3eff8";
+    const lineStyle = {
+        stroke: meridianStroke,
+        strokeWidth: 1,
+        roughness: 2.1,
+        bowing: 1.3,
+    };
+
+    roughCanvas.circle(cx, cy, globeDiameter, {
+        stroke: emblemStroke,
+        strokeWidth: 1.2,
+        fill: emblemStroke,
+        fillStyle: "solid",
+        roughness: 2.1,
+        bowing: 1.2,
+    });
+    roughCanvas.line(cx, cy - globeRadius, cx, cy + globeRadius, lineStyle);
+    roughCanvas.line(cx - globeRadius, cy, cx + globeRadius, cy, lineStyle);
+    roughCanvas.line(
+        cx - globeRadius * 0.72,
+        cy - globeRadius * 0.38,
+        cx + globeRadius * 0.72,
+        cy + globeRadius * 0.38,
+        lineStyle,
+    );
+    roughCanvas.line(
+        cx - globeRadius * 0.72,
+        cy + globeRadius * 0.38,
+        cx + globeRadius * 0.72,
+        cy - globeRadius * 0.38,
+        lineStyle,
+    );
+
+    const wreathRadius = globeRadius * 1.48;
+    const wreathYOffset = globeRadius * 0.1;
+    drawUnWreathArc(
+        cx,
+        cy + wreathYOffset,
+        wreathRadius,
+        (Math.PI * 5) / 6,
+        Math.PI / 2,
+        emblemStroke,
+    );
+    drawUnWreathArc(
+        cx,
+        cy + wreathYOffset,
+        wreathRadius,
+        Math.PI / 6,
+        Math.PI / 2,
+        emblemStroke,
+    );
+}
+
+/** 用折线近似橄榄枝半弧，供联合国旗徽记两侧复用。 */
+function drawUnWreathArc(cx, cy, radius, startRad, endRad, stroke) {
+    const steps = 11;
+    let previousX = cx + Math.cos(startRad) * radius;
+    let previousY = cy + Math.sin(startRad) * radius;
+
+    for (let step = 1; step <= steps; step += 1) {
+        const angle = startRad + ((endRad - startRad) * step) / steps;
+        const nextX = cx + Math.cos(angle) * radius + jitter(0.8);
+        const nextY = cy + Math.sin(angle) * radius + jitter(0.8);
+
+        roughCanvas.line(previousX, previousY, nextX, nextY, {
+            stroke,
+            strokeWidth: 2.1,
+            roughness: 2.4,
+            bowing: 1.6,
+        });
+        previousX = nextX;
+        previousY = nextY;
+    }
 }
 
 /** 绘制西班牙旗左侧简化徽章：盾形、冠饰和少量手绘线条。 */

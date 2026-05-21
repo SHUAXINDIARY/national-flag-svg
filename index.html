@@ -520,6 +520,7 @@
                 HK: "中国香港",
                 MO: "中国澳门",
                 TW: "中国台湾",
+                UN: "联合国",
                 XK: "科索沃",
             };
 
@@ -540,6 +541,7 @@
                 "ES",
                 "VA",
                 "KR",
+                "UN",
             ];
 
             function renderFlagCard(parent, code) {
@@ -624,7 +626,7 @@
                 ).length;
 
                 if (!query) {
-                    status.textContent = `共 ${regionCodes.length} 个地区，统一手绘风格`;
+                    status.textContent = `共 ${total} 个地区，统一手绘风格`;
                     return;
                 }
 

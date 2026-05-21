@@ -249,6 +249,7 @@ export const TEMPLATE_FLAGS = {
     ua: "🇺🇦",
     ug: "🇺🇬",
     um: "🇺🇲",
+    un: "🇺🇳",
     unitedStates: "🇺🇸",
     uy: "🇺🇾",
     uz: "🇺🇿",
