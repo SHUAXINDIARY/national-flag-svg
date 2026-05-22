@@ -96,7 +96,12 @@ Load the IIFE bundle only; it automatically attaches `window.RoughEmoji`:
 </script>
 ```
 
-If the page includes the demo form DOM (`#rough-canvas`, `#emoji-form`, etc.), interaction and download handlers are wired up automatically.
+If the page includes the demo form DOM (`#rough-canvas`, `#emoji-form`, etc.), load the root-level `rough-emoji-app.js` to wire up interaction and download handlers:
+
+```html
+<script src="./dist/rough-emoji.js"></script>
+<script src="./rough-emoji-app.js"></script>
+```
 
 ## API
 
@@ -118,7 +123,7 @@ Converts arbitrary input into a drawable flag emoji. Only valid flag emojis are 
 import type { RoughEmojiApi } from "rough-emoji-draw";
 ```
 
-You can also import `RoughOptions`, `Point`, `RoughCanvasLike`, and the demo page helper `RoughEmojiApp` as needed.
+You can also import `RoughOptions`, `Point`, and `RoughCanvasLike` as needed.
 
 ## Project Structure
 
@@ -128,11 +133,11 @@ You can also import `RoughOptions`, `Point`, `RoughCanvasLike`, and the demo pag
 │   ├── index.ts           # npm library entry; exports API and types
 │   ├── browser.ts         # browser IIFE entry; mounts window.RoughEmoji
 │   ├── rough-emoji.ts     # core drawing logic
-│   ├── rough-emoji-app.ts # single-page demo DOM bindings
 │   ├── flag-utils.ts      # flag emoji parsing and validation
 │   ├── render-context.ts  # canvas context switching
 │   ├── constant.ts        # static constants and template map
 │   └── types.ts           # public type declarations
+├── rough-emoji-app.js     # index.html demo DOM bindings (not in npm artifacts)
 ├── index.html             # batch visual QA page
 ├── rslib.config.ts        # Rslib multi-format build config
 ├── tsconfig.json          # TypeScript config

@@ -96,7 +96,12 @@ console.log(typeof RoughEmoji.draw); // "function"
 </script>
 ```
 
-若页面包含演示表单 DOM（`#rough-canvas`、`#emoji-form` 等），还会自动绑定交互与下载逻辑。
+若页面包含演示表单 DOM（`#rough-canvas`、`#emoji-form` 等），可额外加载根目录下的 `rough-emoji-app.js` 绑定交互与下载逻辑：
+
+```html
+<script src="./dist/rough-emoji.js"></script>
+<script src="./rough-emoji-app.js"></script>
+```
 
 ## API
 
@@ -118,7 +123,7 @@ console.log(typeof RoughEmoji.draw); // "function"
 import type { RoughEmojiApi } from "rough-emoji-draw";
 ```
 
-还可按需导入 `RoughOptions`、`Point`、`RoughCanvasLike`，以及演示页入口 `RoughEmojiApp`。
+还可按需导入 `RoughOptions`、`Point`、`RoughCanvasLike`。
 
 ## 项目结构
 
@@ -128,11 +133,11 @@ import type { RoughEmojiApi } from "rough-emoji-draw";
 │   ├── index.ts          # npm 库入口，导出 API 与类型
 │   ├── browser.ts        # 浏览器 IIFE 入口，挂载 window.RoughEmoji
 │   ├── rough-emoji.ts    # 核心绘制逻辑
-│   ├── rough-emoji-app.ts # 单页演示 DOM 绑定
 │   ├── flag-utils.ts     # 国旗 emoji 解析与校验
 │   ├── render-context.ts # Canvas 上下文切换
 │   ├── constant.ts       # 静态常量与模板映射
 │   └── types.ts          # 对外类型声明
+├── rough-emoji-app.js    # index.html 演示页 DOM 绑定（不进入 npm 产物）
 ├── index.html            # 批量视觉 QA 页面
 ├── rslib.config.ts       # Rslib 多格式构建配置
 ├── tsconfig.json         # TypeScript 配置
