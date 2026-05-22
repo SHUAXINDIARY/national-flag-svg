@@ -1,19 +1,5 @@
-/** 单页演示入口使用的 DOM 选择器，QA 页面不存在这些节点时只暴露全局 API。 */
-export const ELEMENT_SELECTORS = {
-    canvas: "#rough-canvas",
-    form: "#emoji-form",
-    input: "#emoji-input",
-    downloadButton: "#download-button",
-} as const;
-
-/** 默认绘制国旗，供首次打开页面、prompt 默认值和非法输入回退共用。 */
+/** 默认绘制国旗，供非法输入回退共用。 */
 export const DEFAULT_FLAG = "🇨🇳";
-
-/** 下载文件名前缀，最终文件名会追加当前绘制的国旗 emoji。 */
-export const DOWNLOAD_FILE_PREFIX = "rough-flag";
-
-/** 首次进入单页演示时提示用户输入国旗的文案。 */
-export const FLAG_PROMPT_MESSAGE = "请输入要绘制的国旗";
 
 /** 已有专门手写模板的国旗 emoji，避免绘制分支散落字面量。 */
 export const TEMPLATE_FLAGS = {

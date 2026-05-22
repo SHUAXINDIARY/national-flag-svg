@@ -1,16 +1,5 @@
-/** 单页演示入口使用的 DOM 选择器，QA 页面不存在这些节点时只暴露全局 API。 */
-export declare const ELEMENT_SELECTORS: {
-    readonly canvas: "#rough-canvas";
-    readonly form: "#emoji-form";
-    readonly input: "#emoji-input";
-    readonly downloadButton: "#download-button";
-};
-/** 默认绘制国旗，供首次打开页面、prompt 默认值和非法输入回退共用。 */
+/** 默认绘制国旗，供非法输入回退共用。 */
 export declare const DEFAULT_FLAG = "\uD83C\uDDE8\uD83C\uDDF3";
-/** 下载文件名前缀，最终文件名会追加当前绘制的国旗 emoji。 */
-export declare const DOWNLOAD_FILE_PREFIX = "rough-flag";
-/** 首次进入单页演示时提示用户输入国旗的文案。 */
-export declare const FLAG_PROMPT_MESSAGE = "\u8BF7\u8F93\u5165\u8981\u7ED8\u5236\u7684\u56FD\u65D7";
 /** 已有专门手写模板的国旗 emoji，避免绘制分支散落字面量。 */
 export declare const TEMPLATE_FLAGS: {
     readonly ad: "🇦🇩";

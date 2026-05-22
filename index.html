@@ -887,15 +887,28 @@
                 searchInput.addEventListener("search", applySearchFilter);
             }
 
-            function loadRoughEmojiAndRender() {
+            function loadScript(src, onload, onerror) {
                 const script = document.createElement("script");
-                script.src = "./dist/rough-emoji.js";
-                script.onload = renderAllFlags;
-                script.onerror = () => {
-                    document.querySelector("#status").textContent =
-                        "加载 dist/rough-emoji.js 失败，请先运行 pnpm run build";
-                };
+                script.src = src;
+                script.onload = onload;
+                script.onerror = onerror;
                 document.head.append(script);
+            }
+
+            function loadRoughEmojiAndRender() {
+                loadScript(
+                    "./dist/rough-emoji.js",
+                    () => {
+                        loadScript("./rough-emoji-app.js", renderAllFlags, () => {
+                            document.querySelector("#status").textContent =
+                                "加载 rough-emoji-app.js 失败";
+                        });
+                    },
+                    () => {
+                        document.querySelector("#status").textContent =
+                            "加载 dist/rough-emoji.js 失败，请先运行 pnpm run build";
+                    },
+                );
             }
 
             if (location.protocol === "file:") {
