@@ -1,8 +1,13 @@
+/**
+ * index.html 批量国旗 QA 页脚本：渲染全部地区旗面、搜索筛选与复制 SVG。
+ */
 import { canvasToSvg } from "./index-svg-export.js";
 
+/** file:// 协议下 ES module 无法加载时的状态栏提示文案。 */
 const FILE_PROTOCOL_HINT =
     "无法通过 file:// 加载本地脚本。请先运行 pnpm run dev，再打开 http://localhost:3000/";
 
+/** ISO 3166-1 alpha-2 地区码列表，用于批量渲染 QA 网格。 */
 const regionCodes = [
     "AD",
     "AE",
@@ -255,9 +260,11 @@ const regionCodes = [
     "ZW",
 ];
 
+/** 浏览器内置中文地区名解析器。 */
 const regionNames = new Intl.DisplayNames(["zh-CN"], {
     type: "region",
 });
+/** Intl 未覆盖或需特殊表述的地区中文名。 */
 const regionNameFallbacks = {
     HK: "中国香港",
     MO: "中国澳门",
@@ -266,6 +273,7 @@ const regionNameFallbacks = {
     XK: "科索沃",
 };
 
+/** 顶部「示例」区块优先展示的地区码。 */
 const sampleCodes = [
     "CN",
     "JP",
@@ -280,6 +288,7 @@ const sampleCodes = [
     "UN",
 ];
 
+/** 将两位地区码转为对应 regional indicator 国旗 emoji。 */
 function flagFromCode(code) {
     return [...code]
         .map((letter) =>
@@ -288,10 +297,12 @@ function flagFromCode(code) {
         .join("");
 }
 
+/** 解析地区码对应的中文显示名，优先 fallback 表。 */
 function regionNameFromCode(code) {
     return regionNameFallbacks[code] || regionNames.of(code) || code;
 }
 
+/** 复制文本到剪贴板，Clipboard API 不可用时降级为 execCommand。 */
 async function copyText(text) {
     if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(text);
@@ -309,6 +320,7 @@ async function copyText(text) {
     textarea.remove();
 }
 
+/** 复制成功后短暂切换按钮文案与样式。 */
 function showCopyFeedback(button) {
     const originalText = button.textContent;
     button.classList.add("copy-svg-btn--copied");
@@ -319,6 +331,7 @@ function showCopyFeedback(button) {
     }, 1400);
 }
 
+/** 将画布旗面导出为 SVG 字符串并写入剪贴板。 */
 async function handleCopySvg(button, canvas) {
     if (button.disabled) {
         return;
@@ -339,6 +352,7 @@ async function handleCopySvg(button, canvas) {
     }
 }
 
+/** 创建单个国旗卡片：canvas 绘制、标签信息与复制 SVG 按钮。 */
 function renderFlagCard(parent, code, RoughEmoji) {
     const item = document.createElement("article");
     item.className = "item";
@@ -385,6 +399,7 @@ function renderFlagCard(parent, code, RoughEmoji) {
     RoughEmoji.draw(canvas, emoji);
 }
 
+/** 渲染示例区与全量网格，并初始化搜索筛选。 */
 function renderAllFlags(RoughEmoji) {
     const sampleCodeSet = new Set(sampleCodes);
     const samples = document.querySelector("#samples");
@@ -403,12 +418,14 @@ function renderAllFlags(RoughEmoji) {
     updateStatusText();
 }
 
+/** 判断卡片是否匹配搜索词（地区码或中文名）。 */
 function flagItemMatchesQuery(item, query) {
     const code = item.dataset.code?.toLowerCase() ?? "";
     const name = item.dataset.name?.toLowerCase() ?? "";
     return code.includes(query) || name.includes(query);
 }
 
+/** 按搜索框内容隐藏不匹配卡片，并更新区块空态。 */
 function applySearchFilter() {
     const searchInput = document.querySelector("#flag-search");
     const query = searchInput.value.trim().toLowerCase();
@@ -428,6 +445,7 @@ function applySearchFilter() {
     updateStatusText();
 }
 
+/** 刷新底部状态栏：总数或筛选结果计数。 */
 function updateStatusText() {
     const status = document.querySelector("#status");
     const searchInput = document.querySelector("#flag-search");
@@ -446,12 +464,14 @@ function updateStatusText() {
             : `筛选结果：${visible} / ${total}`;
 }
 
+/** 绑定搜索框 input / search 事件。 */
 function setupSearchFilter() {
     const searchInput = document.querySelector("#flag-search");
     searchInput.addEventListener("input", applySearchFilter);
     searchInput.addEventListener("search", applySearchFilter);
 }
 
+/** 动态加载库产物并启动批量渲染。 */
 async function bootstrap() {
     const status = document.querySelector("#status");
 
@@ -464,6 +484,7 @@ async function bootstrap() {
     }
 }
 
+/** file:// 下无法加载 ES module，否则启动主流程。 */
 if (location.protocol === "file:") {
     document.querySelector("#status").textContent = FILE_PROTOCOL_HINT;
 } else {

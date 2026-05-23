@@ -1,3 +1,7 @@
+/**
+ * 单页交互演示脚本：绑定表单绘制与 PNG 下载，QA 页无对应 DOM 时静默跳过。
+ */
+
 /** 单页演示入口使用的 DOM 选择器，QA 页面不存在这些节点时只暴露全局 API。 */
 const ELEMENT_SELECTORS = {
   canvas: "#rough-canvas",
@@ -73,4 +77,5 @@ class RoughEmojiApp {
   }
 }
 
+/** 库已挂载到 window 时自动初始化单页演示。 */
 new RoughEmojiApp(window.RoughEmoji).mount();
