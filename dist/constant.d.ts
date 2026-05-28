@@ -260,9 +260,21 @@ export declare const REGION_INDICATOR_MIN_CODE_POINT = 127462;
 export declare const REGION_INDICATOR_MAX_CODE_POINT = 127487;
 /** 离屏 emoji 栅格化时使用的像素倍率，保证高分屏采样足够细。 */
 export declare const DEVICE_PIXEL_RATIO: number;
-/** 全局视觉色板：纸张、边框和投影色在多个旗帜绘制函数中复用。 */
-export declare const PALETTE: {
-    readonly paper: "#fbfdfa";
-    readonly frame: "#d9e3db";
-    readonly shadow: "rgba(36, 49, 44, 0.08)";
-};
+/** 绘制主题：浅色纸张或深色纸张，与 QA 页 data-theme 对应。 */
+export type DrawTheme = "light" | "dark";
+/** 单套绘制色板：纸张、边框与投影。 */
+export interface PaletteColors {
+    paper: string;
+    frame: string;
+    shadow: string;
+}
+/** 浅色 / 深色色板，与 index.html CSS 变量保持一致。 */
+export declare const PALETTES: Record<DrawTheme, PaletteColors>;
+/** 默认浅色色板，兼容直接引用 PALETTE 的调用方。 */
+export declare const PALETTE: PaletteColors;
+/** 返回当前绘制主题下的色板。 */
+export declare function getPalette(): PaletteColors;
+/** 切换绘制主题，切换后需对已有 canvas 重新调用 draw。 */
+export declare function setDrawTheme(theme: DrawTheme): void;
+/** 读取当前绘制主题。 */
+export declare function getDrawTheme(): DrawTheme;

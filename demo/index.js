@@ -399,6 +399,104 @@ function renderFlagCard(parent, code, RoughEmoji) {
     RoughEmoji.draw(canvas, emoji);
 }
 
+/** 从页面 data-theme 同步库内绘制色板。 */
+function syncDrawThemeFromPage(RoughEmoji) {
+    const theme =
+        document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    RoughEmoji.setTheme(theme);
+}
+
+/** 收集待重绘的国旗 canvas 与 emoji。 */
+function collectFlagRedrawTargets() {
+    const targets = [];
+
+    document.querySelectorAll(".item").forEach((item) => {
+        const canvas = item.querySelector("canvas");
+        const emoji = item.querySelector(".emoji")?.textContent;
+        if (!canvas || !emoji) {
+            return;
+        }
+
+        targets.push({ canvas, emoji });
+    });
+
+    return targets;
+}
+
+/** 对页面上所有国旗 canvas 重新绘制。 */
+function redrawAllFlags(RoughEmoji) {
+    collectFlagRedrawTargets().forEach(({ canvas, emoji }) => {
+        RoughEmoji.draw(canvas, emoji);
+    });
+}
+
+const THEME_REDRAW_BATCH_SIZE = 12;
+
+/** 更新主题重绘 loading 文案。 */
+function updateThemeRedrawProgress(done, total) {
+    const progress = document.querySelector("#theme-redraw-progress");
+    if (!progress) {
+        return;
+    }
+
+    progress.textContent =
+        total === 0
+            ? "准备中…"
+            : `正在重绘 ${done} / ${total} 面国旗…`;
+}
+
+/** 显示主题切换重绘 loading，并暂时禁用相关交互。 */
+function showThemeRedrawLoading() {
+    const overlay = document.querySelector("#theme-redraw-overlay");
+    const themeToggle = document.querySelector("#theme-toggle");
+    const searchInput = document.querySelector("#flag-search");
+
+    document.body.classList.add("theme-redraw-busy");
+    overlay?.classList.add("theme-redraw-overlay--visible");
+    overlay?.setAttribute("aria-hidden", "false");
+    themeToggle?.setAttribute("disabled", "");
+    searchInput?.setAttribute("disabled", "");
+    updateThemeRedrawProgress(0, 0);
+}
+
+/** 隐藏主题切换重绘 loading，并恢复交互。 */
+function hideThemeRedrawLoading() {
+    const overlay = document.querySelector("#theme-redraw-overlay");
+    const themeToggle = document.querySelector("#theme-toggle");
+    const searchInput = document.querySelector("#flag-search");
+
+    document.body.classList.remove("theme-redraw-busy");
+    overlay?.classList.remove("theme-redraw-overlay--visible");
+    overlay?.setAttribute("aria-hidden", "true");
+    themeToggle?.removeAttribute("disabled");
+    searchInput?.removeAttribute("disabled");
+}
+
+/** 分批重绘全部国旗，避免长时间阻塞主线程且可更新进度。 */
+async function redrawAllFlagsBatched(RoughEmoji) {
+    const targets = collectFlagRedrawTargets();
+    const total = targets.length;
+
+    if (total === 0) {
+        return;
+    }
+
+    updateThemeRedrawProgress(0, total);
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+
+    for (let index = 0; index < total; index += THEME_REDRAW_BATCH_SIZE) {
+        const batch = targets.slice(index, index + THEME_REDRAW_BATCH_SIZE);
+        batch.forEach(({ canvas, emoji }) => {
+            RoughEmoji.draw(canvas, emoji);
+        });
+        updateThemeRedrawProgress(
+            Math.min(index + batch.length, total),
+            total,
+        );
+        await new Promise((resolve) => requestAnimationFrame(resolve));
+    }
+}
+
 /** 渲染示例区与全量网格，并初始化搜索筛选。 */
 function renderAllFlags(RoughEmoji) {
     const sampleCodeSet = new Set(sampleCodes);
@@ -471,13 +569,49 @@ function setupSearchFilter() {
     searchInput.addEventListener("search", applySearchFilter);
 }
 
+let themeRedrawInProgress = false;
+
+/** 主题切换后同步色板并重绘页面上全部国旗 canvas（带 loading）。 */
+async function handleThemeChange(RoughEmoji) {
+    const targets = collectFlagRedrawTargets();
+    syncDrawThemeFromPage(RoughEmoji);
+
+    if (targets.length === 0) {
+        return;
+    }
+
+    if (themeRedrawInProgress) {
+        return;
+    }
+
+    themeRedrawInProgress = true;
+    showThemeRedrawLoading();
+
+    try {
+        await redrawAllFlagsBatched(RoughEmoji);
+    } finally {
+        hideThemeRedrawLoading();
+        themeRedrawInProgress = false;
+        updateStatusText();
+    }
+}
+
+/** 注册主题切换回调：index.html 在 applyTheme 后调用以重绘全部 canvas。 */
+function setupThemeRedraw(RoughEmoji) {
+    window.redrawRoughEmojiFlags = () => {
+        void handleThemeChange(RoughEmoji);
+    };
+}
+
 /** 动态加载库产物并启动批量渲染。 */
 async function bootstrap() {
     const status = document.querySelector("#status");
 
     try {
         const { RoughEmoji } = await import("../dist/index.js");
+        syncDrawThemeFromPage(RoughEmoji);
         renderAllFlags(RoughEmoji);
+        setupThemeRedraw(RoughEmoji);
     } catch {
         status.textContent =
             "加载 dist/index.js 失败，请先运行 pnpm run build";

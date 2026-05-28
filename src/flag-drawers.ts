@@ -1,4 +1,4 @@
-import { DEVICE_PIXEL_RATIO, PALETTE, TEMPLATE_FLAGS } from "./constant";
+import { DEVICE_PIXEL_RATIO, getPalette, TEMPLATE_FLAGS } from "./constant";
 import { ctx, roughCanvas, size } from "./render-context";
 
 /** 专门模板绘制函数签名。 */
@@ -51,11 +51,21 @@ function drawChinaFlag() {
 /** 日本国旗模板：浅色旗面加中心红日，并叠加纸纹和边框。 */
 function drawJapanFlag() {
     const flag = makeSketchRect(128, 172, 464, 344);
+    const fieldWhite = "#fbfdfa";
 
     roughCanvas.polygon(flag, {
         stroke: "#d6ded7",
         strokeWidth: 2.4,
-        fill: "#fbfdfa",
+        fill: fieldWhite,
+        fillStyle: "solid",
+        roughness: 2.1,
+        bowing: 1.2,
+    });
+
+    roughCanvas.polygon(flag, {
+        stroke: "#d6ded7",
+        strokeWidth: 2.4,
+        fill: fieldWhite,
         fillStyle: "hachure",
         hachureAngle: -10,
         hachureGap: 17,
@@ -110,7 +120,7 @@ function drawUnitedStatesFlag() {
     );
     roughCanvas.polygon(offsetPoints(flag, 8, 10), {
         stroke: "transparent",
-        fill: PALETTE.shadow,
+        fill: getPalette().shadow,
         fillStyle: "solid",
         roughness: 2.2,
         bowing: 1.2,
@@ -9283,7 +9293,7 @@ function makeStandardFlagBox() {
 function drawFlagShadow(flag) {
     roughCanvas.polygon(offsetPoints(flag, 8, 10), {
         stroke: "transparent",
-        fill: PALETTE.shadow,
+        fill: getPalette().shadow,
         fillStyle: "solid",
         roughness: 2.2,
         bowing: 1.2,

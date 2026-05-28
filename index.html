@@ -14,7 +14,24 @@
         />
         <meta name="author" content="SHUAXINDIARY" />
         <meta name="robots" content="index, follow" />
-        <meta name="theme-color" content="#2f6b4f" />
+        <meta name="theme-color" content="#2f6b4f" id="theme-color-meta" />
+        <script>
+            (function () {
+                const storageKey = "rough-emoji-draw-theme";
+                const stored = localStorage.getItem(storageKey);
+                const prefersDark = window.matchMedia(
+                    "(prefers-color-scheme: dark)",
+                ).matches;
+                const theme =
+                    stored === "light" || stored === "dark"
+                        ? stored
+                        : prefersDark
+                          ? "dark"
+                          : "light";
+                document.documentElement.dataset.theme = theme;
+                document.documentElement.style.colorScheme = theme;
+            })();
+        </script>
         <meta name="application-name" content="Rough Emoji Draw" />
         <link rel="author" href="https://github.com/SHUAXINDIARY" />
         <link rel="canonical" href="/" />
@@ -71,6 +88,44 @@
             }
         </script>
         <style>
+            :root {
+                color-scheme: light;
+                --bg-page: #f4f8f5;
+                --text-primary: #1f2933;
+                --text-secondary: #52645d;
+                --text-body: #374151;
+                --surface: #fbfdfa;
+                --border: #d9e3db;
+                --border-subtle: #e2ebe5;
+                --border-input: #c5d4cb;
+                --accent: #2f6b4f;
+                --accent-hover: #245a42;
+                --accent-on: #fbfdfa;
+                --surface-muted: #eef5f0;
+                --input-bg: #ffffff;
+                --placeholder: #8a9a94;
+                --theme-color: #2f6b4f;
+            }
+
+            :root[data-theme="dark"] {
+                color-scheme: dark;
+                --bg-page: #121816;
+                --text-primary: #e8edea;
+                --text-secondary: #9aada4;
+                --text-body: #c5d1cb;
+                --surface: #1a221e;
+                --border: #2d3a34;
+                --border-subtle: #243029;
+                --border-input: #3a4a42;
+                --accent: #5eb88a;
+                --accent-hover: #7dcca3;
+                --accent-on: #0f1412;
+                --surface-muted: #243029;
+                --input-bg: #141a17;
+                --placeholder: #6d7f76;
+                --theme-color: #1e2e26;
+            }
+
             * {
                 box-sizing: border-box;
             }
@@ -85,8 +140,11 @@
                     BlinkMacSystemFont,
                     "Segoe UI",
                     sans-serif;
-                color: #1f2933;
-                background: #f4f8f5;
+                color: var(--text-primary);
+                background: var(--bg-page);
+                transition:
+                    background-color 0.2s ease,
+                    color 0.2s ease;
             }
 
             main {
@@ -118,19 +176,19 @@
                 margin: 4px 0 0;
                 font-size: 14px;
                 font-weight: 450;
-                color: #52645d;
+                color: var(--text-secondary);
                 line-height: 1.45;
             }
 
             .intro {
                 margin-bottom: 18px;
                 padding: 14px 16px;
-                border: 1px solid #d9e3db;
+                border: 1px solid var(--border);
                 border-radius: 8px;
-                background: #fbfdfa;
+                background: var(--surface);
                 font-size: 14px;
                 line-height: 1.6;
-                color: #374151;
+                color: var(--text-body);
             }
 
             .intro p {
@@ -142,26 +200,26 @@
             }
 
             .intro a {
-                color: #2f6b4f;
+                color: var(--accent);
                 font-weight: 550;
                 text-decoration: underline;
                 text-underline-offset: 2px;
             }
 
             .intro a:hover {
-                color: #245a42;
+                color: var(--accent-hover);
             }
 
             .intro code,
             .site-footer code {
                 padding: 1px 5px;
                 border-radius: 4px;
-                background: #eef5f0;
+                background: var(--surface-muted);
                 font-family:
                     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
                     monospace;
                 font-size: 0.92em;
-                color: #1f2933;
+                color: var(--text-primary);
             }
 
             .header-actions {
@@ -176,9 +234,9 @@
                 align-items: center;
                 padding: 7px 14px;
                 border-radius: 6px;
-                border: 1px solid #245a42;
-                background: #2f6b4f;
-                color: #fbfdfa;
+                border: 1px solid var(--accent-hover);
+                background: var(--accent);
+                color: var(--accent-on);
                 font-size: 14px;
                 font-weight: 550;
                 text-decoration: none;
@@ -186,44 +244,53 @@
             }
 
             .repo-link:hover {
-                background: #245a42;
+                background: var(--accent-hover);
             }
 
             .repo-link:focus-visible {
-                outline: 2px solid #2f6b4f;
+                outline: 2px solid var(--accent);
                 outline-offset: 2px;
             }
 
             .author-link,
-            .secondary-link {
+            .secondary-link,
+            .theme-toggle {
                 display: inline-flex;
                 align-items: center;
                 padding: 7px 14px;
                 border-radius: 6px;
-                border: 1px solid #c5d4cb;
-                background: #fbfdfa;
-                color: #2f6b4f;
+                border: 1px solid var(--border-input);
+                background: var(--surface);
+                color: var(--accent);
                 font-size: 14px;
                 font-weight: 550;
                 text-decoration: none;
                 white-space: nowrap;
             }
 
+            .theme-toggle {
+                cursor: pointer;
+                font-family: inherit;
+                line-height: 1.2;
+            }
+
             .author-link:hover,
-            .secondary-link:hover {
-                border-color: #2f6b4f;
-                background: #eef5f0;
+            .secondary-link:hover,
+            .theme-toggle:hover {
+                border-color: var(--accent);
+                background: var(--surface-muted);
             }
 
             .author-link:focus-visible,
-            .secondary-link:focus-visible {
-                outline: 2px solid #2f6b4f;
+            .secondary-link:focus-visible,
+            .theme-toggle:focus-visible {
+                outline: 2px solid var(--accent);
                 outline-offset: 2px;
             }
 
             .status {
                 font-size: 14px;
-                color: #52645d;
+                color: var(--text-secondary);
             }
 
             .grid {
@@ -240,9 +307,9 @@
             }
 
             .item {
-                border: 1px solid #d9e3db;
+                border: 1px solid var(--border);
                 border-radius: 8px;
-                background: #fbfdfa;
+                background: var(--surface);
                 overflow: hidden;
             }
 
@@ -258,7 +325,7 @@
                 justify-content: space-between;
                 gap: 8px;
                 padding: 8px 10px 10px;
-                border-top: 1px solid #e2ebe5;
+                border-top: 1px solid var(--border-subtle);
                 font-size: 13px;
             }
 
@@ -271,10 +338,10 @@
 
             .copy-svg-btn {
                 padding: 3px 8px;
-                border: 1px solid #c5d4cb;
+                border: 1px solid var(--border-input);
                 border-radius: 4px;
-                background: #fff;
-                color: #2f6b4f;
+                background: var(--input-bg);
+                color: var(--accent);
                 font: inherit;
                 font-size: 12px;
                 font-weight: 550;
@@ -284,12 +351,12 @@
             }
 
             .copy-svg-btn:hover {
-                border-color: #2f6b4f;
-                background: #eef5f0;
+                border-color: var(--accent);
+                background: var(--surface-muted);
             }
 
             .copy-svg-btn:focus-visible {
-                outline: 2px solid #2f6b4f;
+                outline: 2px solid var(--accent);
                 outline-offset: 1px;
             }
 
@@ -299,13 +366,13 @@
             }
 
             .copy-svg-btn--copied {
-                border-color: #2f6b4f;
-                background: #eef5f0;
+                border-color: var(--accent);
+                background: var(--surface-muted);
             }
 
             .name {
                 min-width: 0;
-                color: #52645d;
+                color: var(--text-secondary);
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -322,15 +389,15 @@
                 align-items: center;
                 margin-bottom: 18px;
                 padding: 12px 14px;
-                border: 1px solid #d9e3db;
+                border: 1px solid var(--border);
                 border-radius: 8px;
-                background: #fbfdfa;
+                background: var(--surface);
             }
 
             .search-label {
                 font-size: 14px;
                 font-weight: 550;
-                color: #374151;
+                color: var(--text-body);
                 white-space: nowrap;
             }
 
@@ -338,21 +405,21 @@
                 flex: 1 1 220px;
                 min-width: 0;
                 padding: 8px 12px;
-                border: 1px solid #c5d4cb;
+                border: 1px solid var(--border-input);
                 border-radius: 6px;
                 font-size: 14px;
-                color: #1f2933;
-                background: #fff;
+                color: var(--text-primary);
+                background: var(--input-bg);
             }
 
             .search-input:focus {
-                outline: 2px solid #2f6b4f;
+                outline: 2px solid var(--accent);
                 outline-offset: 1px;
-                border-color: #2f6b4f;
+                border-color: var(--accent);
             }
 
             .search-input::placeholder {
-                color: #8a9a94;
+                color: var(--placeholder);
             }
 
             .item--hidden {
@@ -366,10 +433,10 @@
             .site-footer {
                 margin-top: 28px;
                 padding-top: 18px;
-                border-top: 1px solid #d9e3db;
+                border-top: 1px solid var(--border);
                 font-size: 13px;
                 line-height: 1.6;
-                color: #52645d;
+                color: var(--text-secondary);
             }
 
             .site-footer p {
@@ -381,7 +448,7 @@
             }
 
             .site-footer a {
-                color: #2f6b4f;
+                color: var(--accent);
                 font-weight: 550;
                 text-decoration: none;
             }
@@ -389,6 +456,82 @@
             .site-footer a:hover {
                 text-decoration: underline;
                 text-underline-offset: 2px;
+            }
+
+            .theme-redraw-overlay {
+                position: fixed;
+                inset: 0;
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 24px;
+                background: color-mix(in srgb, var(--bg-page) 72%, transparent);
+                backdrop-filter: blur(4px);
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition:
+                    opacity 0.18s ease,
+                    visibility 0.18s ease;
+            }
+
+            .theme-redraw-overlay--visible {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+            }
+
+            .theme-redraw-panel {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                min-width: min(320px, 100%);
+                padding: 22px 26px;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                background: var(--surface);
+                box-shadow: 0 12px 40px rgba(15, 20, 18, 0.12);
+                text-align: center;
+            }
+
+            .theme-redraw-spinner {
+                width: 36px;
+                height: 36px;
+                border: 3px solid var(--border-input);
+                border-top-color: var(--accent);
+                border-radius: 50%;
+                animation: theme-redraw-spin 0.75s linear infinite;
+            }
+
+            @keyframes theme-redraw-spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .theme-redraw-title {
+                margin: 0;
+                font-size: 15px;
+                font-weight: 650;
+                color: var(--text-primary);
+            }
+
+            .theme-redraw-progress {
+                margin: 0;
+                font-size: 13px;
+                color: var(--text-secondary);
+            }
+
+            body.theme-redraw-busy {
+                overflow: hidden;
+            }
+
+            body.theme-redraw-busy .theme-toggle:disabled,
+            body.theme-redraw-busy .search-input:disabled {
+                cursor: wait;
+                opacity: 0.72;
             }
         </style>
     </head>
@@ -404,6 +547,15 @@
                     </p>
                 </div>
                 <div class="header-actions">
+                    <button
+                        type="button"
+                        class="theme-toggle"
+                        id="theme-toggle"
+                        aria-label="切换到深色模式"
+                        aria-pressed="false"
+                    >
+                        深色模式
+                    </button>
                     <a
                         class="repo-link"
                         href="https://www.npmjs.com/package/rough-emoji-draw"
@@ -534,6 +686,62 @@
             </footer>
         </main>
 
+        <div
+            id="theme-redraw-overlay"
+            class="theme-redraw-overlay"
+            aria-hidden="true"
+        >
+            <div class="theme-redraw-panel" role="status" aria-live="polite">
+                <div class="theme-redraw-spinner" aria-hidden="true"></div>
+                <p class="theme-redraw-title">正在切换颜色模式</p>
+                <p class="theme-redraw-progress" id="theme-redraw-progress">
+                    准备中…
+                </p>
+            </div>
+        </div>
+
+        <script>
+            (function () {
+                const storageKey = "rough-emoji-draw-theme";
+                const root = document.documentElement;
+                const toggle = document.getElementById("theme-toggle");
+                const themeColorMeta = document.getElementById("theme-color-meta");
+
+                function applyTheme(theme) {
+                    root.dataset.theme = theme;
+                    root.style.colorScheme = theme;
+                    const isDark = theme === "dark";
+                    toggle.setAttribute(
+                        "aria-label",
+                        isDark ? "切换到浅色模式" : "切换到深色模式",
+                    );
+                    toggle.setAttribute("aria-pressed", String(isDark));
+                    toggle.textContent = isDark ? "浅色模式" : "深色模式";
+                    if (themeColorMeta) {
+                        const styles = getComputedStyle(root);
+                        themeColorMeta.setAttribute(
+                            "content",
+                            styles.getPropertyValue("--theme-color").trim(),
+                        );
+                    }
+                    window.dispatchEvent(
+                        new CustomEvent("rough-emoji-theme", {
+                            detail: { theme },
+                        }),
+                    );
+                    window.redrawRoughEmojiFlags?.();
+                }
+
+                toggle.addEventListener("click", () => {
+                    const next =
+                        root.dataset.theme === "dark" ? "light" : "dark";
+                    localStorage.setItem(storageKey, next);
+                    applyTheme(next);
+                });
+
+                applyTheme(root.dataset.theme || "light");
+            })();
+        </script>
         <script type="module" src="./demo/index.js"></script>
     </body>
 </html>

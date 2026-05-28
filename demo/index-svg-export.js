@@ -13,11 +13,26 @@ const FLAG_FRAME_INSET = 46;
 const FLAG_CANVAS_SIZE = 720;
 /** 导出矩形在旗面边界外的留白像素（720 基准）。 */
 const FLAG_EXPORT_PAD = 6;
-/** 与库内 PALETTE.paper / PALETTE.frame 一致。 */
-const PAPER_RGB = [251, 253, 250];
-const FRAME_RGB = [217, 227, 219];
+/** 浅色 / 深色纸张与边框 RGB，与库内 PALETTES 及 index.html 主题一致。 */
+const EXPORT_PALETTE_RGB = {
+    light: {
+        paper: [251, 253, 250],
+        frame: [217, 227, 219],
+    },
+    dark: {
+        paper: [26, 34, 30],
+        frame: [45, 58, 52],
+    },
+};
 /** 纸张 / 边框 RGB 与像素色的曼哈顿距离阈值。 */
 const PAPER_COLOR_TOLERANCE = 18;
+
+/** 按当前页面主题返回 SVG 导出用的纸张 / 边框 RGB。 */
+function getExportPaletteRgb() {
+    const theme =
+        document.documentElement?.dataset.theme === "dark" ? "dark" : "light";
+    return EXPORT_PALETTE_RGB[theme];
+}
 
 /** 按 scale 等比缩放矩形坐标与尺寸。 */
 function scaleRect(rect, scale) {
@@ -71,24 +86,33 @@ function colorDistance(red, green, blue, target) {
     );
 }
 
-/** 判断是否为纸张底色或近白色 hachure 留白，导出 SVG 时置为透明。 */
+/** 判断是否为纸张底色或近纸张 hachure 留白，导出 SVG 时置为透明。 */
 function isBackgroundPaperPixel(red, green, blue, alpha) {
     if (alpha < 8) {
         return true;
     }
 
-    if (colorDistance(red, green, blue, PAPER_RGB) <= PAPER_COLOR_TOLERANCE) {
+    const { paper, frame } = getExportPaletteRgb();
+
+    if (colorDistance(red, green, blue, paper) <= PAPER_COLOR_TOLERANCE) {
         return true;
     }
 
-    if (colorDistance(red, green, blue, FRAME_RGB) <= PAPER_COLOR_TOLERANCE) {
+    if (colorDistance(red, green, blue, frame) <= PAPER_COLOR_TOLERANCE) {
         return true;
     }
 
     const luminance = 0.299 * red + 0.587 * green + 0.114 * blue;
     const maxChannel = Math.max(red, green, blue);
     const minChannel = Math.min(red, green, blue);
-    return luminance > 238 && maxChannel - minChannel < 12;
+    const isLightTheme =
+        document.documentElement?.dataset.theme !== "dark";
+
+    if (isLightTheme) {
+        return luminance > 238 && maxChannel - minChannel < 12;
+    }
+
+    return luminance < 42 && maxChannel - minChannel < 14;
 }
 
 /** 截取 exportRect 区域并将纸张底色像素 alpha 置 0，返回 PNG data URL。 */

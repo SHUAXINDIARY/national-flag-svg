@@ -1,4 +1,4 @@
-import { PALETTE } from "./constant";
+import { getDrawTheme, getPalette, setDrawTheme } from "./constant";
 import { drawGenericFlag, templateDrawers, type TemplateFlag } from "./flag-drawers";
 import { isFlagEmoji, resolveFlag } from "./flag-utils";
 import { ctx, roughCanvas, size, withCanvas } from "./render-context";
@@ -14,6 +14,8 @@ export const RoughEmoji: RoughEmojiApi = {
     },
     isFlagEmoji,
     resolveFlag,
+    setTheme: setDrawTheme,
+    getTheme: getDrawTheme,
 };
 
 /** 国旗绘制器：负责清理画布、绘制纸张背景、模板分发和 fallback。 */
@@ -39,15 +41,16 @@ class RoughEmojiRenderer {
 
     /** 绘制统一纸张底色和粗糙边框，给所有旗帜提供一致的手写载体。 */
     private drawPaper() {
-        ctx.fillStyle = PALETTE.paper;
+        const palette = getPalette();
+        ctx.fillStyle = palette.paper;
         ctx.fillRect(0, 0, size, size);
 
         roughCanvas.rectangle(46, 46, size - 92, size - 92, {
             roughness: 1.4,
             bowing: 0.8,
-            stroke: PALETTE.frame,
+            stroke: palette.frame,
             strokeWidth: 1.2,
-            fill: PALETTE.paper,
+            fill: palette.paper,
             fillStyle: "hachure",
             hachureGap: 24,
             fillWeight: 0.28,

@@ -270,9 +270,46 @@ export const DEVICE_PIXEL_RATIO =
         ? globalThis.devicePixelRatio
         : 1;
 
-/** 全局视觉色板：纸张、边框和投影色在多个旗帜绘制函数中复用。 */
-export const PALETTE = {
-    paper: "#fbfdfa",
-    frame: "#d9e3db",
-    shadow: "rgba(36, 49, 44, 0.08)",
-} as const;
+/** 绘制主题：浅色纸张或深色纸张，与 QA 页 data-theme 对应。 */
+export type DrawTheme = "light" | "dark";
+
+/** 单套绘制色板：纸张、边框与投影。 */
+export interface PaletteColors {
+    paper: string;
+    frame: string;
+    shadow: string;
+}
+
+/** 浅色 / 深色色板，与 index.html CSS 变量保持一致。 */
+export const PALETTES: Record<DrawTheme, PaletteColors> = {
+    light: {
+        paper: "#fbfdfa",
+        frame: "#d9e3db",
+        shadow: "rgba(36, 49, 44, 0.08)",
+    },
+    dark: {
+        paper: "#1a221e",
+        frame: "#2d3a34",
+        shadow: "rgba(0, 0, 0, 0.28)",
+    },
+};
+
+/** 默认浅色色板，兼容直接引用 PALETTE 的调用方。 */
+export const PALETTE = PALETTES.light;
+
+let activeDrawTheme: DrawTheme = "light";
+
+/** 返回当前绘制主题下的色板。 */
+export function getPalette(): PaletteColors {
+    return PALETTES[activeDrawTheme];
+}
+
+/** 切换绘制主题，切换后需对已有 canvas 重新调用 draw。 */
+export function setDrawTheme(theme: DrawTheme): void {
+    activeDrawTheme = theme;
+}
+
+/** 读取当前绘制主题。 */
+export function getDrawTheme(): DrawTheme {
+    return activeDrawTheme;
+}

@@ -22,6 +22,9 @@ export interface RoughCanvasLike {
   line(x1: number, y1: number, x2: number, y2: number, options?: RoughOptions): void;
 }
 
+/** 绘制主题，与页面浅色 / 深色模式对应。 */
+export type DrawTheme = "light" | "dark";
+
 /** 暴露给 HTML 页面和 QA 工具使用的全局绘制 API。 */
 export interface RoughEmojiApi {
   /** 将任意输入规范化为国旗 emoji，并绘制到指定 canvas。 */
@@ -32,6 +35,12 @@ export interface RoughEmojiApi {
 
   /** 把外部输入解析成可绘制国旗，非法值回退为默认国旗。 */
   resolveFlag(value: unknown): string;
+
+  /** 设置绘制色板主题；已有 canvas 需重新 draw 才会更新背景。 */
+  setTheme(theme: DrawTheme): void;
+
+  /** 返回当前绘制色板主题。 */
+  getTheme(): DrawTheme;
 }
 
 declare global {
