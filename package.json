@@ -1,6 +1,6 @@
 {
     "name": "rough-emoji-draw",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "将 Unicode 国旗 emoji 绘制成 Rough.js 手写风格 Canvas 图像的轻量前端库",
     "author": {
         "name": "SHUAXINDIARY",
