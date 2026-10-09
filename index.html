@@ -378,6 +378,22 @@
                 white-space: nowrap;
             }
 
+            .name-tooltip {
+                position: fixed;
+                z-index: 1000;
+                max-width: min(360px, calc(100vw - 16px));
+                padding: 6px 8px;
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                background: var(--text-primary);
+                color: var(--surface);
+                font-size: 13px;
+                line-height: 1.4;
+                white-space: normal;
+                overflow-wrap: anywhere;
+                pointer-events: none;
+            }
+
             .emoji {
                 font-size: 18px;
             }

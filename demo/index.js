@@ -7,6 +7,56 @@ import { canvasToSvg } from "./index-svg-export.js";
 const FILE_PROTOCOL_HINT =
     "无法通过 file:// 加载本地脚本。请先运行 pnpm run dev，再打开 http://localhost:3000/";
 
+/** 复用一个浮层 Tooltip，避免卡片数量较多时为每个名称重复创建节点。 */
+const nameTooltip = document.createElement("div");
+nameTooltip.className = "name-tooltip";
+nameTooltip.setAttribute("role", "tooltip");
+nameTooltip.hidden = true;
+document.body.append(nameTooltip);
+
+/** 根据名称节点的位置显示完整名称 Tooltip。 */
+function showNameTooltip(target, name) {
+    // 只有实际被省略的名称才需要提示，避免短名称悬浮时产生干扰。
+    if (target.scrollWidth <= target.clientWidth) {
+        return;
+    }
+
+    nameTooltip.textContent = name;
+    nameTooltip.hidden = false;
+
+    const targetRect = target.getBoundingClientRect();
+    const tooltipRect = nameTooltip.getBoundingClientRect();
+    const gap = 8;
+    const viewportPadding = 8;
+    const top =
+        targetRect.top - tooltipRect.height - gap >= viewportPadding
+            ? targetRect.top - tooltipRect.height - gap
+            : targetRect.bottom + gap;
+    const left = Math.max(
+        viewportPadding,
+        Math.min(
+            targetRect.left + (targetRect.width - tooltipRect.width) / 2,
+            window.innerWidth - tooltipRect.width - viewportPadding,
+        ),
+    );
+
+    nameTooltip.style.top = `${top}px`;
+    nameTooltip.style.left = `${left}px`;
+}
+
+/** 隐藏名称 Tooltip。 */
+function hideNameTooltip() {
+    nameTooltip.hidden = true;
+}
+
+/** 为被省略的名称绑定鼠标悬浮 Tooltip。 */
+function bindNameTooltip(target, name) {
+    target.addEventListener("mouseenter", () => {
+        showNameTooltip(target, name);
+    });
+    target.addEventListener("mouseleave", hideNameTooltip);
+}
+
 /** ISO 3166-1 alpha-2 地区码列表，用于批量渲染 QA 网格。 */
 const regionCodes = [
     "AD",
@@ -372,8 +422,8 @@ function renderFlagCard(parent, code, RoughEmoji) {
 
     const nameSpan = document.createElement("span");
     nameSpan.className = "name";
-    nameSpan.title = name;
     nameSpan.textContent = name;
+    bindNameTooltip(nameSpan, name);
 
     const labelActions = document.createElement("div");
     labelActions.className = "label-actions";
